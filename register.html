@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Form</title>
+	
+</head>
+<body>
+	<h1>Registration Form</h1>
+	<form name="myForm" onsubmit="return validateForm()" method="post">
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name">
+        <br><br>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email">
+        <br><br>
+		<label for="password">Password:</label>
+		<input type="password" name="password" id="password">
+        <br><br>
+		<label for="confirmPassword">Confirm Password:</label>
+		<input type="password" name="confirmPassword" id="confirmPassword">
+        <br><br>
+		<input type="submit" value="Submit">
+	</form>
+</body>
+<script src="/js/js.js"></script>
+</html>
