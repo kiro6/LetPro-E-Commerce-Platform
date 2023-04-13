@@ -1,13 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL Shazly</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family-Jost:wght@100; 200; 300;400; 500; 600; 700&display-swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
 </head>
 <body>
+    <header>
+        <a href="index.html" class="logo"><img src="images/El_Shazly-Logo.png" alt="Logo"></a>
 
-    <a href="/login.html">Login</a> <br><br>
-    <a href="/register.html">Register</a> <br><br>
-    <a href="/about.html">About</a>
-    
+        <div class="searchbox">
+            <form action="">
+                <button onclick=""><i class="bx bx-search"></i></button>
+                <input type="search" placeholder="Search items">
+            </form>
+        </div>
+        
+
+        <div class="navigation">
+            <a href="index.html"><i class="bx bx-home"></i></a>
+            <a href="login.html"><i class="bx bx-user"></i></a>
+            <a href="cart.html"><i class="bx bx-cart"></i></a>
+
+            <div class="bx bx-menu" id="menu"></div>
+        </div>
+        
+    </header>
+
+    <section class="main-home">
+        <div class="main-text">
+            <h5>Eid Collection</h5>
+            <h1>New Eid <br> Collection <br>2023</h1>
+            <p>There's Nothing like Trend</p>
+            <a href="shop.html" class="main-btn"><i class='bx bx-shopping-bag'
+            ></i>  Shop Now</a>
+        </div>
+
+        <div class="down-arrow">
+            <a href="#trending" class="down"><i class='bx bx-down-arrow-alt' ></i></a>
+        </div>
+    </section>
+    <!-- trending-products-section -->
+    <section class="trending-product" id="trending">
+        <div class="center-text">
+            <h2>Trending <span>Products</Span></h2>
+            </div>
+                <div class="products">
+                    <div class="row">
+                        <a href="1.html"><img src="images/1.jpg" alt=""></a>
+                            <div class="product-text">
+                                <h5>New</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Crop top and shorts</h4>
+                                <p>$29.99</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <a href="10.html"><img src="images/10.jpg"  alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$29.99</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <a href="2.html"><img src="images/2.jpg"  alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$99.99</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <a href="9.html"><img src="images/9.jpg" alt=""></a>
+                            <div class="product-text">
+                                <h5>Sale</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$37.99 <del>$59.99</del></p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <a href="4.html"><img src="images/4.jpg" alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$99.99</p>
+                            </div>
+                    </div>
+                    <div class="row">
+                        <a href="5.html"><img src="images/5.jpg"  alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$99.99</p>
+                            </div>
+                    </div>    
+                    <div class="row">
+                        <a href="6.html"><img src="images/6.jpg"  alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$99.99</p>
+                            </div>
+                    </div>    
+                    <div class="row">
+                        <a href="7.html"><img src="images/7.jpg"  alt=""></a>
+                            <div class="product-text">
+                                <h5>hot</h5>
+                            </div>
+                            <div class="heart-icon">
+                                <i class='bx bx-heart'></i>
+                            </div>
+                            <div class="ratting">
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star"></i>
+                                <i class="bx bxs-star-half"></i>
+                            </div>
+                            <div class="price">
+                                <h4>Product</h4>
+                                <p>$99.99</p>
+                            </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+
+    <section class="contact">
+        <div class="contact-info">
+            <div class="first-info">
+                <img src="images/El_Shazly-Logo.png" alt="Logo">
+                <p>Smouha,Alexandria</p>
+                <div class="socials">
+                    <a href=""><i class='bx bxl-facebook-square' ></i></a>
+                    <a href=""><i class='bx bxl-tiktok' ></i></a>
+                    <a href=""><i class='bx bxl-instagram' ></i></a>
+                    <a href="http://linkedin.com/in/mahmoud-mohsen-9891a31b2"><i class='bx bxl-linkedin-square' ></i></a>
+                    <a href=""><i class='bx bxl-github' ></i></a>
+                </div>
+            </div>
+
+            <div class="second-info">
+                <h4>Support</h4>
+                <p>Contact Us</p>
+                <p>About Us</p>
+                <p>Size Guide</p>
+                <p>Privacy</p>
+            </div>
+
+            <div class="third-info">
+                <h4>Shop</h4>
+                <p>Men's Shopping</p>
+                <p>Women's Shopping</p>
+                <p>Kid's Shopping</p>
+                <p>Bags</p>
+            </div>
+        </div>
+        <hr>
+        <p>2023 © El Shazly. All rights reserved. All trademarks acknowledged.</p>
+    </section>
+    <script src="js/index.js"></script>
+
 </body>
 </html>
