@@ -55,6 +55,7 @@
                   class="input-field"
                   autocomplete="off"
                   required
+                  id = "username"
                 />
                 <label>Username</label>
               </div>
@@ -66,6 +67,7 @@
                   class="input-field"
                   autocomplete="off"
                   required
+                  id = "password"
                 />
                 <label>Password</label>
               </div>
@@ -80,8 +82,8 @@
           </form>
 
 
-          <!-- REGISTER FORM -->
-          <form action="index.html" autocomplete="off" class="sign-up-form" name="myForm" onsubmit="return validateForm()" method="post">
+          <!-- REGISTER -->
+          <form action="profile.html" autocomplete="off" class="sign-up-form" name="myForm" onsubmit="return validateRegister()" method="post">
             <div class="signlogo">
               <img src="images/logo1.png" alt="easyclass" />
             </div>
@@ -94,18 +96,23 @@
 
             <div class="actual-form">
               <div class="input-wrap">
-                <input type="text" minlength="4" class="input-field" autocomplete="off" required>
+                <input type="text" minlength="4" class="input-field" autocomplete="off" required id = "rusername">
                 <label>Username</label>
               </div>
 
               <div class="input-wrap">
-                <input type="email" class="input-field" autocomplete="off" required>
+                <input type="email" class="input-field" autocomplete="off" required id = "remail">
                 <label>Email</label>
               </div>
 
               <div class="input-wrap">
-                <input type="password" minlength="4" class="input-field" autocomplete="off" required>
+                <input type="password" minlength="4" class="input-field" autocomplete="off" required id = "rpassword">
                 <label>Password</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="password" minlength="4" class="input-field" autocomplete="off" required id = "confirmPassword">
+                <label>Confirm password</label>
               </div>
 
               <input type="submit" value="Sign Up" class="sign-btn" />
@@ -183,4 +190,3 @@
       <script src="C:/Users/mshmo/OneDrive/Desktop/top_site/Project/js/login.js"></script>
   </body>
 </html>
-
