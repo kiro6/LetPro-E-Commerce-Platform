@@ -55,14 +55,16 @@ function validateLogin() {
     return true ; 
  } else {
     alert("Invalid username or password!");
+    document.getElementById("username").value ="";
+    document.getElementById("password").value ="";
     return false
   }
 }
 
-function validateForm() {
-  var name = document.forms["myForm"]["name"].value;
-  var email = document.forms["myForm"]["email"].value;
-  var password = document.forms["myForm"]["password"].value;
+function validateRegister() {
+  var name = document.forms["myForm"]["rusername"].value;
+  var email = document.forms["myForm"]["remail"].value;
+  var password = document.forms["myForm"]["rpassword"].value;
   var confirmPassword = document.forms["myForm"]["confirmPassword"].value;
 
   if (name == "" || email == "" || password == "" || confirmPassword == "") {
@@ -72,9 +74,15 @@ function validateForm() {
 
   if (password != confirmPassword) {
     alert("Passwords do not match");
+    document.forms["myForm"]["rpassword"].value="";
+    document.forms["myForm"]["confirmPassword"].value="";
     return false; // this is temp action
   }
 
   alert("Registration successful!");
+  document.forms["myForm"]["rusername"].value="";
+  document.forms["myForm"]["remail"].value="";
+  document.forms["myForm"]["rpassword"].value="";
+  document.forms["myForm"]["confirmPassword"].value="";
   return false; // this is temp action
 }
