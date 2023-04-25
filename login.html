@@ -1,19 +1,186 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Login Page</title>
-	
-</head>
-<body>
-	<h1>Login Page</h1>
-	<form  onsubmit=" return validateLogin()" method="get"  action="/profile.html">
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username"><br><br>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password"><br><br>
-		<input type="submit" value="Login">
-	</form>
-</body>
-<script src="/js/js.js">
-</script>
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family-Jost:wght@100; 200; 300;400; 500; 600; 700&display-swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  </head>
+  <body>
+    <header>
+      <a href="index.html" class="logo"><img src="images/logo1.png" alt="Logo"></a>
+
+      <div class="navigation">
+        <div class="menu-bar" id="menu">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+          <a href="#">Home</a>
+          <a href="#">Products</a>
+          <a href="#">Profile</a>
+          <a href="#">My Cart</a>
+          <a href="#">About Us</a>
+          <a href="#">Contact Us</a>
+        </div>
+
+        <span onclick="openMenu()"><i class="bx bx-menu" id="menui"></i></span>
+      </div>
+      
+    </header>
+
+  <main>
+    <div class="box">
+      <div class="inner-box">
+        <div class="forms-wrap">
+
+          <!-- LOGIN FORM -->
+          <form autocomplete="off" class="sign-in-form" onsubmit=" return validateLogin()" method="get"  action="profile.html">
+            <div class="signlogo">
+              <img src="images/logo1.png" alt="easyclass" />
+            </div>
+
+            <div class="heading">
+              <h2>Welcome Back</h2>
+              <h6>Not registred yet?</h6>
+              <a href="#" class="toggle">Sign up</a>
+            </div>
+
+            <div class="actual-form">
+              <div class="input-wrap">
+                <input
+                  type="text"
+                  minlength="4"
+                  class="input-field"
+                  autocomplete="off"
+                  required
+                />
+                <label>Username</label>
+              </div>
+
+              <div class="input-wrap">
+                <input
+                  type="password"
+                  minlength="4"
+                  class="input-field"
+                  autocomplete="off"
+                  required
+                />
+                <label>Password</label>
+              </div>
+
+              <input type="submit" value="Sign In" class="sign-btn" />
+
+              <p class="text">
+                Forgotten your password or you login datails?
+                <a href="#">Get help</a> signing in
+              </p>
+            </div>
+          </form>
+
+
+          <!-- REGISTER FORM -->
+          <form action="index.html" autocomplete="off" class="sign-up-form" name="myForm" onsubmit="return validateForm()" method="post">
+            <div class="signlogo">
+              <img src="images/logo1.png" alt="easyclass" />
+            </div>
+
+            <div class="heading">
+              <h2>Get Started</h2>
+              <h6>Already have an account?</h6>
+              <a href="#" class="toggle">Sign in</a>
+            </div>
+
+            <div class="actual-form">
+              <div class="input-wrap">
+                <input type="text" minlength="4" class="input-field" autocomplete="off" required>
+                <label>Username</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="email" class="input-field" autocomplete="off" required>
+                <label>Email</label>
+              </div>
+
+              <div class="input-wrap">
+                <input type="password" minlength="4" class="input-field" autocomplete="off" required>
+                <label>Password</label>
+              </div>
+
+              <input type="submit" value="Sign Up" class="sign-btn" />
+
+              <p class="text">
+                By signing up, I agree to the
+                <a href="#">Terms of Services</a> and
+                <a href="#">Privacy Policy</a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <div class="carousel">
+          <div class="images-wrapper">
+            <img src="login1.png" class="image img-1 show" alt="" />
+            <img src="login2.png" class="image img-2" alt="" />
+            <img src="login3.png" class="image img-3" alt="" />
+          </div>
+
+          <div class="text-slider">
+            <div class="text-wrap">
+              <div class="text-group">
+                <h2>Shop from home</h2>
+                <h2>Affordable quality products</h2>
+                <h2>Reliable delivery times guaranteed</h2>
+              </div>
+            </div>
+
+            <div class="bullets">
+              <span class="active" data-value="1"></span>
+              <span data-value="2"></span>
+              <span data-value="3"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+      <section class="contact">
+        <div class="contact-info">
+            <div class="first-info">
+                <img src="images/logo1.png" alt="Logo">
+                <p>Smouha, Alexandria</p>
+                <div class="socials">
+                    <a href=""><i class='bx bxl-facebook-square' ></i></a>
+                    <a href=""><i class='bx bxl-tiktok' ></i></a>
+                    <a href=""><i class='bx bxl-instagram' ></i></a>
+                    <a href="http://linkedin.com/in/mahmoud-mohsen-9891a31b2"><i class='bx bxl-linkedin-square' ></i></a>
+                    <a href=""><i class='bx bxl-github' ></i></a>
+                </div>
+            </div>
+
+            <div class="second-info">
+                <h4>Support</h4>
+                <p>Contact Us</p>
+                <p>About Us</p>
+                <p>Size Guide</p>
+                <p>Privacy</p>
+            </div>
+
+            <div class="third-info">
+                <h4>Shop</h4>
+                <p>Men's Shopping</p>
+                <p>Women's Shopping</p>
+                <p>Kid's Shopping</p>
+                <p>Bags</p>
+            </div>
+        </div>
+        <hr>
+        <p>2023 © El Shazly. All rights reserved. All trademarks acknowledged.</p>
+      </section>
+
+      <script src="C:/Users/mshmo/OneDrive/Desktop/top_site/Project/js/login.js"></script>
+  </body>
 </html>
+
