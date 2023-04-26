@@ -1,3 +1,8 @@
+:root {
+    --Primary: #1152ad; 
+    --Secondary: #f4f4f3;
+    --Teritary: #8b8989;
+  }
 *{
     padding: 0;
     margin: 0;
@@ -5,7 +10,6 @@
     scroll-behavior: smooth;
     font-family: 'Jost', sans-serif;
     list-style: none;
-    
 }
 
 header{
@@ -18,6 +22,7 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 20px 10%;
+    background: #fff;
 }
 header.sticky{
     background: #fff;
@@ -52,33 +57,72 @@ header.sticky{
     background: transparent;
     border: none;
 }
+
 .navigation{
     display: flex;
     align-items: center;
 }
+
 .navigation i{
-    color: #2c2c2c;
+    color: #111;
     font-size: 25px;
     font-weight: 400;
     margin-right: 20px;
     transition: all .42s ease;
 }
+
 .navigation i:hover{
     transform: scale(1.1);
-    color: rgb(255, 87, 115);
+    color: var(--Primary);
 }
-#menu{
+
+.menu-bar{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #151515;
+    overflow: hidden;
+    padding-top: 60px;
+    transition: .5s;
+}
+
+.menu-bar a{
+    text-decoration: none;
+    color: #f4f4f4;
+    font-size: 25px;
+    padding: 8px 8px 8px 32px;
+    display: block;
+    transition: .3s;
+}
+
+.menu-bar a:hover{
+    color: var(--Primary);
+}
+
+.menu-bar .closebtn{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#menui{
     font-size: 35px;
     color: #2c2c2c;
     z-index: 10001;
     cursor: pointer;
 }
+
 section{
     padding: 5% 10%;
 }
 .main-home{
     width: 100%;
-    height: 100vh;
+    height: 110vh;
     background-image: url(kiro6/WebProject/images/home.jpg);
     background-position: center;
     background-size: cover;
@@ -88,7 +132,7 @@ section{
 }
 
 .main-text h5 {
-    color: rgb(255, 87, 115);
+    color: var(--Primary);
     font-size: 16px;
     text-transform: capitalize;
     font-weight: 500;
@@ -142,7 +186,9 @@ section{
 }
 
 /* trending */
-
+.trending-product{
+    background-color: #fffafa;
+}
 .center-text h2{
     color: #111;
     font-size: 28px;
@@ -151,7 +197,7 @@ section{
     margin: 20px 30px;
 }
 .center-text span{
-    color: rgb(255, 87, 115);
+    color: var(--Primary);
 }
 .products{
     display: grid;
@@ -189,7 +235,7 @@ section{
     font-size: 20px;
 }
 .heart-icon:hover{
-    color: rgb(255, 87, 115);
+    color: rgb(246, 13, 36);
     cursor: pointer;
 }
 .ratting i{
@@ -208,9 +254,9 @@ section{
     font-weight: 600;
 }
 
-/* footer */
+/* Footer */
 .contact{
-    background-color: #f3f4f6;
+    background-color: var(--Primary);
 }
 .contact p{
     margin-top: 10px;
@@ -233,17 +279,7 @@ section{
     margin-bottom: 10px;
 }
 .contact-info p{
-    color: #565656;
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: capitalize;
-    line-height: 1.5;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: all .42s;
-}
-.contact-info a{
-    color: #565656;
+    color: #fffafa;
     font-size: 14px;
     font-weight: 400;
     text-transform: capitalize;
@@ -253,19 +289,20 @@ section{
     transition: all .42s;
 }
 .contact-info p:hover{
-    color: rgb(255, 87, 115);
+    color: var(--Teritary);
 }
 .first-info img{
     width: 155px;
     height: auto;
 }
 .socials i{
-    color: #565656;
+    color: #fffafa;
     margin-right: 10px;
     font-size: 20px;
     transition: all .42s;
 }
 .socials i:hover{
     transform: scale(1.3);
-    color: rgb(255, 87, 115);
+    color: var(--Teritary);
 }
+
