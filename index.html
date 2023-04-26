@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EL Shazly</title>
+    <title>Mood</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="images/El_Shazly-Logo.png" alt="Logo"></a>
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Logo"></a>
 
         <div class="searchbox">
             <form action="">
@@ -30,7 +30,17 @@
             <a href="login.html"><i class="bx bx-user"></i></a>
             <a href="cart.html"><i class="bx bx-cart"></i></a>
 
-            <div class="bx bx-menu" id="menu"></div>
+            <div class="menu-bar" id="menu">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Profile</a>
+                <a href="#">My Cart</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+            </div>
+
+            <span onclick="openMenu()"><i class="bx bx-menu" id="menui"></i></span>
         </div>
         
     </header>
@@ -219,12 +229,10 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-
     <section class="contact">
         <div class="contact-info">
             <div class="first-info">
-                <img src="images/El_Shazly-Logo.png" alt="Logo">
+                <img src="images/logo1.png" alt="Logo">
                 <p>Smouha,Alexandria</p>
                 <div class="socials">
                     <a href=""><i class='bx bxl-facebook-square' ></i></a>
@@ -238,7 +246,7 @@
             <div class="second-info">
                 <h4>Support</h4>
                 <p>Contact Us</p>
-                <a href="/about.html">About Us</a>
+                <p>About Us</p>
                 <p>Size Guide</p>
                 <p>Privacy</p>
             </div>
@@ -254,6 +262,7 @@
         <hr>
         <p>2023 © El Shazly. All rights reserved. All trademarks acknowledged.</p>
     </section>
+
     <script src="js/index.js"></script>
 
 </body>
