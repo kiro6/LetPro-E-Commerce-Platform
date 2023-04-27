@@ -1,1 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
+:root {
+    --Primary: #1152ad; 
+    --Secondary: #f4f4f3;
+    --Teritary: #8b8989;
+}
+  
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body,
+input {
+  font-family: "Poppins", sans-serif;
+}
+
+header{
+    background-color: var(--Primary);
+}
+
+main {
+  width: 100%;
+  margin-top: 50px;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: #fbf2f2;
+  padding: 2rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.profilenav{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    height: 27vh;
+    padding-right: 10px;
+    border-right: 0.1em solid var(--Teritary);
+}
+.options{
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+}
+.options a{
+    position: relative;
+    width: fit-content;
+    left: 20px;
+    margin-top: 15px;
+    color: var(--Teritary);
+    text-decoration: none;
+    font-size: 17px;
+    transition: .2s;
+}
+.options a:hover{
+    border-bottom: 3px solid var(--Primary);
+}
+#PI{
+    color: var(--Primary);
+}
+
+.info{
+    position: absolute;
+    left: 380px;
+    visibility: hidden;
+}
+.info h1{
+    font-size: 30px;
+    position: relative;
+    bottom: 60px;
+}
+.info-item label{
+    font-size: 20px;
+}
+.info-item input{
+    font-size: 20px;
+    margin: 20px;
+    outline: none;
+    border: none;
+    background: transparent;
+}
+.change-btn{
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--Secondary);
+    background-color: var(--Teritary);
+    padding: 5px;
+    border-radius: 25px;
+}
+.confirm{
+    visibility: hidden;
+    position: relative;
+    right: 80px;
+}
+
+.orders{
+    position: absolute;
+    left: 380px;
+    /* visibility: hidden; */
+}
+.orders h1{
+    position: absolute;
+    left: 380px;
+    top: -120px;
+}
+.table{
+    position: relative;
+    bottom: 30px;
+    left: 50px;
+    border-collapse: collapse;
+    box-shadow: 0 5px 10px rgb(222, 222, 222);
+    background-color: white;
+    text-align: left;
+    overflow: hidden;
+}
+.table thead{
+    box-shadow: 0 5px 10px rgb(222, 222, 222);
+    background-color: var(--Primary);
+}
+.table th{
+    color: var(--Secondary);
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+}
+
+.table td{
+    padding: 1rem 2rem;
+}
+.table .status{
+    border-radius: 20px;
+    background-color: red;
+    padding: 0.2rem 1rem;
+    text-align: center;
+    font-weight: 550;
+}
+.table .d{
+    background-color: rgb(65, 255, 103);
+    color: rgb(59, 63, 79);  
+}
+.table .s{
+    background-color: rgb(255, 240, 33);
+    color: rgb(59, 63, 79); 
+}
+.table .o{
+    background-color: rgb(244, 116, 4);
+    color: rgb(59, 63, 79);   
+}
+.table tr:nth-child(even){
+    background-color: rgb(222, 222, 222);
+}
+.table tr:last-of-type{
+    border-bottom: 2px solid var(--Primary);
+}
+
+.changepass{
+    position: absolute;
+    top: 300px;
+    left: 380px;
+    visibility: hidden;
+}
+.changepass h1{
+    font-size: 30px;
+    position: relative;
+    bottom: 60px;
+}
+
+.changer-input label{
+    font-size: 20px;
+}
+
+.changer-input input{
+    font-size: 20px;
+    margin-bottom: 20px;
+}
