@@ -1,49 +1,172 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Account - Clothing Shop</title>
+    <title>My Account - Mood</title>
     <link rel="stylesheet" href="styles/profile.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family-Jost:wght@100; 200; 300;400; 500; 600; 700&display-swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
   </head>
   <body>
-    <h1>My Account</h1>
-    <h2>Personal Information</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required><br><br>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required><br><br>
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address"><br><br>
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone"><br><br>
-      <input type="submit" value="Update">
-    </form>
-    
-    <h2>Orders</h2>
-    <table>
-      <tr>
-        <th>Order Number</th>
-        <th>Order Date</th>
-        <th>Items</th>
-        <th>Total</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>001</td>
-        <td>2023-04-20</td>
-        <td>Blue T-shirt, Black Jeans</td>
-        <td>$50</td>
-        <td>Delivered</td>
-      </tr>
-      <tr>
-        <td>002</td>
-        <td>2023-04-18</td>
-        <td>Red Dress, White Shoes</td>
-        <td>$80</td>
-        <td>Shipped</td>
-      </tr>
-    </table>
+      <header>
+        <a href="index.html" class="logo"><img src="images/logo.png" alt="Logo"></a>
+
+        <div class="searchbox">
+            <form action="">
+                <button onclick=""><i class="bx bx-search"></i></button>
+                <input type="search" placeholder="Search items">
+            </form>
+        </div>
+        
+
+        <div class="navigation">
+            <a href="index.html"><i class="bx bx-home"></i></a>
+            <a href="login.html"><i class="bx bx-user"></i></a>
+            <a href="cart.html"><i class="bx bx-cart"></i></a>
+
+            <div class="menu-bar" id="menu">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Profile</a>
+                <a href="#">My Cart</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+            </div>
+
+            <span onclick="openMenu()"><i class="bx bx-menu" id="menui"></i></span>
+        </div>
+        
+      </header>
+
+      <main>
+        <div class="profilenav">
+            <h1>My Account</h1>
+            <!-- <h2>Personal Information</h2> -->
+          <div class="options">
+            <a href="#" id="PI" onclick="personalInfo()">Personal Information</a>
+            <a href="#" id="MO" onclick="myOrders()">My Orders</a>
+            <a href="#" id="CP" onclick="changePass()">Change Password</a>
+            <a href="index.html" id="LO" onclick="return logOut(this)">Log out</a>
+          </div>
+          
+        </div>
+        <div class="info">
+          <h1>Personal Information</h1>
+          <form>
+            <div class="info-item">
+              <label for="name">Name:</label>
+              <input type="text" class="ii" name="name" required value="admin" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="email">Email:</label>
+              <input type="email" class="ii" name="email" required value="admin@gmail.com" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="address">Address:</label>
+              <input type="text" class="ii" name="address" value="Alexandria,Sidi Gaber" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="phone">Phone:</label>
+              <input type="tel" class="ii" name="phone" value="+201234567899" disabled="true">
+            </div>
+
+            <input class="change-btn" type="button" value="Update" onclick="changeInfo()">
+            <input class="change-btn confirm" type="submit" value="Confirm" >
+          
+          </form>
+        </div>
+        <div class="orders">
+            <h1>My Orders</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>2023-04-20</td>
+                <td>Blue T-shirt, Black Jeans</td>
+                <td>$50</td>
+                <td><p class="status d">Delivered</p></td>
+              </tr>
+              <tr>
+                <td>002</td>
+                <td>2023-04-18</td>
+                <td>Red Dress, White Shoes</td>
+                <td>$80</td>
+                <td><p class="status s">Shipped</p></td>
+              </tr>
+              <tr>
+                <td>003</td>
+                <td>2023-04-26</td>
+                <td>Blue Crop top and Shorts</td>
+                <td>$29.99</td>
+                <td><p class="status o">Ordered</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="changepass">
+          <h1>Change Password</h1>
+          <form action="">
+            <div class="changer-input">
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <div class="changer-input">
+              <label for="password">Confirm password:</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <input class="change-btn pass-btn" type="submit" value="Confirm" >
+          </form>
+        </div>
+      
+        
+
+      </main>
+      <section class="contact">
+        <div class="contact-info">
+            <div class="first-info">
+                <img src="images/logo1.png" alt="Logo">
+                <p>Smouha,Alexandria</p>
+                <div class="socials">
+                    <a href=""><i class='bx bxl-facebook-square' ></i></a>
+                    <a href=""><i class='bx bxl-tiktok' ></i></a>
+                    <a href=""><i class='bx bxl-instagram' ></i></a>
+                    <a href="http://linkedin.com/in/mahmoud-mohsen-9891a31b2"><i class='bx bxl-linkedin-square' ></i></a>
+                    <a href=""><i class='bx bxl-github' ></i></a>
+                </div>
+            </div>
+
+            <div class="second-info">
+                <h4>Support</h4>
+                <p>Contact Us</p>
+                <p>About Us</p>
+                <p>Size Guide</p>
+                <p>Privacy</p>
+            </div>
+
+            <div class="third-info">
+                <h4>Shop</h4>
+                <p>Men's Shopping</p>
+                <p>Women's Shopping</p>
+                <p>Kid's Shopping</p>
+                <p>Bags</p>
+            </div>
+        </div>
+        <hr>
+        <p>2023 © El Shazly. All rights reserved. All trademarks acknowledged.</p>
+    </section>
+    <script src="js/profile.js"></script>
   </body>
 </html>
