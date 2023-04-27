@@ -67,7 +67,6 @@ main {
 .info{
     position: absolute;
     left: 380px;
-    visibility: hidden;
 }
 .info h1{
     font-size: 30px;
@@ -101,7 +100,7 @@ main {
 .orders{
     position: absolute;
     left: 380px;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 .orders h1{
     position: absolute;
