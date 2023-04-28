@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Login Page</title>
+    <title>Mood-Login</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,12 +17,19 @@
       <div class="navigation">
         <div class="menu-bar" id="menu">
           <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
-          <a href="#">Home</a>
+          <a href="index.html">Home</a>
           <a href="#">Products</a>
-          <a href="#">Profile</a>
+          <a href="login.html">Profile</a>
           <a href="#">My Cart</a>
-          <a href="#">About Us</a>
+          <a href="about.html">About Us</a>
           <a href="#">Contact Us</a>
+          <div class="color-btn">
+            <div class="color-btn-container">
+                <div class="color-btn-icon">
+                    <i class="color-btn-switch bx"></i>
+                </div>
+            </div>
+        </div>
         </div>
 
         <span onclick="openMenu()"><i class="bx bx-menu" id="menui"></i></span>
@@ -153,40 +160,45 @@
     </div>
   </main>
   
-      <section class="contact">
-        <div class="contact-info">
-            <div class="first-info">
-                <img src="images/logo1.png" alt="Logo">
-                <p>Smouha, Alexandria</p>
-                <div class="socials">
-                    <a href=""><i class='bx bxl-facebook-square' ></i></a>
-                    <a href=""><i class='bx bxl-tiktok' ></i></a>
-                    <a href=""><i class='bx bxl-instagram' ></i></a>
-                    <a href="http://linkedin.com/in/mahmoud-mohsen-9891a31b2"><i class='bx bxl-linkedin-square' ></i></a>
-                    <a href=""><i class='bx bxl-github' ></i></a>
-                </div>
-            </div>
-
-            <div class="second-info">
-                <h4>Support</h4>
-                <p>Contact Us</p>
-                <p>About Us</p>
-                <p>Size Guide</p>
-                <p>Privacy</p>
-            </div>
-
-            <div class="third-info">
+  <footer>
+    <div class="footer-container">
+        <div class="footer-row">
+            <div class="footer-col">
                 <h4>Shop</h4>
-                <p>Men's Shopping</p>
-                <p>Women's Shopping</p>
-                <p>Kid's Shopping</p>
-                <p>Bags</p>
+                <ul>
+                    <li><a href="">Men's Shopping</a></li>
+                    <li><a href="">Women's Shopping</a></li>
+                    <li><a href="">Kid's Shopping</a></li>
+                    <li><a href="">Bags</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="">Contact Us</a></li>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Size Guide</a></li>
+                    <li><a href="">Privacy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow US</h4>
+                <a href=""><i class='bx bxl-facebook-square' ></i></a>
+                <a href=""><i class='bx bxl-tiktok' ></i></a>
+                <a href=""><i class='bx bxl-instagram' ></i></a>
+                <a href="http://linkedin.com/in/mahmoud-mohsen-9891a31b2"><i class='bx bxl-linkedin-square' ></i></a>
+                <a href=""><i class='bx bxl-github' ></i></a>
+                <img src="images/logo.png" alt="logo">
             </div>
         </div>
-        <hr>
-        <p>2023 © El Shazly. All rights reserved. All trademarks acknowledged.</p>
-      </section>
+        <div class="footer-copyrights">
+            <hr>
+            <p>2023 © Mood. All rights reserved. All trademarks acknowledged.</p>
+        </div>
+    </div>
+</footer>
 
       <script src="js/login.js"></script>
+      <script src="js/menu.js"></script>
   </body>
 </html>
