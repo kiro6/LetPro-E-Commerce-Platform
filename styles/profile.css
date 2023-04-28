@@ -18,7 +18,10 @@ body,
 input {
   font-family: "Poppins", sans-serif;
 }
-
+body{
+    position: relative;
+    padding-bottom: 280px;
+}
 header{
     background-color: var(--Primary);
 }
@@ -29,14 +32,15 @@ main {
   min-height: 100vh;
   overflow: hidden;
   background-color: #fbf2f2;
-  padding: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
   display:flex;
   align-items: center;
   justify-content: center;
 }
 .profilenav{
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 5%;
     height: 27vh;
     padding-right: 10px;
@@ -112,7 +116,6 @@ main {
     bottom: 30px;
     left: 50px;
     border-collapse: collapse;
-    box-shadow: 0 5px 10px rgb(222, 222, 222);
     background-color: white;
     text-align: left;
     overflow: hidden;
@@ -178,4 +181,59 @@ main {
 .changer-input input{
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+
+.darkmode main{
+    background-color: #333333;;
+}
+
+.darkmode .contact{
+    background-color: #1f1f1f;
+}
+
+.darkmode .contact-info p{
+    color: var(--Teritary);
+}
+
+.darkmode .socials i{
+    color: var(--Teritary);
+}
+
+.darkmode .contact-info h4{
+    color: #f1e5e5;
+}
+
+.darkmode .contact p{
+    color: var(--Teritary);
+}
+
+.darkmode .profilenav{
+    border-right: 0.1em solid #fbf2f2;
+}
+
+.darkmode .profilenav h1{
+    color: var(--Teritary);
+}
+
+.darkmode .info h1{
+    color: #fbf2f2;
+}
+
+.darkmode .info-item label{
+    color: #fbf2f2;
+}
+.darkmode ::placeholder{
+    color: #fbf2f2;
+}
+
+.darkmode .orders h1{
+    color: #fbf2f2;
+}
+
+.darkmode .changepass h1{
+    color: #fbf2f2;
+}
+.darkmode .changepass label{
+    color: #fbf2f2;
 }
