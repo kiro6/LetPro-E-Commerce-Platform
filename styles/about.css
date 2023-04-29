@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+
+.about{
+    background-color: #fcfafa;
+    margin-top: 45px;
+}
+.about h1{
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.about p{
+    text-align: justify;
+    font-size: 18px;
+}
+
+.founders{
+    padding-bottom: 0px;
+    background-color: #fcfafa;
+    height: 120vh;
+    padding-top: 30px;
+    border-top: 1px solid #fbf7f7;
+}
+
+.founders h1{
+    position: absolute;
+    color: #111;
+    left: 40%;
+    top: 33%;
+    font-size: 35px;
+    padding: 0;
+    text-transform: capitalize;
+}
+#f{
+    color: var(--Primary);
+}
+.founders .card .image{
+    position: relative;
+    bottom: 15px;
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    padding: 3px;
+    background: var(--Primary);
+}
+.founders-container{
+    position: relative;
+    top: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.founders .card .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    transition: .3s;
+}
+
+.founders .card .image img:hover{
+    transform: scale(1.1);
+}
+
+.card{
+    background-color: var(--Primary);
+    /* background: #fff; */
+    padding: 5px;
+    margin: 0 30px;
+    border-radius: 20px;
+}
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px;
+}
+.card-content h4{
+    text-transform: capitalize;
+}
+
+.card-content .social i{
+    color: var(--Teritary);
+    font-size: 20px;
+    transition: .3s;
+}
+.card-content .social i:hover{
+    transform: scale(1.3);
+}
+
+/* DARK MODE */
+
+.darkmode .founders{
+    background: #333333;
+    border-top: 1px solid #303030;
+}
+.darkmode .about{
+    background: #333333;
+}
+.darkmode .about h1{
+    color: #f1e5e5;
+}
+.darkmode .about p{
+    color: #f1e5e5;
+}
