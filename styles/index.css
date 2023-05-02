@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
 :root {
     --Primary: #1152ad; 
     --Secondary: #f4f4f3;
@@ -8,7 +10,6 @@
     --light-color:#f7f7f7;
     --light-icon-color:#ffde59;
   }
-  
 *{
     padding: 0;
     margin: 0;
