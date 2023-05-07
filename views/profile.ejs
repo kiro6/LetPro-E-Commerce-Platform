@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <%- include('./partials/head.ejs') %>
+
+<body>
+        
+    <%- include('./partials/header.ejs') %>
+
+      <main>
+        <div class="profilenav">
+            <h1>My Account</h1>
+            <!-- <h2>Personal Information</h2> -->
+          <div class="options">
+            <a href="#" id="PI" onclick="personalInfo()">Personal Information</a>
+            <a href="#" id="MO" onclick="myOrders()">My Orders</a>
+            <a href="#" id="CP" onclick="changePass()">Change Password</a>
+            <a href="/index" id="LO" onclick="return logOut(this)">Log out</a>
+          </div>
+          
+        </div>
+        <div class="info">
+          <h1>Personal Information</h1>
+          <form>
+            <div class="info-item">
+              <label for="name">Name:</label>
+              <input type="text" class="ii" name="name" required value="admin" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="email">Email:</label>
+              <input type="email" class="ii" name="email" required value="admin@gmail.com" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="address">Address:</label>
+              <input type="text" class="ii" name="address" value="Alexandria,Sidi Gaber" disabled="true">
+            </div>
+            <div class="info-item">
+              <label for="phone">Phone:</label>
+              <input type="tel" class="ii" name="phone" value="+201234567899" disabled="true">
+            </div>
+
+            <input class="change-btn" type="button" value="Update" onclick="changeInfo()">
+            <input class="change-btn confirm" type="submit" value="Confirm" >
+          
+          </form>
+        </div>
+        <div class="orders">
+            <h1>My Orders</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order Number</th>
+                <th>Order Date</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>2023-04-20</td>
+                <td>Blue T-shirt, Black Jeans</td>
+                <td>$50</td>
+                <td><p class="status d">Delivered</p></td>
+              </tr>
+              <tr>
+                <td>002</td>
+                <td>2023-04-18</td>
+                <td>Red Dress, White Shoes</td>
+                <td>$80</td>
+                <td><p class="status s">Shipped</p></td>
+              </tr>
+              <tr>
+                <td>003</td>
+                <td>2023-04-26</td>
+                <td>Blue Crop top and Shorts</td>
+                <td>$29.99</td>
+                <td><p class="status o">Ordered</p></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="changepass">
+          <h1>Change Password</h1>
+          <form action="">
+            <div class="changer-input">
+              <label for="password">New password:</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <div class="changer-input">
+              <label for="password">Confirm password:</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <input class="change-btn pass-btn" type="submit" value="Confirm" >
+          </form>
+        </div>
+      
+        
+
+      </main>
+    
+      <%- include('./partials/footer.ejs') %>
+
+    <script src="js/profile.js"></script>
+    <script src="js/menu.js"></script>
+  </body>
+</html>

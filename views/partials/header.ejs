@@ -1,0 +1,44 @@
+<header>
+    <a href="/index" class="logo"><img src="images/logo.png" alt="Logo"></a>
+
+    <% if(!(title == 'Login')){%>
+        <div class="searchbox">
+            <form action="">
+                <button onclick=""><i class="bx bx-search"></i></button>
+                <input type="search" placeholder="Search items">
+            </form>
+        </div>
+    <%}%>
+    
+
+    <div class="navigation">
+        <a href="/index"><i class="bx bx-home"></i></a>
+
+        <% if(!(title == 'Login')){%>
+            <a href="/login"><i class="bx bx-user"></i></a>
+            <a href="/cart"><i class="bx bx-cart"></i></a>
+        <%}%>
+        
+
+        <div class="menu-bar" id="menu">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+            <a href="/index">Home</a>
+            <a href="#">Products</a>
+            <a href="/login">Profile</a>
+            <a href="#">My Cart</a>
+            <a href="/about">About Us</a>
+            <a href="#">Contact Us</a>
+
+            <div class="color-btn">
+                <div class="color-btn-container">
+                    <div class="color-btn-icon">
+                        <i class="color-btn-switch bx"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span onclick="openMenu()"><i class="bx bx-menu" id="menui"></i></span>
+    </div>
+    
+</header>
