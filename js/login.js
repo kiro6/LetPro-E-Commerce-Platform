@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const inputs = document.querySelectorAll(".input-field");
 const toggle_btn = document.querySelectorAll(".toggle");
 const main = document.querySelector("main");
@@ -39,20 +40,36 @@ bullets.forEach((bullet) => {
 });
 
 
-function validateLogin() {
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
 
-  if (username === "admin" && password === "admin") {
-    alert("Login successful!");
-    return true ; 
- } else {
-    alert("Invalid username or password!");
-    document.getElementById("username").value ="";
-    document.getElementById("password").value ="";
-    return false
-  }
-}
+  var  loginForm = document.getElementsByClassName("sign-in-form");
+  console.log(loginForm)
+  loginForm.addEventListener('submit' , (event)=>{
+  event.preventDefault();
+  var usernameValue = document.getElementById("username").value;
+  var passwordValue = document.getElementById("password").value;
+
+  var usernameName = document.getElementById("username").name ; 
+  var passwordName = document.getElementById("password").name ; 
+
+  const endpoint = "/login" ; 
+
+  fetch(endpoint , {
+    method : 'post' , 
+   usernameName : usernameValue , 
+   passwordName : passwordValue 
+  }).then(
+    (res)=>{
+      res.json()
+    }).then((data)=>{
+      alert(data); 
+    }).catch((err)=>{
+      console.log(err);
+    })
+
+  })
+  
+  
+
 
 function validateRegister() {
   var name = document.forms["myForm"]["rusername"].value;

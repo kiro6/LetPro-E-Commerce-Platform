@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
@@ -87,7 +88,9 @@ app.post('/login', (req,res)=>{
             res.redirect('/profile');
         }
         else{
-            // res.send(false)
+            res.json({
+                error : "there is no user with this credentials"
+            })
         }
     })
     .catch(err=>{
@@ -149,7 +152,7 @@ function requireLogin(req) {
     return true;
   } 
   else {
-    console.log('failesdsdsds');
+    console.log('failed');
     return false;
   }
 }
