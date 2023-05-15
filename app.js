@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const helmet = require('helmet');
 const mongoose = require('mongoose');
 const Users = require('./models/user.js');
 const session = require('express-session');
