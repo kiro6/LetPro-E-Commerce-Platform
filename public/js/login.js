@@ -40,18 +40,30 @@ bullets.forEach((bullet) => {
 
 
 function validateLogin() {
-  var username = document.getElementById("username").value;
-  var password = document.getElementById("password").value;
+//   var username = document.getElementById("username").value;
+//   var password = document.getElementById("password").value;
 
-  if (username === "admin" && password === "admin") {
-    alert("Login successful!");
-    return true ; 
- } else {
-    alert("Invalid username or password!");
-    document.getElementById("username").value ="";
-    document.getElementById("password").value ="";
-    return false
-  }
+//   if (username === "admin" && password === "admin") {
+//     alert("Login successful!");
+//     return true ; 
+//  } else {
+//     alert("Invalid username or password!");
+//     document.getElementById("username").value ="";
+//     document.getElementById("password").value ="";
+//     return false
+//   }
+
+const formData = new FormData(document.querySelector('.sign-in-form'));
+fetch('/login', {
+  method: 'POST',
+  body: formData
+})
+.then(response => {
+  // Handle the response from the server
+})
+.catch(error => {
+  // Handle any errors that occur
+});
 }
 
 function validateRegister() {
@@ -73,9 +85,9 @@ function validateRegister() {
   }
 
   alert("Registration successful!");
-  document.forms["myForm"]["rusername"].value="";
-  document.forms["myForm"]["remail"].value="";
-  document.forms["myForm"]["rpassword"].value="";
-  document.forms["myForm"]["confirmPassword"].value="";
-  return false; // this is temp action
+  // document.forms["myForm"]["rusername"].value="";
+  // document.forms["myForm"]["remail"].value="";
+  // document.forms["myForm"]["rpassword"].value="";
+  // document.forms["myForm"]["confirmPassword"].value="";
+  
 }

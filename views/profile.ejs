@@ -14,7 +14,7 @@
             <a href="#" id="PI" onclick="personalInfo()">Personal Information</a>
             <a href="#" id="MO" onclick="myOrders()">My Orders</a>
             <a href="#" id="CP" onclick="changePass()">Change Password</a>
-            <a href="/index" id="LO" onclick="return logOut(this)">Log out</a>
+            <a href="/logout"  id="LO" onclick="return logOut(this)">Log out</a>
           </div>
           
         </div>
@@ -23,19 +23,19 @@
           <form>
             <div class="info-item">
               <label for="name">Name:</label>
-              <input type="text" class="ii" name="name" required value="admin" disabled="true">
+              <input type="text" class="ii" name="name" required value="<%= currentUser.username %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="email">Email:</label>
-              <input type="email" class="ii" name="email" required value="admin@gmail.com" disabled="true">
+              <input type="email" class="ii" name="email" required value="<%= currentUser.email %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="address">Address:</label>
-              <input type="text" class="ii" name="address" value="Alexandria,Sidi Gaber" disabled="true">
+              <input type="text" class="ii" name="address" value="<%= currentUser.address %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="phone">Phone:</label>
-              <input type="tel" class="ii" name="phone" value="+201234567899" disabled="true">
+              <input type="tel" class="ii" name="phone" value="<%= currentUser.phoneNumber %>" disabled="true">
             </div>
 
             <input class="change-btn" type="button" value="Update" onclick="changeInfo()">

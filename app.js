@@ -1,7 +1,22 @@
 const express = require('express');
+const morgan = require('morgan');
+const helmet = require('helmet');
+const mongoose = require('mongoose');
+const Users = require('./models/user.js');
+const session = require('express-session');
+
+
 
 //express app
 const app = express();
+
+//connect to DB
+const DBUSR = 'mongodb+srv://CEO:admin12345@mood.kkmmia4.mongodb.net/MOOD';
+mongoose.connect(DBUSR, {useNewURLParser:true, useUnifiedTopology:true})
+.then((result) => {
+    console.log('connected')
+    app.listen(3000)})
+.catch((err) => console.log(err))
 
 //register view engine
 app.set('view engine','ejs');
@@ -9,8 +24,43 @@ app.set('view engine','ejs');
 //static files
 app.use(express.static('public'));
 
-//listen for requests
-app.listen(3000);
+//req body
+app.use(express.urlencoded({extended: true}));
+
+//sessions
+app.use(session({
+    secret: 'Secret-Key',
+    resave: false,
+    saveUninitialized:false
+}));
+
+//logs
+app.use(morgan('dev'));
+
+//mongoose and mogo sandbox routes
+// app.use('/add-user',(req,res) =>{
+//     const user = new Users({
+//         username:'mo',
+//         password:'12345',
+//         email:'mo@gmail.com'
+//     });
+
+//     user.save()
+//     .then((result)=>{
+//         res.send(result);
+//     })
+//     .catch((err) => console.log(err));
+// });
+
+const usersCollection = require('./models/user');
+const currentUser ={
+    username:'',
+    email:'',
+    phoneNumber:'',
+    address:'',
+    cart:'',
+    orders:''
+}
 
 app.get('/', (req,res) =>{
     res.render('index' , {title : 'Home'});
@@ -20,9 +70,60 @@ app.get('/login', (req,res) =>{
     res.render('login' , {title : 'Login'});
 });
 
-app.get('/profile', (req,res) =>{
-    res.render('profile' , {title : 'Profile'});
+app.post('/login', (req,res)=>{
+    const username = req.body.username;
+    const password = req.body.password;
+
+    usersCollection.findOne({username: username, password: password})
+    .then(user =>{
+        if(user){
+            currentUser.username = username;
+            currentUser.email = user.email;
+            currentUser.address = user.address;
+            currentUser.phoneNumber = user.phoneNumber;
+            currentUser.cart = user.cart;
+            currentUser.orders = user.orders;
+
+            req.session.user = user;
+            res.redirect('/profile');
+        }
+        else{
+            // res.send(false)
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
 });
+
+app.post('/register', (req,res)=>{
+    console.log(req.body);
+    
+    const user = new Users(req.body);
+    user.save()
+    .then((result)=>{
+        // res.send(result);
+    })
+    .catch((err) => console.log(err));
+
+    res.redirect('/login');
+});
+
+app.get('/profile', (req,res) =>{
+    if(requireLogin(req)){
+        res.redirect('/login');
+    }
+    
+    res.render('profile' , {title : 'Profile' , currentUser});
+});
+
+app.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+      res.redirect('/');
+    });
+  });
+  
 
 app.get('/about', (req,res) =>{
     res.render('about' , {title : 'About us'});
@@ -41,3 +142,15 @@ app.get('/index' , (req , res) => {
 app.use((req,res) =>{
     res.status(404).render('404' , {title : '404 - Not Found'});
 });
+
+
+function requireLogin(req) {
+    console.log('checking');
+  if (!req.session.user) {
+    return true;
+  } 
+  else {
+    console.log('failesdsdsds');
+    return false;
+  }
+}

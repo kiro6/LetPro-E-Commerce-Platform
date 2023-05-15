@@ -11,9 +11,9 @@
     <div class="box">
       <div class="inner-box">
         <div class="forms-wrap">
-
+          <!-- onsubmit=" return validateLogin()" -->
           <!-- LOGIN FORM -->
-          <form autocomplete="off" class="sign-in-form" onsubmit=" return validateLogin()" method="get"  action="/profile">
+          <form autocomplete="off" class="sign-in-form"  method="post"  action="/login">
             <div class="signlogo">
               <img src="images/logo1.png" alt="easyclass" />
             </div>
@@ -33,6 +33,7 @@
                   autocomplete="off"
                   required
                   id = "username"
+                  name="username"
                 />
                 <label>Username</label>
               </div>
@@ -45,6 +46,7 @@
                   autocomplete="off"
                   required
                   id = "password"
+                  name="password"
                 />
                 <label>Password</label>
               </div>
@@ -60,9 +62,9 @@
 
 
           <!-- REGISTER -->
-          <form action="profile.html" autocomplete="off" class="sign-up-form" name="myForm" onsubmit="return validateRegister()" method="post">
+          <form action="/register" autocomplete="off" class="sign-up-form" name="myForm"  onsubmit="return validateRegister()" method="post">
             <div class="signlogo">
-              <img src="images/logo1.png" alt="easyclass" />
+              <img src="images/logo1.png" alt="MOOD" />
             </div>
 
             <div class="heading">
@@ -73,17 +75,17 @@
 
             <div class="actual-form">
               <div class="input-wrap">
-                <input type="text" minlength="4" class="input-field" autocomplete="off" required id = "rusername">
+                <input name = "username" type="text" minlength="4" class="input-field" autocomplete="off" required id = "rusername">
                 <label>Username</label>
               </div>
 
               <div class="input-wrap">
-                <input type="email" class="input-field" autocomplete="off" required id = "remail">
+                <input name = "email" type="email" class="input-field" autocomplete="off" required id = "remail">
                 <label>Email</label>
               </div>
 
               <div class="input-wrap">
-                <input type="password" minlength="4" class="input-field" autocomplete="off" required id = "rpassword">
+                <input name = "password" type="password" minlength="4" class="input-field" autocomplete="off" required id = "rpassword">
                 <label>Password</label>
               </div>
 
