@@ -40,7 +40,6 @@ app.use(
 app.use(morgan("dev"));
 
 const usersCollection = require("./models/user");
-const { forEach } = require("lodash");
 const currentUser = {
   userId: "",
   username: "",

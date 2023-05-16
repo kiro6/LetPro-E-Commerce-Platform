@@ -106,5 +106,5 @@ function generateId() {
 
 window.onload = ()=>{
   var input = document.getElementById("ruserId") ; 
-  input.setAttribute("valye" , generateId()); 
+  input.setAttribute("value" , generateId()); 
 }
