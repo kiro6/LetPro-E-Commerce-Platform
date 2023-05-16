@@ -2,7 +2,6 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const ObjectId = require('mongodb').ObjectId; 
 const Users = require("./models/user.js");
 const session = require("express-session");
 
@@ -126,31 +125,8 @@ app.post("/profile", (req, res) => {
     res.redirect("/login");
   }
   console.log(req.body.userId) ; 
-  usersCollection.findOne({_id : new ObjectId(req.body.userId.toString()) }).then((user)=>{
-    if (user) {
-        var userUpdateInfo = {
-          username: req.body.username,
-          email: req.body.email,
-          phoneNumber: req.body.phoneNumber,
-          address: req.body.address ,
-          cart: req.body.cart  ,
-          orders: req.body.orders ,
-        }
-        var userUpdate = new Users(userUpdateInfo) ;
-        userUpdate.updateOne().then(()=>{
-        currentUser.username = userUpdate.username;
-        currentUser.email = userUpdate.email;
-        currentUser.address = userUpdate.address;  
-        currentUser.phoneNumber = userUpdate.phoneNumber;  
-        currentUser.cart = userUpdate.cart;  
-        currentUser.orders = userUpdate.orders;  
-        req.session.user = userUpdate;
-        res.redirect("/profile");
-      })
-    } else {
-      console.log('not found');
-    }
-  })
+ 
+    
 });
 
 app.get("/logout", (req, res) => {
