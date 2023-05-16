@@ -39,7 +39,6 @@ app.use(
 //logs
 app.use(morgan("dev"));
 
-const usersCollection = require("./models/user");
 const currentUser = {
   userId: "",
   username: "",
@@ -66,11 +65,11 @@ app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  usersCollection
+  Users
     .findOne({ username: username, password: password })
     .then((user) => {
       if (user) {
-        currentUser.userId = user.userId ;
+        currentUser.userId = user.userId;
         currentUser.username = username;
         currentUser.email = user.email;
         currentUser.address = user.address;
@@ -93,8 +92,6 @@ app.post("/login", (req, res) => {
     });
 });
 
-
-
 app.post("/register", (req, res) => {
   console.log(req.body);
 
@@ -109,8 +106,6 @@ app.post("/register", (req, res) => {
   res.redirect("/login");
 });
 
-
-
 app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
@@ -123,10 +118,40 @@ app.post("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
   }
- usersCollection.findOne({ userID : req.body.userId}).then(()=>{
-  
- })
 
+  var conditions = {
+   userId : req.body.userId 
+  }
+ 
+  var update = {
+    userId:  req.body.userId,
+    username:  req.body.username,
+    email:  req.body.email,
+    phoneNumber:  req.body.phoneNumber,
+    address: req.body.address,
+    cart: req.body.cart,
+    orders: req.body.orders , 
+  }
+ 
+   Users.findOneAndUpdate(conditions,update).then((updatedUser)=>{
+    if (updatedUser) {
+      currentUser.username = updatedUser.username;
+      currentUser.email = updatedUser.email;
+      currentUser.address = updatedUser.address;
+      currentUser.phoneNumber = updatedUser.phoneNumber;
+      currentUser.cart = updatedUser.cart;
+      currentUser.orders = updatedUser.orders;
+
+
+      res.render('profile' , { title: "Profile", currentUser })
+    } else {
+      res.redirect('/profile')
+    }
+
+  })
+
+
+  
 });
 
 app.get("/logout", (req, res) => {
@@ -154,11 +179,9 @@ app.use((req, res) => {
 });
 
 function requireLogin(req) {
-  console.log("checking");
   if (!req.session.user) {
     return true;
   } else {
-    console.log("failed");
     return false;
   }
 }
