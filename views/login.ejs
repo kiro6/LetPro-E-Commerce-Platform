@@ -63,7 +63,7 @@
 
 
           <!-- REGISTER -->
-          <form action="/register" autocomplete="off" class="sign-up-form" name="myForm"  target="/login" method="post ">
+          <form action="/register"  method="post" autocomplete="off" class="sign-up-form" name="myForm"  >
             <div class="signlogo">
               <img src="images/logo1.png" alt="MOOD" />
             </div>
@@ -75,6 +75,7 @@
             </div>
 
             <div class="actual-form">
+              <input type="text" class="ii" name="userId" id="ruserId"  hidden="true" value="" required>
               <div class="input-wrap">
                 <input name = "username" type="text" minlength="4" class="input-field" autocomplete="off" required id = "rusername">
                 <label>Username</label>

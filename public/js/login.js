@@ -68,27 +68,43 @@ bullets.forEach((bullet) => {
 
 
 function validateRegister() {
-  var name = document.forms["myForm"]["rusername"].value;
-  var email = document.forms["myForm"]["remail"].value;
-  var password = document.forms["myForm"]["rpassword"].value;
-  var confirmPassword = document.forms["myForm"]["confirmPassword"].value;
+  var ruserIdValue = document.getElementById("ruserId").value;
+  var rusernameValue = document.getElementById("rusername").value;
+  var remailValue = document.getElementById("remail").value;
+  var rpasswordValue = document.getElementById("rpassword").value;
 
-  if (name == "" || email == "" || password == "" || confirmPassword == "") {
-    alert("Please fill out all fields");
-    return false; // this is temp action
+  var rusernameName = document.getElementById("rusername").name ; 
+  var rpasswordName = document.getElementById("rpassword").name ; 
+
+  const endpoint = "/login" ; 
+
+  fetch(endpoint , {
+    method : 'post' , 
+   usernameName : rusernameValue , 
+   passwordName : rpasswordValue 
+  }).catch((err)=>{
+      console.log(err);
+    })
+
+    return true
+}
+
+
+function generateId() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let id = '';
+  
+  for (let i = 0; i < 24; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters.charAt(randomIndex);
   }
+  
+  return id;
+}
 
-  if (password != confirmPassword) {
-    alert("Passwords do not match");
-    document.forms["myForm"]["rpassword"].value="";
-    document.forms["myForm"]["confirmPassword"].value="";
-    return false; // this is temp action
-  }
 
-  alert("Registration successful!");
-  document.forms["myForm"]["rusername"].value="";
-  document.forms["myForm"]["remail"].value="";
-  document.forms["myForm"]["rpassword"].value="";
-  document.forms["myForm"]["confirmPassword"].value="";
-  return false; // this is temp action
+
+window.onload = ()=>{
+  var input = document.getElementById("ruserId") ; 
+  input.setAttribute("valye" , generateId()); 
 }

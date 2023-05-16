@@ -1,156 +1,188 @@
 /* eslint-disable no-unused-vars */
-const express = require('express');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
-const Users = require('./models/user.js');
-const session = require('express-session');
-
-
+const express = require("express");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const ObjectId = require('mongodb').ObjectId; 
+const Users = require("./models/user.js");
+const session = require("express-session");
 
 //express app
 const app = express();
 
 //connect to DB
-const DBUSR = 'mongodb+srv://CEO:admin12345@mood.kkmmia4.mongodb.net/MOOD';
-mongoose.connect(DBUSR, {useNewURLParser:true, useUnifiedTopology:true})
-.then((result) => {
-    console.log('connected')
-    app.listen(3000)})
-.catch((err) => console.log(err))
+const DBUSR = "mongodb+srv://CEO:admin12345@mood.kkmmia4.mongodb.net/MOOD";
+mongoose
+  .connect(DBUSR, { useNewURLParser: true, useUnifiedTopology: true })
+  .then((result) => {
+    console.log("connected");
+    app.listen(5555);
+  })
+  .catch((err) => console.log(err));
 
 //register view engine
-app.set('view engine','ejs');
+app.set("view engine", "ejs");
 
 //static files
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 //req body
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 //sessions
-app.use(session({
-    secret: 'Secret-Key',
+app.use(
+  session({
+    secret: "Secret-Key",
     resave: false,
-    saveUninitialized:false
-}));
+    saveUninitialized: false,
+  })
+);
 
 //logs
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
-//mongoose and mogo sandbox routes
-// app.use('/add-user',(req,res) =>{
-//     const user = new Users({
-//         username:'mo',
-//         password:'12345',
-//         email:'mo@gmail.com'
-//     });
+const usersCollection = require("./models/user");
+const { forEach } = require("lodash");
+const currentUser = {
+  userId: "",
+  username: "",
+  email: "",
+  phoneNumber: "",
+  address: "",
+  cart: "",
+  orders: "",
+};
 
-//     user.save()
-//     .then((result)=>{
-//         res.send(result);
-//     })
-//     .catch((err) => console.log(err));
-// });
-
-const usersCollection = require('./models/user');
-const currentUser ={
-    username:'',
-    email:'',
-    phoneNumber:'',
-    address:'',
-    cart:'',
-    orders:''
-}
-
-app.get('/', (req,res) =>{
-    res.render('index' , {title : 'Home'});
+app.get("/", (req, res) => {
+  res.render("index", { title: "Home" });
 });
 
-app.get('/login', (req,res) =>{
-    res.render('login' , { title : 'Login' , accountExist : true , message : "there is no account with this credentials"})
+app.get("/login", (req, res) => {
+  res.render("login", {
+    title: "Login",
+    accountExist: true,
+    message: "there is no account with this credentials",
+  });
 });
 
-app.post('/login', (req,res)=>{
-    const username = req.body.username;
-    const password = req.body.password;
+app.post("/login", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
 
-    usersCollection.findOne({username: username, password: password})
-    .then(user =>{
-        if(user){
-            currentUser.username = username;
-            currentUser.email = user.email;
-            currentUser.address = user.address;
-            currentUser.phoneNumber = user.phoneNumber;
-            currentUser.cart = user.cart;
-            currentUser.orders = user.orders;
+  usersCollection
+    .findOne({ username: username, password: password })
+    .then((user) => {
+      if (user) {
+        currentUser.userId = user.userId ;
+        currentUser.username = username;
+        currentUser.email = user.email;
+        currentUser.address = user.address;
+        currentUser.phoneNumber = user.phoneNumber;
+        currentUser.cart = user.cart;
+        currentUser.orders = user.orders;
 
-            req.session.user = user;
-            res.redirect('/profile');
-        }
-        else{
-            res.render('login' , { title : 'Login' , accountExist : false , message : "there is no account with this credentials"})
-        }
+        req.session.user = user;
+        res.redirect("/profile");
+      } else {
+        res.render("login", {
+          title: "Login",
+          accountExist: false,
+          message: "there is no account with this credentials",
+        });
+      }
     })
-    .catch(err=>{
-        console.log(err);
-    })
-
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
-app.post('/register', (req,res)=>{
-    console.log(req.body);
-    
-    const user = new Users(req.body);
-    user.save()
-    .then((result)=>{
-        // res.send(result);
+
+
+app.post("/register", (req, res) => {
+  console.log(req.body);
+
+  const user = new Users(req.body);
+  user
+    .save()
+    .then((result) => {
+      // res.send(result);
     })
     .catch((err) => console.log(err));
 
-    res.redirect('/login');
+  res.redirect("/login");
 });
 
-app.get('/profile', (req,res) =>{
-    if(requireLogin(req)){
-        res.redirect('/login');
+
+
+app.get("/profile", (req, res) => {
+  if (requireLogin(req)) {
+    res.redirect("/login");
+  }
+
+  res.render("profile", { title: "Profile", currentUser });
+});
+
+app.post("/profile", (req, res) => {
+  if (requireLogin(req)) {
+    res.redirect("/login");
+  }
+  console.log(req.body.userId) ; 
+  usersCollection.findOne({_id : new ObjectId(req.body.userId.toString()) }).then((user)=>{
+    if (user) {
+        var userUpdateInfo = {
+          username: req.body.username,
+          email: req.body.email,
+          phoneNumber: req.body.phoneNumber,
+          address: req.body.address ,
+          cart: req.body.cart  ,
+          orders: req.body.orders ,
+        }
+        var userUpdate = new Users(userUpdateInfo) ;
+        userUpdate.updateOne().then(()=>{
+        currentUser.username = userUpdate.username;
+        currentUser.email = userUpdate.email;
+        currentUser.address = userUpdate.address;  
+        currentUser.phoneNumber = userUpdate.phoneNumber;  
+        currentUser.cart = userUpdate.cart;  
+        currentUser.orders = userUpdate.orders;  
+        req.session.user = userUpdate;
+        res.redirect("/profile");
+      })
+    } else {
+      console.log('not found');
     }
-    
-    res.render('profile' , {title : 'Profile' , currentUser});
+  })
 });
 
-app.get('/logout', (req, res) => {
-    req.session.destroy(() => {
-      res.redirect('/');
-    });
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
   });
-  
+});
 
-app.get('/about', (req,res) =>{
-    res.render('about' , {title : 'About us'});
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About us" });
 });
 
 //redirect
-app.get('/about-us' , (req , res) => {
-    res.redirect('/about');
+app.get("/about-us", (req, res) => {
+  res.redirect("/about");
 });
 
-app.get('/index' , (req , res) => {
-    res.redirect('/');
+app.get("/index", (req, res) => {
+  res.redirect("/");
 });
 
 //404
-app.use((req,res) =>{
-    res.status(404).render('404' , {title : '404 - Not Found'});
+app.use((req, res) => {
+  res.status(404).render("404", { title: "404 - Not Found" });
 });
 
-
 function requireLogin(req) {
-    console.log('checking');
+  console.log("checking");
   if (!req.session.user) {
     return true;
-  } 
-  else {
-    console.log('failed');
+  } else {
+    console.log("failed");
     return false;
   }
 }
