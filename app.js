@@ -149,6 +149,11 @@ app.post("/profile", (req, res) => {
   
 });
 
+app.get('/product',(req,res)=>{
+  res.render('product',{title:'Product'});
+});
+
+
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/");

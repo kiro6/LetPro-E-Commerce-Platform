@@ -46,9 +46,10 @@ main {
 
 .box {
   position: relative;
+  top: 15px;
   width: 100%;
-  max-width: 1020px;
-  height: 640px;
+  max-width: 1080px;
+  height: 720px;
   background-color: var(--Primary);
   border-radius: 3.3rem;
   box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
@@ -109,22 +110,25 @@ form.sign-up-form {
   letter-spacing: -0.5px;
   color: var(--Secondary);
 }
-
+.heading{
+  position: relative;
+  top: 12px;
+}
 .heading h2 {
     position: relative;
     bottom: 20px;
-  font-size: 2.1rem;
-  font-weight: 600;
-  color: var(--Secondary);
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--Secondary);
 }
 
 .heading h6 {
     position: relative;
     bottom: 20px;
-  color: var(--Secondary);
-  font-weight: 400;
-  font-size: 0.95rem;
-  display: inline;
+    color: var(--Secondary);
+    font-weight: 400;
+    font-size: 0.95rem;
+    display: inline;
 }
 .heading a{
     position: relative;

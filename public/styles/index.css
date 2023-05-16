@@ -218,7 +218,8 @@ section{
 }
 .row img{
     width: 100%;
-    height: auto;
+    /* height: auto; */
+    height: 340px;
     transition: all .40s;
 }
 .row img:hover{
@@ -253,7 +254,7 @@ section{
     bottom: 12px;
 }
 .cart-icon:hover{
-    color: rgb(246, 13, 36);
+    color: var(--Primary);
     cursor: pointer;
 }
 .ratting i{
@@ -453,7 +454,9 @@ footer ul{
 .darkmode .color-btn-switch{
     color: var(--dark-icon-color);
 }
-
+.darkmode .color-btn-icon i{
+    color: #fff;
+}
 
 .darkmode .price h4{
     color: #fbf2f2;
@@ -537,4 +540,62 @@ footer ul{
 }
 .darkmode .footer-copyrights hr{
     background-color: #fff;
+}
+
+.popup-container{
+    width: 100%;
+    height: 100%;
+    background: rgba(38, 38, 38,.7);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    visibility: hidden;
+    z-index: 500;
+}
+.popup{
+    width: 400px;
+    background: #fff;
+    border-radius: 6px;
+    position: absolute;
+    margin-top: 150px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    color: #333;
+    visibility: hidden;
+    transition: transform 0.4s,top 0.4s;
+}
+.open-popup{
+    visibility: visible;
+    top: 180px;
+    transform: translate(-50%,-50%) scale(1);
+    z-index: 5;
+}
+.blur{
+    visibility: visible;
+}
+.popup pre{
+ text-align: right;
+ justify-content: right;
+
+}
+.popup h2{
+    font-size: 38px;
+    font-weight: 500;
+    margin: 30px 0 10px;
+}
+.popup button{
+    width: 50%;
+    margin-top: 50px;
+    padding: 10px 0;
+    background: #3c5077;
+    color: #fff;
+    border: 0;
+    outline: none;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
 }
