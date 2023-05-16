@@ -123,9 +123,10 @@ app.post("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
   }
-  console.log(req.body.userId) ; 
- 
-    
+ usersCollection.findOne({ userID : req.body.userId}).then(()=>{
+  
+ })
+
 });
 
 app.get("/logout", (req, res) => {
