@@ -246,6 +246,16 @@ section{
     color: rgb(246, 13, 36);
     cursor: pointer;
 }
+.cart-icon{
+    position: absolute;
+    right: 0;
+    font-size: 20px;
+    bottom: 12px;
+}
+.cart-icon:hover{
+    color: rgb(246, 13, 36);
+    cursor: pointer;
+}
 .ratting i{
     color: #ff8c00;
     font-size: 18px;
