@@ -67,7 +67,7 @@ app.get('/', (req,res) =>{
 });
 
 app.get('/login', (req,res) =>{
-    res.render('login' , {title : 'Login'});
+    res.render('login' , { title : 'Login' , accountExist : true , message : "there is no account with this credentials"})
 });
 
 app.post('/login', (req,res)=>{
@@ -88,9 +88,7 @@ app.post('/login', (req,res)=>{
             res.redirect('/profile');
         }
         else{
-            res.json({
-                error : "there is no user with this credentials"
-            })
+            res.render('login' , { title : 'Login' , accountExist : false , message : "there is no account with this credentials"})
         }
     })
     .catch(err=>{

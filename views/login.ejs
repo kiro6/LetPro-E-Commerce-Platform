@@ -14,7 +14,7 @@
           <!-- onsubmit=" return validateLogin()" -->
           <!-- LOGIN FORM -->
           
-          <form autocomplete="off" class="sign-in-form"  >
+          <form autocomplete="off" class="sign-in-form" onsubmit="return validateLogin()" method="post" >
             <div class="signlogo">
               <img src="images/logo1.png" alt="easyclass" />
             </div>
@@ -63,7 +63,7 @@
 
 
           <!-- REGISTER -->
-          <form action="/register" autocomplete="off" class="sign-up-form" name="myForm"  onsubmit="return validateRegister()" method="post">
+          <form action="/register" autocomplete="off" class="sign-up-form" name="myForm"  target="/login" method="post ">
             <div class="signlogo">
               <img src="images/logo1.png" alt="MOOD" />
             </div>
@@ -137,5 +137,16 @@
 
       <script src="/js/login.js"></script>
       <script src="/js/menu.js"></script>
+      
+      <script >
+        var accountExist = <%= accountExist %>;     
+       
+        if(accountExist === false) 
+        {  
+          confirm('<%= message %>') ; 
+        }
+        </script>
+        
+       
   </body>
 </html>

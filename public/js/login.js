@@ -41,9 +41,29 @@ bullets.forEach((bullet) => {
 
 
 
-  var  loginForm = document.getElementsByClassName("sign-in-form");
-  console.log(loginForm)
+ function validateLogin(){
+  var usernameValue = document.getElementById("username").value;
+  var passwordValue = document.getElementById("password").value;
 
+  var usernameName = document.getElementById("username").name ; 
+  var passwordName = document.getElementById("password").name ; 
+
+  const endpoint = "/login" ; 
+
+  fetch(endpoint , {
+    method : 'post' , 
+   usernameName : usernameValue , 
+   passwordName : passwordValue 
+  }).catch((err)=>{
+      console.log(err);
+    })
+
+    return true
+
+ }
+    
+    
+    
   
 
 
