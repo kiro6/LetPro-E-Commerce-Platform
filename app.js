@@ -124,26 +124,21 @@ app.post("/profile", (req, res) => {
   }
  
   var update = {
-    userId:  req.body.userId,
-    username:  req.body.username,
-    email:  req.body.email,
+
     phoneNumber:  req.body.phoneNumber,
     address: req.body.address,
-    cart: req.body.cart,
-    orders: req.body.orders , 
+ 
   }
  
    Users.findOneAndUpdate(conditions,update).then((updatedUser)=>{
     if (updatedUser) {
-      currentUser.username = updatedUser.username;
-      currentUser.email = updatedUser.email;
-      currentUser.address = updatedUser.address;
-      currentUser.phoneNumber = updatedUser.phoneNumber;
-      currentUser.cart = updatedUser.cart;
-      currentUser.orders = updatedUser.orders;
+      console.log(updatedUser)
+     
+      currentUser.address = req.body.address,
+      currentUser.phoneNumber =  req.body.phoneNumber,
+     
 
-
-      res.render('profile' , { title: "Profile", currentUser })
+      res.render('profile' ,  { title: "Profile", currentUser } )
     } else {
       res.redirect('/profile')
     }

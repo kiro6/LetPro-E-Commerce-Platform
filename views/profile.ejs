@@ -22,13 +22,13 @@
           <h1>Personal Information</h1>
           <form target="/profile" method="post" >
             <div class="info-item">
-              <input type="text" class="ii" name="userId"  hidden="true" value="<%=currentUser.userId%>">
+              <input type="text"  name="userId"  hidden="true" value="<%=currentUser.userId%>">
               <label for="name">Name:</label>
-              <input type="text" class="ii" name="username" require="true" value="<%= currentUser.username %>" disabled="true">
+              <label   disabled="true"><%= currentUser.username %></label>
             </div>
             <div class="info-item">
               <label for="email">Email:</label>
-              <input type="email" class="ii" name="email" require="true" value="<%= currentUser.email %>" disabled="true">
+              <label  disabled="true"><%= currentUser.email %> </label>
             </div>
             <div class="info-item">
               <label for="address">Address:</label>
@@ -39,7 +39,7 @@
               <input type="tel" class="ii" name="phoneNumber" value="<%= currentUser.phoneNumber %>" disabled="true">
             </div>
 
-            <input class="change-btn" type="button" value="Update" onclick="changeInfo()">
+            <input class="change-btn" type="button" value="Update" onclick="changeInfo()" >
             <input class="change-btn confirm" type="submit" value="Confirm" >
           
           </form>
