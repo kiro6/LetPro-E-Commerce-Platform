@@ -81,16 +81,18 @@
             </tbody>
           </table>
         </div>
+
         <div class="changepass">
           <h1>Change Password</h1>
-          <form action="">
+          <form action="/profile/changepass" method="post">
+            <input type="text"  name="userId"  hidden="true" value="<%=currentUser.userId%>">
             <div class="changer-input">
               <label for="password">New password:</label>
               <input type="password" id="password" name="password" required>
             </div>
             <div class="changer-input">
               <label for="password">Confirm password:</label>
-              <input type="password" id="password" name="password" required>
+              <input type="password" id="confirmPassword" required>
             </div>
             <input class="change-btn pass-btn" type="submit" value="Confirm" >
           </form>

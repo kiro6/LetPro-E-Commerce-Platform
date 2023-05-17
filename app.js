@@ -101,10 +101,7 @@ app.post("/login", (req, res) => {
 //  ------------------register------------------
 app.post("/register", (req, res) => {
   Users.findOne({
-    $or: [
-      { username: req.body.username },
-      { email: req.body.email }
-    ]
+    $or: [{ username: req.body.username }, { email: req.body.email }],
   }).then((userFound) => {
     if (userFound) {
       res.render("login", {
@@ -114,7 +111,8 @@ app.post("/register", (req, res) => {
       });
     } else {
       const user = new Users(req.body);
-      user.save()
+      user
+        .save()
         .then((result) => {
           res.render("login", {
             title: "Login",
@@ -127,7 +125,6 @@ app.post("/register", (req, res) => {
   });
 });
 
-
 //  ------------------profile------------------
 app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
@@ -136,7 +133,6 @@ app.get("/profile", (req, res) => {
 
   res.render("profile", { title: "Profile", currentUser });
 });
-
 //  ------------------/profile/update------------------
 app.post("/profile/update", (req, res) => {
   if (requireLogin(req)) {
@@ -154,15 +150,41 @@ app.post("/profile/update", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      (currentUser.address = req.body.address),
-        (currentUser.phoneNumber = req.body.phoneNumber),
-        res.render("profile", { title: "Profile", currentUser });
+      currentUser.address = req.body.address;
+      currentUser.phoneNumber = req.body.phoneNumber;
+      res.render("profile", { title: "Profile", currentUser });
     } else {
       res.redirect("/profile");
     }
   });
 });
 
+//  ------------------/profile/changepass------------------
+app.post("/profile/changepass", (req, res) => {
+  var conditions = {
+    userId: req.body.userId,
+  };
+
+  var update = {
+    password: req.body.password,
+  };
+
+  Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
+    if (updatedUser) {
+      currentUser.address = req.body.address;
+      currentUser.password = req.body.password;
+      res.redirect("/profile")
+    } else {
+      req.session.destroy(() => {
+        res.render("login", {
+          title: "Login",
+          show: true,
+          message: "an error happened while updating your password",
+        });
+      });
+    }
+  });
+});
 //  ------------------/product------------------
 app.get("/product", (req, res) => {
   res.render("product", { title: "Product" });
