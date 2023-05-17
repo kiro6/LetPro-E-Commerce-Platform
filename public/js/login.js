@@ -41,53 +41,7 @@ bullets.forEach((bullet) => {
 
 
 
- function validateLogin(){
-  var usernameValue = document.getElementById("username").value;
-  var passwordValue = document.getElementById("password").value;
-
-  var usernameName = document.getElementById("username").name ; 
-  var passwordName = document.getElementById("password").name ; 
-
-  const endpoint = "/login" ; 
-
-  fetch(endpoint , {
-    method : 'post' , 
-   usernameName : usernameValue , 
-   passwordName : passwordValue 
-  }).catch((err)=>{
-      console.log(err);
-    })
-
-    return true
-
- }
     
-    
-    
-  
-
-
-function validateRegister() {
-  var ruserIdValue = document.getElementById("ruserId").value;
-  var rusernameValue = document.getElementById("rusername").value;
-  var remailValue = document.getElementById("remail").value;
-  var rpasswordValue = document.getElementById("rpassword").value;
-
-  var rusernameName = document.getElementById("rusername").name ; 
-  var rpasswordName = document.getElementById("rpassword").name ; 
-
-  const endpoint = "/login" ; 
-
-  fetch(endpoint , {
-    method : 'post' , 
-   usernameName : rusernameValue , 
-   passwordName : rpasswordValue 
-  }).catch((err)=>{
-      console.log(err);
-    })
-
-    return true
-}
 
 
 function generateId() {
