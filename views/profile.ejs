@@ -20,7 +20,7 @@
         </div>
         <div class="info">
           <h1>Personal Information</h1>
-          <form target="/profile" method="post" >
+          <form action="/profile/update" method="post" >
             <div class="info-item">
               <input type="text"  name="userId"  hidden="true" value="<%=currentUser.userId%>">
               <label for="name">Name:</label>

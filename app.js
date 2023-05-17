@@ -49,24 +49,30 @@ const currentUser = {
   orders: "",
 };
 
+//  ------------------/index------------------
 app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
+app.get("/index", (req, res) => {
+  res.redirect("/");
+});
+
+//  ------------------login------------------
 
 app.get("/login", (req, res) => {
   res.render("login", {
     title: "Login",
-    accountExist: true,
-    message: "there is no account with this credentials",
+    show: false,
+    message: "",
   });
 });
 
+//  ------------------login------------------
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  Users
-    .findOne({ username: username, password: password })
+  Users.findOne({ username: username, password: password })
     .then((user) => {
       if (user) {
         currentUser.userId = user.userId;
@@ -82,7 +88,7 @@ app.post("/login", (req, res) => {
       } else {
         res.render("login", {
           title: "Login",
-          accountExist: false,
+          show: true,
           message: "there is no account with this credentials",
         });
       }
@@ -92,20 +98,37 @@ app.post("/login", (req, res) => {
     });
 });
 
+//  ------------------register------------------
 app.post("/register", (req, res) => {
-  console.log(req.body);
-
-  const user = new Users(req.body);
-  user
-    .save()
-    .then((result) => {
-      // res.send(result);
-    })
-    .catch((err) => console.log(err));
-
-  res.redirect("/login");
+  Users.findOne({
+    $or: [
+      { username: req.body.username },
+      { email: req.body.email }
+    ]
+  }).then((userFound) => {
+    if (userFound) {
+      res.render("login", {
+        title: "Login",
+        show: true,
+        message: "There is a user with this username or email",
+      });
+    } else {
+      const user = new Users(req.body);
+      user.save()
+        .then((result) => {
+          res.render("login", {
+            title: "Login",
+            show: true,
+            message: "Your account has been registered successfully",
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  });
 });
 
+
+//  ------------------profile------------------
 app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
@@ -114,66 +137,53 @@ app.get("/profile", (req, res) => {
   res.render("profile", { title: "Profile", currentUser });
 });
 
-app.post("/profile", (req, res) => {
+//  ------------------/profile/update------------------
+app.post("/profile/update", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
   }
 
   var conditions = {
-   userId : req.body.userId 
-  }
- 
+    userId: req.body.userId,
+  };
+
   var update = {
-
-    phoneNumber:  req.body.phoneNumber,
+    phoneNumber: req.body.phoneNumber,
     address: req.body.address,
- 
-  }
- 
-   Users.findOneAndUpdate(conditions,update).then((updatedUser)=>{
+  };
+
+  Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      console.log(updatedUser)
-     
-      currentUser.address = req.body.address,
-      currentUser.phoneNumber =  req.body.phoneNumber,
-     
-
-      res.render('profile' ,  { title: "Profile", currentUser } )
+      (currentUser.address = req.body.address),
+        (currentUser.phoneNumber = req.body.phoneNumber),
+        res.render("profile", { title: "Profile", currentUser });
     } else {
-      res.redirect('/profile')
+      res.redirect("/profile");
     }
-
-  })
-
-
-  
+  });
 });
 
-app.get('/product',(req,res)=>{
-  res.render('product',{title:'Product'});
+//  ------------------/product------------------
+app.get("/product", (req, res) => {
+  res.render("product", { title: "Product" });
 });
 
-
+//  ------------------/logout------------------
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/");
   });
 });
 
+//  ------------------/about------------------
 app.get("/about", (req, res) => {
   res.render("about", { title: "About us" });
 });
-
-//redirect
 app.get("/about-us", (req, res) => {
   res.redirect("/about");
 });
 
-app.get("/index", (req, res) => {
-  res.redirect("/");
-});
-
-//404
+//  ------------------404------------------
 app.use((req, res) => {
   res.status(404).render("404", { title: "404 - Not Found" });
 });
