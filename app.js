@@ -173,7 +173,7 @@ app.post("/profile/changepass", (req, res) => {
     if (updatedUser) {
       currentUser.address = req.body.address;
       currentUser.password = req.body.password;
-      res.redirect("/profile")
+      res.redirect("/profile") ;
     } else {
       req.session.destroy(() => {
         res.render("login", {
