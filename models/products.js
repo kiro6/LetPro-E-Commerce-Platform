@@ -25,6 +25,14 @@ const tshirtSchema = new Schema({
   price:{
     type: Number,
     required: true
+  },
+  gender:{
+    type: String,
+    required: true
+  },
+  trending:{
+    type: Boolean,
+    required: true
   }
 });
 
@@ -50,6 +58,14 @@ const bagSchema = new Schema({
   price:{
     type: Number,
     required: true
+  },
+  gender:{
+    type: String,
+    required: true
+  },
+  trending:{
+    type: Boolean,
+    required: true
   }
 });
 
@@ -74,6 +90,14 @@ const watchSchema = new Schema({
   }],
   price:{
     type: Number,
+    required: true
+  },
+  gender:{
+    type: String,
+    required: true
+  },
+  trending:{
+    type: Boolean,
     required: true
   }
 });

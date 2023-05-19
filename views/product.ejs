@@ -7,15 +7,12 @@
     <div class="popup-container">
         <div class="popup" id="popup">
         <img src="">
-        <h2> product name</h2>
-        <pre>
-         price:
-         quantity:
-         total:   
-        </pre>
-    <button type="button" onclick="continueShopping()">Continue shopping</button>
-    <button type="button" onclick="viewCart()">view cart</button>
-    </div>
+        <h2> <%= product.name %></h2>
+        <p id="P">Price: $<span></span></p>
+        <p id="Q">Quantity: <span></span></p>
+        <p id="T">Total: $<span></span></p>
+    <button class="button" type="button" onclick="continueShopping()">Continue shopping</button>
+    <button class="button" type="button" ><a href="/cart">view cart</a></button>
 </div>
     </div>
     <main>
@@ -88,44 +85,31 @@
         </div>
         
     </main>
-    <hr class="hr">
-    <!-- <section class="reviews">
-        <h1>Customer Reviews</h1>
-        <div class="reviews-container">
-            <div class="reviews-graph">
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">5</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">4</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">3</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">2</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">1</span>
-                </div>
-            </div>
-            
-            <div class="review-form">
-                <form action="" method="post">
-                    <label for="review">Write your review:</label>
-                    <input id="review" type="text">
-                    <input type="submit" value="Post">
-                </form>
-            </div>
-        </div>
-    </section> -->
     
-    <hr class="hr">
 
     <%- include('./partials/footer.ejs') %>
 
+    <div style="visibility: hidden;" id="product" data-variable="<%=product.name%>"></div>
+
     <script src="js/menu.js"></script>
     <script src="js/product.js"></script>
+    <script>
+        const colors = document.querySelectorAll(".colorBtn");
+
+        colors.forEach((color) => {
+            color.addEventListener('click', colorSelected);
+        });
+
+
+        function colorSelected(){
+            let index = this.dataset.value;
+            console.log(index);
+            
+            console.log(product.name);
+            src = <%=product.name%>+index+'.jpg';
+            image.setAttribute('src',src);
+        }
+    </script>
 
     
 </body>

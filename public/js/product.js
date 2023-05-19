@@ -4,6 +4,11 @@ const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
 const quantity = document.querySelector('.quantity span');
 const image = document.querySelector('.product-image img');
+const product = document.getElementById('product').dataset.variable;
+let src = image.getAttribute('src');
+
+const cartcount = document.querySelector('.cart h4');
+
 let count = 1;
 
 
@@ -14,10 +19,10 @@ colors.forEach((color) => {
 
 function colorSelected(){
     let index = this.dataset.value;
-    // console.log(index);
+    console.log(index);
     
-    let src = image.getAttribute('src');
-    src = 'images/f'+index+'.jpg';
+    console.log(product.name);
+    src = product+index+'.jpg';
     image.setAttribute('src',src);
 }
 
@@ -47,9 +52,15 @@ function order(){
 
     //Create post request
 
-
-    openPopup();
+    addtocart();
+    openPopup(Quantity);
 }  
+
+function addtocart(){
+    let count = cartcount.innerHTML;
+    count++;
+    cartcount.innerHTML = count;
+}
 
 function selectedSize(){
     for(var i = 0 ; i < sizes.length ; i++){
@@ -69,7 +80,21 @@ function selectedColor(){
 
 let popup=document.getElementById("popup");
 let b =document.querySelector('.popup-container');
-function openPopup(){
+
+const P = document.querySelector('#P span');
+const Q = document.querySelector('#Q span');
+const T = document.querySelector('#T span');
+const popupImage = document.querySelector('.popup img');
+
+function openPopup(quantity){
+    let price = document.querySelector('.product-options p span').innerHTML;
+    let total = quantity * price;
+
+    P.innerHTML = price;
+    Q.innerHTML = quantity;
+    T.innerHTML = total;
+    popupImage.setAttribute('src',src);
+
     popup.classList.add("open-popup");
     b.classList.add('blur');
     window.scrollTo(0,0);

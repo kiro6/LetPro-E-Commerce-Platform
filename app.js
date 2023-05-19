@@ -108,7 +108,9 @@ const currentUser = {
 //     },
     
 //   ],
-//   price: 29.99
+//   price: 29.99,
+//   trending: true,
+//   gender: 'Men'
 // });
 
 // tshirt.save()
@@ -121,10 +123,35 @@ const currentUser = {
 
 //  ------------------/index------------------
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+  Products.find({ trending: true})
+    .then((products) => {
+      if (products) 
+        // const variants = product.schema.path('variants');
+        // let size = false;
+
+        // if(variants.schema.path('sizes')){
+        //   console.log('true');
+        //   size = true;
+        // }
+        console.log('gadjlskajgihuofsaijdka');
+        res.render("index", { title: "Home" , products});
+      // } else {
+      //   res.status(404).render("404", { title: "404 - Not Found" });
+      // }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
 });
 app.get("/index", (req, res) => {
   res.redirect("/");
+});
+
+
+// -------------------shop------------------
+app.get('/shop',(req,res)=>{
+  res.render('shop',{title:'Shop'})
 });
 
 //  ------------------login------------------
@@ -203,6 +230,8 @@ app.get("/profile", (req, res) => {
 
   res.render("profile", { title: "Profile", currentUser });
 });
+
+
 //  ------------------/profile/update------------------
 app.post("/profile/update", (req, res) => {
   if (requireLogin(req)) {
