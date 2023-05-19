@@ -171,7 +171,7 @@ app.post("/login", (req, res) => {
 //  ------------------register------------------
 app.post("/register", (req, res) => {
   Users.findOne({
-    $or: [{ username: req.body.username }, { email: req.body.email }],
+    $or: [{ username: req.body.username }, { email: req.body.email }]
   }).then((userFound) => {
     if (userFound) {
       res.render("login", {

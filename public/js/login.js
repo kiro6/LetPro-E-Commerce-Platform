@@ -62,3 +62,29 @@ window.onload = ()=>{
   var input = document.getElementById("ruserId") ; 
   input.setAttribute("value" , generateId()); 
 }
+
+
+function doRegister() {
+  var usernameValue = document.getElementById("rusername").value;
+  var passwordValue = document.getElementById("rpassword").value;
+  var emailValue = document.getElementById("remai").value;
+  var phoneValue = document.getElementById("rphone").value;
+  var addressValue = document.getElementById("raddress").value;
+  var endpoint = "/register";
+
+  fetch(endpoint, {
+    method: 'post',
+    body: JSON.stringify({
+      username: usernameValue,
+      email : emailValue , 
+      phoneNumber: phoneValue , 
+      address : addressValue, 
+      password: passwordValue
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+
+  return false; 
+}
