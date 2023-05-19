@@ -25,38 +25,36 @@
                     <a href="">Men</a> <i class="bx bx-chevrons-right"></i> <a href="">Tops</a> <i class="bx bx-chevrons-right"></i> <a href="">T-shirts</a>
                 </div>
                 
-                <img src="/images/f1.jpg" alt="Product-image">
+                <img src="/images/Mix.jpg" alt="Product-image">
             </div>
             <div class="product-container">
-                <h1>Men's Flowers T-shirt</h1>
+                <h1><%= product.name%></h1>
                 <div class="product-options">
-                    <!-- <datalist id="sizes">
-                        <option value="S">
-                        <option value="M">
-                        <option value="L">
-                        <option value="XL">
-                        <option value="XXL">
-                    </datalist>
-                    <input type="text" id="size" list="sizes" placeholder="Select Size"/> -->
-                    <p>$49.99</p>
-                    <div class="size">
-                        <h3>Size:</h3>
-                        <!-- <button type="radio" class="sb-1 active" data-value="1">S</button>
-                        <button type="radio" class="sb-2" data-value="2">M</button>
-                        <button class="sb-3" data-value="3">L</button>
-                        <button class="sb-4" data-value="4">XL</button>
-                        <button class="sb-5" data-value="5">XXL</button> -->
-                        <input type="radio" class="sizeBtn sb-1" id="s" name="size" checked="checked">
-                        <label for="s">S</label>
-                        <input type="radio" class="sizeBtn sb-2" id="m" name="size">
-                        <label for="m">M</label>
-                        <input type="radio" class="sizeBtn sb-3" id="l" name="size">
-                        <label for="l">L</label>
-                        <input type="radio" class="sizeBtn sb-4" id="xl" name="size">
-                        <label for="xl">XL</label>
-                        <input type="radio" class="sizeBtn sb-5" id="xxl" name="size">
-                        <label for="xxl">XXL</label>
-                    </div>
+                    <p>$<span><%= product.price  %></span></p>
+
+                    <% if(size){%>
+                        <div class="size">
+                            <h3>Size:</h3>
+                            <input type="radio" <% if(product.variants[0].sizes[0].quantityLeft== 0) {%>
+                                class = "sizeBtn sb-1 unavailable"
+                                disabled = "true"
+                            <% }else{ %>
+                                class="sizeBtn sb-1"
+                                <% console.log('available') %>
+                                checked="checked"
+                            <% } %> id="s" name="size" >
+                            <label for="s">S</label>
+                            <input type="radio" class="sizeBtn sb-2" id="m" name="size">
+                            <label for="m">M</label>
+                            <input type="radio" class="sizeBtn sb-3" id="l" name="size">
+                            <label for="l">L</label>
+                            <input type="radio" class="sizeBtn sb-4" id="xl" name="size">
+                            <label for="xl">XL</label>
+                            <input type="radio" class="sizeBtn sb-5" id="xxl" name="size">
+                            <label for="xxl">XXL</label>
+                        </div>
+                    <%} %>
+                    
                     <div class="color">
                         <h3>Color:</h3>
                         <!-- <button class="cb-1 active" data-value="1">S</button>

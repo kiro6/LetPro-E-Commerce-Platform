@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Users = require("./models/user.js");
+const Products = require('./models/products.js');
 const session = require("express-session");
 
 //express app
@@ -48,6 +49,75 @@ const currentUser = {
   cart: "",
   orders: "",
 };
+
+
+//................Tshirt creation...............
+
+// const tshirt = new Products({
+//   name: 'Men Flowers T-Shirt',
+//   variants: [
+//     {
+//       color: 'Mix',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Beige-Green',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Brown',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'White',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Purple-Pink',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+    
+//   ],
+//   price: 29.99
+// });
+
+// tshirt.save()
+// .then(savedProduct => {
+//   console.log(savedProduct);
+// })
+// .catch(error => {
+//   console.log(error);
+// });
 
 //  ------------------/index------------------
 app.get("/", (req, res) => {
@@ -187,8 +257,37 @@ app.post("/profile/changepass", (req, res) => {
 });
 //  ------------------/product------------------
 app.get("/product", (req, res) => {
-  res.render("product", { title: "Product" });
+  const { product } = req.query;
+
+  // console.log(product);
+  Products.findOne({ name : product})
+    .then((product) => {
+      if (product) {
+        const variants = product.schema.path('variants');
+        let size = false;
+
+        if(variants.schema.path('sizes')){
+          console.log('true');
+          size = true;
+        }
+
+        res.render("product", { title: "Product" , product , size});
+      } else {
+        res.status(404).render("404", { title: "404 - Not Found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
 });
+
+//  ------------------/cart------------------
+app.get('/cart', (req , res)=>{
+
+  res.render('cart',{title: 'Cart'});
+});
+
 
 //  ------------------/logout------------------
 app.get("/logout", (req, res) => {

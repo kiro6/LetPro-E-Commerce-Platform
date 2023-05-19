@@ -1,22 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const guestSchema = new Schema({
 
-    userId:{
+    guestId:{
     type:String , 
     required:true
     }
     ,
-    username:{
+    firstName:{
+        type:String,
+        required:true
+    },
+    lastName:{
         type:String,
         required:true
     },
     email:{
-        type:String,
-        required:true
-    },
-    password:{
         type:String,
         required:true
     },
@@ -28,14 +28,6 @@ const userSchema = new Schema({
         type:String,
         required:false
     },
-    // cart:{
-    //     type:String,
-    //     required:false
-    // },
-    // orders:{
-    //     type:Object,
-    //     required:false
-    // },
     cart: [
         {
           product: {
