@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const Users = require("./models/user.js");
 const Products = require('./models/products.js');
 const session = require("express-session");
+const bodyParser = require('body-parser');
+
 
 //express app
 const app = express();
@@ -247,8 +249,8 @@ app.post("/login", (req, res) => {
         currentUser.orders = user.orders;
 
         req.session.user = user;
-        res.redirect("/profile");
-      } else {
+        res.json({ redirect: "/profile" });   
+         } else {
         const responseData = { message: 'User Name or Password is Wrong' };
         res.json(responseData)
         
