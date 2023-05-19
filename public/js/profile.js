@@ -87,11 +87,13 @@ function logOut(){
 
 
 
-var updatePasswordForm = document.querySelectorAll("form")[1];
+var updatePasswordForm = document.querySelectorAll("form")[2];
+
 updatePasswordForm.onsubmit = function doChangePassword(event) {
+
   event.preventDefault();
 
-  var userId =  document.getElementById("userId").value;
+  var userIdValue =  document.getElementById("userId").value;
   var passwordValue = document.getElementById("password").value;
   var confirmPasswordValue = document.getElementById("confirmPassword").value;
 
@@ -101,7 +103,7 @@ updatePasswordForm.onsubmit = function doChangePassword(event) {
     fetch(endpoint, {
       method: "post",
       body: JSON.stringify({
-        username: userId,
+        userId: userIdValue,
         password: passwordValue,
       }),
       headers: {
