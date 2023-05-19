@@ -22,7 +22,7 @@
                     <a href="">Men</a> <i class="bx bx-chevrons-right"></i> <a href="">Tops</a> <i class="bx bx-chevrons-right"></i> <a href="">T-shirts</a>
                 </div>
                 
-                <img src="/images/Mix.jpg" alt="Product-image">
+                <img src="/images/<%= product.name %>1.jpg" alt="Product-image">
             </div>
             <div class="product-container">
                 <h1><%= product.name%></h1>
@@ -50,28 +50,33 @@
                             <input type="radio" class="sizeBtn sb-5" id="xxl" name="size" data-size="5">
                             <label for="xxl">XXL</label>
                         </div>
+                        <hr>
                     <%} %>
                     
                     <div class="color">
                         <h3>Color:</h3>
-                        <% product.variants.forEach( (variant,index) => {%>
+                        <% colors.forEach( (variant,index) => {%>
                             <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color"
                             <% if(index==0){ %> 
                                 checked="checked" 
                             <% } %>
                             data-value="<%= index+1%>">
-                            <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg" alt="<%= product.name %>"></label>
+                            <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg"  alt="<%= product.name %>"></label>
                         <% }); %>
                     </div>
+                    <hr>
                     <div class="quantity">
                         <h3>Quantity:</h3>
                         <button disabled="true" id="minus"><i class="bx bx-minus"></i></button>
                         <span>1</span>
                         <button id="plus"><i class="bx bx-plus"></i></button>
                     </div>
+                    <hr>
                     <button class="add-btn" onclick="order()">Add to Cart</button>
 
-                    
+                     <!-- Check the quantity if < 4 put 
+                        <h5 class="notice">Only quantity left in stock</h5>
+                    -->
                     
                 </div>
                 <div class="product-info">

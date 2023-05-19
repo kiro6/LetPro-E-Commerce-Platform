@@ -83,3 +83,54 @@ function logOut(){
   return confirm('Are you sure you want to log out?')
 }
 
+
+
+
+
+var updatePasswordForm = document.querySelectorAll("form")[1];
+updatePasswordForm.onsubmit = function doChangePassword(event) {
+  event.preventDefault();
+
+  var userId =  document.getElementById("userId").value;
+  var passwordValue = document.getElementById("password").value;
+  var confirmPasswordValue = document.getElementById("confirmPassword").value;
+
+  var endpoint = "/profile/changepass";
+
+  if (passwordValue === confirmPasswordValue) {
+    fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({
+        username: userId,
+        password: passwordValue,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+          alert(data.message);
+        } 
+        return data
+      }).then((data)=>{
+        if (data.redirect) {
+          window.location.href = data.redirect; // Redirect to the specified URL
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors
+      });
+  } else {
+    alert("password are not the same ! " ) ; 
+  }
+
+ return false ; 
+};

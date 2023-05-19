@@ -84,8 +84,8 @@
 
         <div class="changepass">
           <h1>Change Password</h1>
-          <form action="/profile/changepass" method="post">
-            <input type="text"  name="userId"  hidden="true" value="<%=currentUser.userId%>">
+          <form>
+            <input type="text"  name="userId" id="userId" hidden="true" value="<%=currentUser.userId%>">
             <div class="changer-input">
               <label for="password">New password:</label>
               <input type="password" id="password" name="password" required>

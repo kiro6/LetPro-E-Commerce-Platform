@@ -16,8 +16,8 @@ main{
     margin-top: 80px;
     display: flex;
     flex-direction: row;
-    /* background-color: red; */
     padding-bottom: 80px;
+    /* background-color: red; */
 }
 
 .container{
@@ -80,6 +80,15 @@ main{
     font-size: 25px;
     margin-bottom: 30px;
 }
+.product-options hr{
+    width: 50%;
+}
+
+.product-options h5{
+    color: red;
+    margin-top: 10px;
+}
+
 .size{
     position: relative;
     top: -25px;
@@ -110,7 +119,6 @@ main{
     padding: 0 20px;
     margin-right: 5px;
     cursor: pointer;
-    position: relative;
 }
 .size label:hover{
     border: 2px solid rgb(102, 102, 102);
@@ -123,18 +131,6 @@ main{
 .size .active{
     border: 2px solid black;
 }
-.unavailable + label:before {
-    content: 'X';
-    position: absolute;
-    left: 92px;
-    top: -5px;
-    font-weight: 100;
-    color: rgba(rgb(0, 0, 0), rgb(0, 0, 0), rgb(14, 14, 15),.5);
-    transform: scaleX(5);
-    width: fit-content;
-    height: 25px;
-    font-size: 25px;
-  }
 
 
 .color{
@@ -188,6 +184,7 @@ main{
 
 .quantity{
     margin-top: 25px;
+    margin-bottom: 10px;
 }
 .quantity h3{
     margin-bottom: 8px;

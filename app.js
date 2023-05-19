@@ -54,36 +54,31 @@ const currentUser = {
 };
 
 //  ------------------/index------------------
-app.get("/", async (req, res) => {
-  try {
-    let Trending = [];
+app.get("/", (req, res) => {
+  let Trending = [];
 
-    const tshirtProducts = await Products.Tshirt.find({ trending: true });
-    if (tshirtProducts) {
-      tshirtProducts.forEach(product => {
-        Trending.push(product);
+
+  let Queries = [
+    Products.Tshirt.find({ trending: true }),
+    Products.Bag.find({ trending: true }),
+    Products.Watch.find({ trending: true })
+  ];
+
+
+  Promise.all(Queries)
+    .then(results => {
+      results.forEach(products => {
+        products.forEach(product => {
+          Trending.push(product);
+        });
       });
-    }
 
-    const bagProducts = await Products.Bag.find({ trending: true });
-    if (bagProducts) {
-      bagProducts.forEach(product => {
-        Trending.push(product);
-      });
-    }
-
-    const watchProducts = await Products.Watch.find({ trending: true });
-    if (watchProducts) {
-      watchProducts.forEach(product => {
-        Trending.push(product);
-      });
-    }
-
-    console.log(Trending);
-    res.render("index", { title: "Home", Trending });
-  } catch (err) {
-    console.log(err);
-  }
+      res.render("index", { title: "Home", Trending });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("An error occurred");
+    });
 });
 
 //------------------/index------------------
@@ -210,16 +205,16 @@ app.post("/profile/changepass", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      currentUser.address = req.body.address;
       currentUser.password = req.body.password;
-      res.redirect("/profile");
+      const responseData = { message: "password updated successfully" , redirect: "/profile" };
+      res.json(responseData);
+      
     } else {
       req.session.destroy(() => {
-        res.render("login", {
-          title: "Login",
-          show: true,
-          message: "an error happened while updating your password",
-        });
+
+        const responseData = { message: "an error happened while updating your password" , redirect: "/index" };
+        res.json(responseData);
+
       });
     }
   });
@@ -230,26 +225,44 @@ app.post("/profile/changepass", (req, res) => {
 //  ------------------/product------------------
 app.get("/product", (req, res) => {
   const { product } = req.query;
+  let Trending=[];
 
-  // console.log(product);
-  Products.findOne({ name: product })
-    .then((product) => {
-      if (product) {
-        const variants = product.schema.path("variants");
-        let size = false;
+  let Queries = [
+    Products.Tshirt.findOne({ name: product }),
+    Products.Bag.findOne({ name: product}),
+    Products.Watch.findOne({ name: product})
+  ];
 
-        if (variants.schema.path("sizes")) {
-          console.log("true");
+  Promise.all(Queries)
+    .then(results => {
+
+      Trending = Trending.concat(results);
+      let productFound;
+
+      Trending.forEach(item=>{
+        if(item!=null)
+          productFound=item;
+      });
+
+
+      let colors;
+      let size = false;
+
+        if(productFound.schema.path('variants')){
+          console.log('true');
           size = true;
+          colors = productFound.variants;
+        }
+        else{
+          colors = productFound.colors;
         }
 
-        res.render("product", { title: "Product", product, size });
-      } else {
-        res.status(404).render("404", { title: "404 - Not Found" });
-      }
+      console.log(Trending);
+      res.render("product", { title: "Product", product:productFound , size ,colors});
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
+      res.status(500).send("An error occurred");
     });
 });
 
