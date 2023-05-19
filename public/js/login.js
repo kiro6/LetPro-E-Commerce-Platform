@@ -67,11 +67,13 @@ window.onload = ()=>{
 function doRegister() {
   var usernameValue = document.getElementById("rusername").value;
   var passwordValue = document.getElementById("rpassword").value;
+  var confirmPasswordValue = document.getElementById("confirmPassword").value;
   var emailValue = document.getElementById("remai").value;
   var phoneValue = document.getElementById("rphone").value;
   var addressValue = document.getElementById("raddress").value;
   var endpoint = "/register";
 
+if (passwordValue === confirmPasswordValue) {
   fetch(endpoint, {
     method: 'post',
     body: JSON.stringify({
@@ -87,4 +89,10 @@ function doRegister() {
   })
 
   return false; 
+} else {
+  window.confirm("the password is not the same ") ; 
+}
+
+
+ 
 }
