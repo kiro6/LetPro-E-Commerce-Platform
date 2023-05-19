@@ -95,9 +95,7 @@ app.get("/shop", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login", {
-    title: "Login",
-    show: false,
-    message: "",
+    title: "Login"
   });
 });
 
