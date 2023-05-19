@@ -54,7 +54,7 @@
                     <%} %>
                     
                     <div class="color">
-                        <h3>Color:</h3>
+                        <h3>Color: <span><%=colors[0].color  %></span></h3>
                         <% colors.forEach( (variant,index) => {%>
                             <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color"
                             <% if(index==0){ %> 

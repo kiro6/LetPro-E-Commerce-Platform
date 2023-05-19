@@ -48,7 +48,7 @@ const bagSchema = new Schema({
     required: true
   },
   colors: [{
-      bagColor: {
+      color: {
         type: String,
         required: true
       },
@@ -83,7 +83,7 @@ const watchSchema = new Schema({
     required: true
   },
   colors: [{
-      watchColor: {
+      color: {
         type: String,
         required: true
       },
