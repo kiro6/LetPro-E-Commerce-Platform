@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    position: relative;
+    padding-bottom: 320px;
+    font-family: 'Poppins', sans-serif;
+}
+
+main{
+    margin-top: 82px;
+    width: 70%;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    padding-bottom: 360px;
+    position: relative;
+    left: 15%;
+}
+main h1{
+    margin-bottom: 20px;
+}
+.cart-items{
+    grid-column: 1;
+}
+.item{
+    display: flex;
+    margin: 15px 0;
+}
+.item-image img{
+    width: 100px;
+    height: 100px;
+}
+.item-info{
+    position: relative;
+    left: 50px;
+}
+.item-info p{
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 550;
+}
+.quantity{
+    margin-top: 20px;
+}
+.quantity button{
+    font-size: 20px;
+    margin-right: 10px;
+}
+.quantity span{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.pay{
+    grid-column: 2;
+    position: relative;
+    left: 50px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.pay h2{
+    font-size: 32px;
+    position: relative;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+.pay h2::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    background-color: black;
+}
+.pay p{
+    font-size: 20px;
+    font-weight: 550;
+    margin-bottom: 10px;
+}
+
+.pay input{
+    border-radius: 20px;
+    margin-top: 15px;
+    position: relative;
+    left: 5%;
+    /* width: 150px; */
+    width: 90%;
+    height: 35px;
+    font-size: 17px;
+    font-weight: 550;
+    color: white;
+    background-color: var(--Primary);
+    cursor: pointer;
+    transition: .1s;
+}
+.pay input:hover{
+    background-color: white;
+    color: var(--Primary);
+    text-decoration: underline;
+}
+
+/* .bc{
+    width: 90%;
+    position: relative;
+    left: 5%;
+    border-radius: 20px;
+    height: 35px;
+} */
+.pay button{
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 90%;
+    height: 35px;
+    position: relative;
+    left: 5%;
+    cursor: pointer;
+    background-color: white;
+    z-index: 5;
+}
+
+.pay button img{
+    width: 100px;
+    height: 25px;
+    z-index: 0;
+}
+.pay button::before{
+    content: '';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 33px;
+    border-radius: 20px;
+    /* background-color: rgba(86, 86, 87, 0.5); */
+    position: absolute;
+}
+.pay button:hover::before{
+    background-color: rgba(86, 86, 87, 0.5);
+}
+.pay button img:hover{
+    
+}

@@ -28,14 +28,81 @@ const userSchema = new Schema({
         type:String,
         required:false
     },
-    cart:{
-        type:String,
-        required:false
-    },
-    orders:{
-        type:Object,
-        required:false
-    }
+    // cart:{
+    //     type:String,
+    //     required:false
+    // },
+    // orders:{
+    //     type:Object,
+    //     required:false
+    // },
+    cart: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+          },
+          color: {
+            type: String,
+            required: true
+          },
+          size: {
+            type: String,
+            required: false
+          },
+          quantity: {
+            type: Number,
+            required: true
+          },
+          price: {
+            type: Number,
+            required: true
+          }
+        }
+      ],
+      wishlist: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+          }
+        }
+      ],
+    orderedProducts: [
+        {
+          product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+            required: true
+          },
+          color: {
+            type: String,
+            required: true
+          },
+          size: {
+            type: String,
+            required: true
+          },
+          quantity: {
+            type: Number,
+            required: true
+          },
+          price: {
+            type: Number,
+            required: true
+          },
+          createAt: {
+            type: String,
+            required: true
+          }
+        }
+      ],
+      cartTotalPrice: {
+        type: Number,
+        default: 0
+      }
 }, {timestamps: true});
 
 const Users = mongoose.model('Users' , userSchema);

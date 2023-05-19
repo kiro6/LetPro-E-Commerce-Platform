@@ -17,6 +17,7 @@ main{
     display: flex;
     flex-direction: row;
     /* background-color: red; */
+    padding-bottom: 80px;
 }
 
 .container{
@@ -109,6 +110,7 @@ main{
     padding: 0 20px;
     margin-right: 5px;
     cursor: pointer;
+    position: relative;
 }
 .size label:hover{
     border: 2px solid rgb(102, 102, 102);
@@ -121,6 +123,18 @@ main{
 .size .active{
     border: 2px solid black;
 }
+.unavailable + label:before {
+    content: 'X';
+    position: absolute;
+    left: 92px;
+    top: -5px;
+    font-weight: 100;
+    color: rgba(rgb(0, 0, 0), rgb(0, 0, 0), rgb(14, 14, 15),.5);
+    transform: scaleX(5);
+    width: fit-content;
+    height: 25px;
+    font-size: 25px;
+  }
 
 
 .color{
