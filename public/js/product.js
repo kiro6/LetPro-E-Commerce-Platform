@@ -12,19 +12,7 @@ const cartcount = document.querySelector('.cart h4');
 let count = 1;
 
 
-colors.forEach((color) => {
-    color.addEventListener('click', colorSelected);
-});
 
-
-function colorSelected(){
-    let index = this.dataset.value;
-    console.log(index);
-    
-    console.log(product.name);
-    src = product+index+'.jpg';
-    image.setAttribute('src',src);
-}
 
 
 plus.addEventListener('click',()=>{
