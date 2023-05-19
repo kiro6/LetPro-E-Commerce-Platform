@@ -1,0 +1,109 @@
+
+//................Tshirt creation...............
+
+// const tshirt = new Products.Tshirt({
+//   name: 'Mens Flowers T-Shirt',
+//   variants: [
+//     {
+//       color: 'Mix',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Beige-Green',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Brown',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'White',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+//     {
+//       color: 'Purple-Pink',
+//       sizes: [
+//         { size: 'S', quantityLeft: 10 },
+//         { size: 'M', quantityLeft: 8 },
+//         { size: 'L', quantityLeft: 5 },
+//         { size: 'XL', quantityLeft: 5 },
+//         { size: 'XXL', quantityLeft: 5 }
+//       ]
+//     },
+
+//   ],
+//   price: 29.99,
+//   trending: true,
+//   gender: 'Men',
+//   productDescription:"Introducing our classic men's t-shirt, perfect for everyday wear. Made with premium 100% cotton material, this t-shirt is soft, breathable, and comfortable, making it an ideal choice for any occasion. The timeless design features a crew neckline, short sleeves, and a regular fit that will flatter any body type. Whether you're dressing up or keeping it casual, this t-shirt is a versatile addition to any wardrobe. It pairs well with jeans or shorts, and can be dressed up with a blazer or dressed down with a pair of sneakers. With a range of colors to choose from, you'll find the perfect match for your personal style. Carefully crafted with attention to detail, this t-shirt is designed to last. It is machine washable for easy care, and the color won't fade over time. Add it to your collection today and experience the ultimate in comfort and style."
+// });
+
+// tshirt.save()
+// .then(savedProduct => {
+//   console.log(savedProduct);
+// })
+// .catch(error => {
+//   console.log(error);
+// });
+
+// const bag = new Products.Bag({
+//   name: 'Mercer Pebbled Zip Crossbody Bag',
+//   colors: [
+//     {
+//       bagColor: 'Black',
+//       quantityLeft: 5
+//     },
+//     {
+//       bagColor: 'Gray Heron',
+//       quantityLeft: 10
+//     },
+//     {
+//       bagColor: 'Lavender Cloud',
+//       quantityLeft: 7
+//     },
+//     {
+//       bagColor: 'New Cream',
+//       quantityLeft: 10
+//     },
+//     {
+//       bagColor: 'Island Chartreuse',
+//       quantityLeft: 6
+//     }
+//   ],
+//   price: 245.43,
+//   trending: true,
+//   gender: 'Women',
+//   productDescription: "The Mercer Pebbled Zip Crossbody Bag is a chic and compact accessory designed for on-the-go individuals. Crafted with high-quality pebbled leather, it exudes sophistication and durability. The bag features a zip-top closure to keep your belongings secure and organized. The adjustable crossbody strap allows for comfortable wear, while the interior compartments and pockets offer convenient storage for your essentials. With its stylish design and versatile functionality, the Mercer Pebbled Zip Crossbody Bag is perfect for everyday use and complements any outfit with its timeless appeal."
+// });
+
+// bag.save()
+// .then(savedProduct => {
+//   console.log(savedProduct);
+// })
+// .catch(error => {
+//   console.log(error);
+// });

@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
-const Users = require("./models/user.js");
-const Products = require('./models/products.js');
 const session = require("express-session");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
+const Users = require("./models/user.js");
+const Products = require("./models/products.js");
 
 //express app
 const app = express();
@@ -53,173 +53,42 @@ const currentUser = {
   orders: "",
 };
 
-
-//................Tshirt creation...............
-
-// const tshirt = new Products.Tshirt({
-//   name: 'Mens Flowers T-Shirt',
-//   variants: [
-//     {
-//       color: 'Mix',
-//       sizes: [
-//         { size: 'S', quantityLeft: 10 },
-//         { size: 'M', quantityLeft: 8 },
-//         { size: 'L', quantityLeft: 5 },
-//         { size: 'XL', quantityLeft: 5 },
-//         { size: 'XXL', quantityLeft: 5 }
-//       ]
-//     },
-//     {
-//       color: 'Beige-Green',
-//       sizes: [
-//         { size: 'S', quantityLeft: 10 },
-//         { size: 'M', quantityLeft: 8 },
-//         { size: 'L', quantityLeft: 5 },
-//         { size: 'XL', quantityLeft: 5 },
-//         { size: 'XXL', quantityLeft: 5 }
-//       ]
-//     },
-//     {
-//       color: 'Brown',
-//       sizes: [
-//         { size: 'S', quantityLeft: 10 },
-//         { size: 'M', quantityLeft: 8 },
-//         { size: 'L', quantityLeft: 5 },
-//         { size: 'XL', quantityLeft: 5 },
-//         { size: 'XXL', quantityLeft: 5 }
-//       ]
-//     },
-//     {
-//       color: 'White',
-//       sizes: [
-//         { size: 'S', quantityLeft: 10 },
-//         { size: 'M', quantityLeft: 8 },
-//         { size: 'L', quantityLeft: 5 },
-//         { size: 'XL', quantityLeft: 5 },
-//         { size: 'XXL', quantityLeft: 5 }
-//       ]
-//     },
-//     {
-//       color: 'Purple-Pink',
-//       sizes: [
-//         { size: 'S', quantityLeft: 10 },
-//         { size: 'M', quantityLeft: 8 },
-//         { size: 'L', quantityLeft: 5 },
-//         { size: 'XL', quantityLeft: 5 },
-//         { size: 'XXL', quantityLeft: 5 }
-//       ]
-//     },
-    
-//   ],
-//   price: 29.99,
-//   trending: true,
-//   gender: 'Men',
-//   productDescription:"Introducing our classic men's t-shirt, perfect for everyday wear. Made with premium 100% cotton material, this t-shirt is soft, breathable, and comfortable, making it an ideal choice for any occasion. The timeless design features a crew neckline, short sleeves, and a regular fit that will flatter any body type. Whether you're dressing up or keeping it casual, this t-shirt is a versatile addition to any wardrobe. It pairs well with jeans or shorts, and can be dressed up with a blazer or dressed down with a pair of sneakers. With a range of colors to choose from, you'll find the perfect match for your personal style. Carefully crafted with attention to detail, this t-shirt is designed to last. It is machine washable for easy care, and the color won't fade over time. Add it to your collection today and experience the ultimate in comfort and style."
-// });
-
-// tshirt.save()
-// .then(savedProduct => {
-//   console.log(savedProduct);
-// })
-// .catch(error => {
-//   console.log(error);
-// });
-
-// const bag = new Products.Bag({
-//   name: 'Mercer Pebbled Zip Crossbody Bag',
-//   colors: [
-//     {
-//       bagColor: 'Black',
-//       quantityLeft: 5
-//     },
-//     {
-//       bagColor: 'Gray Heron',
-//       quantityLeft: 10
-//     },
-//     {
-//       bagColor: 'Lavender Cloud',
-//       quantityLeft: 7
-//     },
-//     {
-//       bagColor: 'New Cream',
-//       quantityLeft: 10
-//     },
-//     {
-//       bagColor: 'Island Chartreuse',
-//       quantityLeft: 6
-//     }
-//   ],
-//   price: 245.43,
-//   trending: true,
-//   gender: 'Women',
-//   productDescription: "The Mercer Pebbled Zip Crossbody Bag is a chic and compact accessory designed for on-the-go individuals. Crafted with high-quality pebbled leather, it exudes sophistication and durability. The bag features a zip-top closure to keep your belongings secure and organized. The adjustable crossbody strap allows for comfortable wear, while the interior compartments and pockets offer convenient storage for your essentials. With its stylish design and versatile functionality, the Mercer Pebbled Zip Crossbody Bag is perfect for everyday use and complements any outfit with its timeless appeal."
-// });
-
-// bag.save()
-// .then(savedProduct => {
-//   console.log(savedProduct);
-// })
-// .catch(error => {
-//   console.log(error);
-// });
-
 //  ------------------/index------------------
-app.get("/", (req, res) => {
-  let Trending =[];
+app.get("/", async (req, res) => {
+  try {
+    let Trending = [];
 
-  Products.Tshirt.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-      console.log('dsafafs')
-      Products.forEach(product=>{
+    const tshirtProducts = await Products.Tshirt.find({ trending: true });
+    if (tshirtProducts) {
+      tshirtProducts.forEach(product => {
         Trending.push(product);
       });
-      
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  Products.Bag.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-    Products.forEach(product=>{
-      Trending.push(product);
-    });
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  Products.Watch.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-    Products.forEach(product=>{
-      Trending.push(product);
-    });
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  // Products.array.forEach(product => {
-  //   product.find({ trending: true})
-  //   .then((products) => {
-  //         if (products) 
-  //           Trending.append(products);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  // });
-  console.log(Trending);
-    res.render("index", { title: "Home" , Trending});
-});
-app.get("/index", (req, res) => {
-  res.redirect("/");
-});
+    }
 
+    const bagProducts = await Products.Bag.find({ trending: true });
+    if (bagProducts) {
+      bagProducts.forEach(product => {
+        Trending.push(product);
+      });
+    }
+
+    const watchProducts = await Products.Watch.find({ trending: true });
+    if (watchProducts) {
+      watchProducts.forEach(product => {
+        Trending.push(product);
+      });
+    }
+
+    console.log(Trending);
+    res.render("index", { title: "Home", Trending });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 // -------------------shop------------------
-app.get('/shop',(req,res)=>{
-  res.render('shop',{title:'Shop'})
+app.get("/shop", (req, res) => {
+  res.render("shop", { title: "Shop" });
 });
 
 //  ------------------login------------------
@@ -249,11 +118,10 @@ app.post("/login", (req, res) => {
         currentUser.orders = user.orders;
 
         req.session.user = user;
-        res.json({ redirect: "/profile" });   
-         } else {
-        const responseData = { message: 'User Name or Password is Wrong' };
-        res.json(responseData)
-        
+        res.json({ redirect: "/profile" });
+      } else {
+        const responseData = { message: "User Name or Password is Wrong" };
+        res.json(responseData);
       }
     })
     .catch((err) => {
@@ -264,30 +132,33 @@ app.post("/login", (req, res) => {
 //  ------------------register------------------
 app.post("/register", (req, res) => {
   Users.findOne({
-    $or: [{ username: req.body.username }, { email: req.body.email }]
-  }).then((userFound) => {
-    if (userFound) {
-      const responseData = { message: 'There is a user with this email or username' };
-      res.json(responseData);
-    } else {
-      const user = new Users(req.body);
-      user
-        .save()
-        .then(() => {
-        const responseData = { message: 'Registration successful' };
-        res.json(responseData)
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).send("Internal Server Error");
-        });
-    }
-  }).catch((err) => {
-    console.log(err);
-    res.status(500).send("Internal Server Error");
-  });
+    $or: [{ username: req.body.username }, { email: req.body.email }],
+  })
+    .then((userFound) => {
+      if (userFound) {
+        const responseData = {
+          message: "There is a user with this email or username",
+        };
+        res.json(responseData);
+      } else {
+        const user = new Users(req.body);
+        user
+          .save()
+          .then(() => {
+            const responseData = { message: "Registration successful" };
+            res.json(responseData);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).send("Internal Server Error");
+          });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    });
 });
-
 
 //  ------------------profile------------------
 app.get("/profile", (req, res) => {
@@ -297,7 +168,6 @@ app.get("/profile", (req, res) => {
 
   res.render("profile", { title: "Profile", currentUser });
 });
-
 
 //  ------------------/profile/update------------------
 app.post("/profile/update", (req, res) => {
@@ -339,7 +209,7 @@ app.post("/profile/changepass", (req, res) => {
     if (updatedUser) {
       currentUser.address = req.body.address;
       currentUser.password = req.body.password;
-      res.redirect("/profile") ;
+      res.redirect("/profile");
     } else {
       req.session.destroy(() => {
         res.render("login", {
@@ -351,23 +221,26 @@ app.post("/profile/changepass", (req, res) => {
     }
   });
 });
+
+
+
 //  ------------------/product------------------
 app.get("/product", (req, res) => {
   const { product } = req.query;
 
   // console.log(product);
-  Products.findOne({ name : product})
+  Products.findOne({ name: product })
     .then((product) => {
       if (product) {
-        const variants = product.schema.path('variants');
+        const variants = product.schema.path("variants");
         let size = false;
 
-        if(variants.schema.path('sizes')){
-          console.log('true');
+        if (variants.schema.path("sizes")) {
+          console.log("true");
           size = true;
         }
 
-        res.render("product", { title: "Product" , product , size});
+        res.render("product", { title: "Product", product, size });
       } else {
         res.status(404).render("404", { title: "404 - Not Found" });
       }
@@ -375,14 +248,12 @@ app.get("/product", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-
 });
 
 //  ------------------/cart------------------
-app.get('/cart', (req , res)=>{
-  res.render('cart',{title: 'Cart'});
+app.get("/cart", (req, res) => {
+  res.render("cart", { title: "Cart" });
 });
-
 
 //  ------------------/logout------------------
 app.get("/logout", (req, res) => {
