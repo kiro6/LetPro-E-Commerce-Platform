@@ -5,8 +5,6 @@ const mongoose = require("mongoose");
 const Users = require("./models/user.js");
 const Products = require('./models/products.js');
 const session = require("express-session");
-const bodyParser = require('body-parser');
-
 
 //express app
 const app = express();
@@ -56,8 +54,8 @@ const currentUser = {
 
 //................Tshirt creation...............
 
-// const tshirt = new Products({
-//   name: 'Men Flowers T-Shirt',
+// const tshirt = new Products.Tshirt({
+//   name: 'Mens Flowers T-Shirt',
 //   variants: [
 //     {
 //       color: 'Mix',
@@ -111,7 +109,10 @@ const currentUser = {
 //     },
     
 //   ],
-//   price: 29.99
+//   price: 29.99,
+//   trending: true,
+//   gender: 'Men',
+//   productDescription:"Introducing our classic men's t-shirt, perfect for everyday wear. Made with premium 100% cotton material, this t-shirt is soft, breathable, and comfortable, making it an ideal choice for any occasion. The timeless design features a crew neckline, short sleeves, and a regular fit that will flatter any body type. Whether you're dressing up or keeping it casual, this t-shirt is a versatile addition to any wardrobe. It pairs well with jeans or shorts, and can be dressed up with a blazer or dressed down with a pair of sneakers. With a range of colors to choose from, you'll find the perfect match for your personal style. Carefully crafted with attention to detail, this t-shirt is designed to last. It is machine washable for easy care, and the color won't fade over time. Add it to your collection today and experience the ultimate in comfort and style."
 // });
 
 // tshirt.save()
@@ -122,12 +123,101 @@ const currentUser = {
 //   console.log(error);
 // });
 
+// const bag = new Products.Bag({
+//   name: 'Mercer Pebbled Zip Crossbody Bag',
+//   colors: [
+//     {
+//       bagColor: 'Black',
+//       quantityLeft: 5
+//     },
+//     {
+//       bagColor: 'Gray Heron',
+//       quantityLeft: 10
+//     },
+//     {
+//       bagColor: 'Lavender Cloud',
+//       quantityLeft: 7
+//     },
+//     {
+//       bagColor: 'New Cream',
+//       quantityLeft: 10
+//     },
+//     {
+//       bagColor: 'Island Chartreuse',
+//       quantityLeft: 6
+//     }
+//   ],
+//   price: 245.43,
+//   trending: true,
+//   gender: 'Women',
+//   productDescription: "The Mercer Pebbled Zip Crossbody Bag is a chic and compact accessory designed for on-the-go individuals. Crafted with high-quality pebbled leather, it exudes sophistication and durability. The bag features a zip-top closure to keep your belongings secure and organized. The adjustable crossbody strap allows for comfortable wear, while the interior compartments and pockets offer convenient storage for your essentials. With its stylish design and versatile functionality, the Mercer Pebbled Zip Crossbody Bag is perfect for everyday use and complements any outfit with its timeless appeal."
+// });
+
+// bag.save()
+// .then(savedProduct => {
+//   console.log(savedProduct);
+// })
+// .catch(error => {
+//   console.log(error);
+// });
+
 //  ------------------/index------------------
 app.get("/", (req, res) => {
-  res.render("index", { title: "Home" });
+  let Trending =[];
+
+  Products.Tshirt.find({trending: true})
+  .then((Products)=>{
+    if(Products)
+      console.log('dsafafs')
+      Products.forEach(product=>{
+        Trending.push(product);
+      });
+      
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+  Products.Bag.find({trending: true})
+  .then((Products)=>{
+    if(Products)
+    Products.forEach(product=>{
+      Trending.push(product);
+    });
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+  Products.Watch.find({trending: true})
+  .then((Products)=>{
+    if(Products)
+    Products.forEach(product=>{
+      Trending.push(product);
+    });
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+  // Products.array.forEach(product => {
+  //   product.find({ trending: true})
+  //   .then((products) => {
+  //         if (products) 
+  //           Trending.append(products);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  // });
+  console.log(Trending);
+    res.render("index", { title: "Home" , Trending});
 });
 app.get("/index", (req, res) => {
   res.redirect("/");
+});
+
+
+// -------------------shop------------------
+app.get('/shop',(req,res)=>{
+  res.render('shop',{title:'Shop'})
 });
 
 //  ------------------login------------------
@@ -205,6 +295,8 @@ app.get("/profile", (req, res) => {
 
   res.render("profile", { title: "Profile", currentUser });
 });
+
+
 //  ------------------/profile/update------------------
 app.post("/profile/update", (req, res) => {
   if (requireLogin(req)) {
@@ -286,7 +378,6 @@ app.get("/product", (req, res) => {
 
 //  ------------------/cart------------------
 app.get('/cart', (req , res)=>{
-
   res.render('cart',{title: 'Cart'});
 });
 

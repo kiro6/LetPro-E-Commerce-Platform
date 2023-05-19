@@ -7,15 +7,12 @@
     <div class="popup-container">
         <div class="popup" id="popup">
         <img src="">
-        <h2> product name</h2>
-        <pre>
-         price:
-         quantity:
-         total:   
-        </pre>
-    <button type="button" onclick="continueShopping()">Continue shopping</button>
-    <button type="button" onclick="viewCart()">view cart</button>
-    </div>
+        <h2> <%= product.name %></h2>
+        <p id="P">Price: $<span></span></p>
+        <p id="Q">Quantity: <span></span></p>
+        <p id="T">Total: $<span></span></p>
+    <button class="button" type="button" onclick="continueShopping()">Continue shopping</button>
+    <button class="button" type="button" ><a href="/cart">view cart</a></button>
 </div>
     </div>
     <main>
@@ -42,31 +39,29 @@
                                 class="sizeBtn sb-1"
                                 <% console.log('available') %>
                                 checked="checked"
-                            <% } %> id="s" name="size" >
+                            <% } %> id="s" name="size" data-size="1">
                             <label for="s">S</label>
-                            <input type="radio" class="sizeBtn sb-2" id="m" name="size">
+                            <input type="radio" class="sizeBtn sb-2" id="m" name="size" data-size="2">
                             <label for="m">M</label>
-                            <input type="radio" class="sizeBtn sb-3" id="l" name="size">
+                            <input type="radio" class="sizeBtn sb-3" id="l" name="size" data-size="3">
                             <label for="l">L</label>
-                            <input type="radio" class="sizeBtn sb-4" id="xl" name="size">
+                            <input type="radio" class="sizeBtn sb-4" id="xl" name="size" data-size="4">
                             <label for="xl">XL</label>
-                            <input type="radio" class="sizeBtn sb-5" id="xxl" name="size">
+                            <input type="radio" class="sizeBtn sb-5" id="xxl" name="size" data-size="5">
                             <label for="xxl">XXL</label>
                         </div>
                     <%} %>
                     
                     <div class="color">
                         <h3>Color:</h3>
-                        <input type="radio" class="colorBtn cb-1" id="GYO" name="color" checked="checked" data-value="1">
-                        <label for="GYO"><img src="images/f1.jpg" alt="green flowers"></label>
-                        <input type="radio" class="colorBtn cb-2" id="Gflowers" name="color" data-value="2">
-                        <label for="Gflowers"><img src="images/f2.jpg" alt="green flowers"></label>
-                        <input type="radio" class="colorBtn cb-3" id="3" name="color" data-value="3">
-                        <label for="3"><img src="images/f3.jpg" alt="green flowers"></label>
-                        <input type="radio" class="colorBtn cb-4" id="4" name="color" data-value="4">
-                        <label for="4"><img src="images/f4.jpg" alt="green flowers"></label>
-                        <input type="radio" class="colorBtn cb-5" id="5" name="color" data-value="5">
-                        <label for="5"><img src="images/f5.jpg" alt="green flowers"></label>
+                        <% product.variants.forEach( (variant,index) => {%>
+                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color"
+                            <% if(index==0){ %> 
+                                checked="checked" 
+                            <% } %>
+                            data-value="<%= index+1%>">
+                            <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg" alt="<%= product.name %>"></label>
+                        <% }); %>
                     </div>
                     <div class="quantity">
                         <h3>Quantity:</h3>
@@ -75,6 +70,8 @@
                         <button id="plus"><i class="bx bx-plus"></i></button>
                     </div>
                     <button class="add-btn" onclick="order()">Add to Cart</button>
+
+                    
                     
                 </div>
                 <div class="product-info">
@@ -88,45 +85,51 @@
         </div>
         
     </main>
-    <hr class="hr">
-    <!-- <section class="reviews">
-        <h1>Customer Reviews</h1>
-        <div class="reviews-container">
-            <div class="reviews-graph">
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">5</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">4</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">3</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">2</span>
-                </div>
-                <div class="bar" data-percent="80%">
-                    <span class="graph-label">1</span>
-                </div>
-            </div>
-            
-            <div class="review-form">
-                <form action="" method="post">
-                    <label for="review">Write your review:</label>
-                    <input id="review" type="text">
-                    <input type="submit" value="Post">
-                </form>
-            </div>
-        </div>
-    </section> -->
     
-    <hr class="hr">
 
     <%- include('./partials/footer.ejs') %>
 
+    <div style="visibility: hidden;" id="product" data-variable="<%=product.name%>"></div>
+
     <script src="js/menu.js"></script>
     <script src="js/product.js"></script>
+    <script>
 
+        // var theProduct= <%= JSON.stringify(product) %>;
+        var theProduct= JSON.parse('<%- JSON.stringify(escape(product)) %>');
+        // theProduct = JSON.parse(theProduct);
+        console.log(theProduct);
+
+
+        // const colors = document.querySelectorAll(".colorBtn");
+        // const product = document.querySelector('#product').dataset.variable;
+        let sizeIndex = 1;
+        let colorIndex = 1;
+
+        colors.forEach((color) => {
+            color.addEventListener('click', colorSelected);
+        });
+
+        colors.forEach(color)
+
+
+        function colorSelected(){
+            index = this.dataset.value;
+            console.log(index);
+            
+            console.log(product);
+            src = product +index+'.jpg';
+            image.setAttribute('src',src);
+        }
+
+        function chosenColor(){
+            return colorIndex - 1;
+        }
+        function chosenSize(){
+            return sizeIndex - 1;
+        }   
+    </script>
+    
     
 </body>
 </html>

@@ -1,13 +1,33 @@
 <header>
     <a href="/index" class="logo"><img src="images/logo.png" alt="Logo"></a>
 
+    
     <% if(!(title == 'Login')){%>
+        <% if(title == 'Shop'){ %>
+            <div class="search-nav">
+        <% } %>
         <div class="searchbox">
             <form action="">
                 <button onclick=""><i class="bx bx-search"></i></button>
                 <input type="search" placeholder="Search items">
             </form>
         </div>
+            <% if(title == 'Shop') {%>
+            <nav class="shop-nav">
+                <ul>
+                    <li>Women</li>
+                    <li>Men</li>
+                    <li>Hats</li>
+                    <li>Watches</li>
+                    <li>Bags</li>
+                    <li>Shoes</li>
+                </ul>
+            </nav>
+            <% } %>
+        
+        <% if(title == 'Shop'){ %>
+            </div>
+        <% } %>
     <%}%>
     
 
@@ -15,7 +35,10 @@
         <% if(!(title == 'Login')){%>
             <a href="/index"><i class="bx bx-home"></i></a>
             <a href="/profile"><i class="bx bx-user"></i></a>
-            <a href="/cart"><i class="bx bx-cart"></i></a>
+            <div class="cart">
+                <h4>0</h4>
+                <a href="/cart"><i class="bx bx-cart"></i></a>
+            </div>
         <%}%>
         
 
