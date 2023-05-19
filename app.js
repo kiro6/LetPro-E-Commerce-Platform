@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const Users = require("./models/user.js");
 const Products = require('./models/products.js');
 const session = require("express-session");
+const bodyParser = require('body-parser');
+
 
 //express app
 const app = express();
@@ -27,6 +29,7 @@ app.use(express.static("public"));
 
 //req body
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //sessions
 app.use(
@@ -156,11 +159,9 @@ app.post("/login", (req, res) => {
         req.session.user = user;
         res.redirect("/profile");
       } else {
-        res.render("login", {
-          title: "Login",
-          show: true,
-          message: "there is no account with this credentials",
-        });
+        const responseData = { message: 'User Name or Password is Wrong' };
+        res.json(responseData)
+        
       }
     })
     .catch((err) => {
@@ -174,26 +175,27 @@ app.post("/register", (req, res) => {
     $or: [{ username: req.body.username }, { email: req.body.email }]
   }).then((userFound) => {
     if (userFound) {
-      res.render("login", {
-        title: "Login",
-        show: true,
-        message: "There is a user with this username or email",
-      });
+      const responseData = { message: 'There is a user with this email or username' };
+      res.json(responseData);
     } else {
       const user = new Users(req.body);
       user
         .save()
-        .then((result) => {
-          res.render("login", {
-            title: "Login",
-            show: true,
-            message: "Your account has been registered successfully",
-          });
+        .then(() => {
+        const responseData = { message: 'Registration successful' };
+        res.json(responseData)
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send("Internal Server Error");
+        });
     }
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
   });
 });
+
 
 //  ------------------profile------------------
 app.get("/profile", (req, res) => {

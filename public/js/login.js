@@ -39,60 +39,113 @@ bullets.forEach((bullet) => {
   bullet.addEventListener("click", moveSlider);
 });
 
-
-
-    
-
-
 function generateId() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let id = '';
-  
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
   for (let i = 0; i < 24; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
     id += characters.charAt(randomIndex);
   }
-  
+
   return id;
 }
 
+window.onload = () => {
+  var input = document.getElementById("ruserId");
+  input.setAttribute("value", generateId());
+};
 
 
-window.onload = ()=>{
-  var input = document.getElementById("ruserId") ; 
-  input.setAttribute("value" , generateId()); 
-}
 
 
-function doRegister() {
+var LoginForm = document.querySelectorAll("form")[0];
+LoginForm.onsubmit = function doLogin(event) {
+  event.preventDefault();
+
+  var usernameValue = document.getElementById("username").value;
+  var passwordValue = document.getElementById("password").value;
+
+  var endpoint = "/login";
+
+
+    fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({
+        username: usernameValue,
+        password: passwordValue,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+       alert(data.message) ; 
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors
+      });
+
+      return false;
+
+  } 
+
+
+
+
+
+var registerForm = document.querySelectorAll("form")[1];
+registerForm.onsubmit = function doRegister(event) {
+  event.preventDefault();
+
+  var userId = document.getElementById("ruserId").value;
   var usernameValue = document.getElementById("rusername").value;
   var passwordValue = document.getElementById("rpassword").value;
   var confirmPasswordValue = document.getElementById("confirmPassword").value;
-  var emailValue = document.getElementById("remai").value;
+  var emailValue = document.getElementById("remail").value;
   var phoneValue = document.getElementById("rphone").value;
   var addressValue = document.getElementById("raddress").value;
+
   var endpoint = "/register";
 
-if (passwordValue === confirmPasswordValue) {
-  fetch(endpoint, {
-    method: 'post',
-    body: JSON.stringify({
-      username: usernameValue,
-      email : emailValue , 
-      phoneNumber: phoneValue , 
-      address : addressValue, 
-      password: passwordValue
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+  if (passwordValue === confirmPasswordValue) {
+    fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({
+        userId: userId,
+        username: usernameValue,
+        password: passwordValue,
+        email: emailValue,
+        phoneNumber: phoneValue,
+        address: addressValue,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+       alert(data.message) ; 
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    alert("The password and confirm password are not the same");
+  }
+  return false;
+};
 
-  return false; 
-} else {
-  window.confirm("the password is not the same ") ; 
-}
-
-
- 
-}
