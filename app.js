@@ -7,7 +7,6 @@ const Products = require('./models/products.js');
 const session = require("express-session");
 const bodyParser = require('body-parser');
 
-
 //express app
 const app = express();
 
@@ -165,53 +164,34 @@ const currentUser = {
 
 //  ------------------/index------------------
 app.get("/", (req, res) => {
-  let Trending =[];
+  let Trending = [];
 
-  Products.Tshirt.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-      console.log('dsafafs')
-      Products.forEach(product=>{
-        Trending.push(product);
+  
+  let Queries = [
+    Products.Tshirt.find({ trending: true }),
+    Products.Bag.find({ trending: true }),
+    Products.Watch.find({ trending: true })
+  ];
+
+  // Use Promise.all to wait for all queries to finish
+  Queries.all(Queries)
+    .then(results => {
+      // Iterate over the results and push products to Trending array
+      results.forEach(products => {
+        products.forEach(product => {
+          Trending.push(product);
+        });
       });
-      
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  Products.Bag.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-    Products.forEach(product=>{
-      Trending.push(product);
+
+      console.log(Trending);
+      res.render("index", { title: "Home", Trending });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).send("An error occurred");
     });
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  Products.Watch.find({trending: true})
-  .then((Products)=>{
-    if(Products)
-    Products.forEach(product=>{
-      Trending.push(product);
-    });
-  })
-  .catch(err=>{
-    console.log(err);
-  })
-  // Products.array.forEach(product => {
-  //   product.find({ trending: true})
-  //   .then((products) => {
-  //         if (products) 
-  //           Trending.append(products);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  // });
-  console.log(Trending);
-    res.render("index", { title: "Home" , Trending});
 });
+
 app.get("/index", (req, res) => {
   res.redirect("/");
 });
@@ -249,8 +229,8 @@ app.post("/login", (req, res) => {
         currentUser.orders = user.orders;
 
         req.session.user = user;
-        res.json({ redirect: "/profile" });   
-         } else {
+        res.redirect("/profile");
+      } else {
         const responseData = { message: 'User Name or Password is Wrong' };
         res.json(responseData)
         
