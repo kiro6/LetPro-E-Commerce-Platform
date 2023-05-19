@@ -255,7 +255,6 @@ app.get("/product", (req, res) => {
       let size = false;
 
         if(productFound.schema.path('variants')){
-          console.log('true');
           size = true;
           colors = productFound.variants;
         }

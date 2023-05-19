@@ -4,7 +4,6 @@ const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
 const quantity = document.querySelector('.quantity span');
 const image = document.querySelector('.product-image img');
-const product = document.getElementById('product').dataset.variable;
 let src = image.getAttribute('src');
 
 const cartcount = document.querySelector('.cart h4');

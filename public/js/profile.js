@@ -124,12 +124,11 @@ updateInfoForm.onsubmit = function doChangePassword(event) {
         return data
       }).then((data)=>{
         if (data.redirect) {
-          window.location.href = data.redirect; // Redirect to the specified URL
+          window.location.href = data.redirect;
         }
       })
       .catch((error) => {
         console.log(error);
-        // Handle any errors
       });
   
  return false ; 
@@ -173,12 +172,11 @@ updatePasswordForm.onsubmit = function doChangePassword(event) {
         return data
       }).then((data)=>{
         if (data.redirect) {
-          window.location.href = data.redirect; // Redirect to the specified URL
+          window.location.href = data.redirect;
         }
       })
       .catch((error) => {
         console.log(error);
-        // Handle any errors
       });
   } else {
     alert("password are not the same ! " ) ; 

@@ -100,30 +100,28 @@
     <script src="js/product.js"></script>
     <script>
 
-        // var theProduct= <%= JSON.stringify(product) %>;
-        var theProduct= JSON.parse('<%- JSON.stringify(escape(product)) %>');
+      
+        var theProduct = <%- JSON.stringify(product) %>;
         // theProduct = JSON.parse(theProduct);
         console.log(theProduct);
 
 
-        // const colors = document.querySelectorAll(".colorBtn");
-        // const product = document.querySelector('#product').dataset.variable;
+        var c = document.querySelectorAll(".colorBtn");
+        var p = document.querySelector('#product').dataset.variable;
         let sizeIndex = 1;
         let colorIndex = 1;
 
-        colors.forEach((color) => {
+        c.forEach((color) => {
             color.addEventListener('click', colorSelected);
         });
-
-        colors.forEach(color)
 
 
         function colorSelected(){
             index = this.dataset.value;
             console.log(index);
             
-            console.log(product);
-            src = product +index+'.jpg';
+            console.log(p);
+            src = '/images/'+theProduct.name +index+'.jpg';
             image.setAttribute('src',src);
         }
 
