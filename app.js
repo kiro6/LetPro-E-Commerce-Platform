@@ -86,6 +86,11 @@ app.get("/", async (req, res) => {
   }
 });
 
+//------------------/index------------------
+app.get('/index' , (req , res) => {
+res.redirect('/') ; 
+})
+
 // -------------------shop------------------
 app.get("/shop", (req, res) => {
   res.render("shop", { title: "Shop" });
