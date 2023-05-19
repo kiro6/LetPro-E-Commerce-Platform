@@ -186,9 +186,15 @@ app.post("/profile/update", (req, res) => {
     if (updatedUser) {
       currentUser.address = req.body.address;
       currentUser.phoneNumber = req.body.phoneNumber;
-      res.render("profile", { title: "Profile", currentUser });
+      const responseData = { message: "data updated successfully" ,  redirect: "/profile"  };
+      res.json(responseData);
     } else {
-      res.redirect("/profile");
+      req.session.destroy(() => {
+
+        const responseData = { message: "an error happened while updating your data" , redirect: "/index" };
+        res.json(responseData);
+
+      });
     }
   });
 });

@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <%- include('./partials/head.ejs') %>
+<%- include('./partials/head.ejs') %>
 
-<body>
-        
+  <body>
+
     <%- include('./partials/header.ejs') %>
 
       <main>
         <div class="profilenav">
-            <h1>My Account</h1>
-            <!-- <h2>Personal Information</h2> -->
+          <h1>My Account</h1>
+          <!-- <h2>Personal Information</h2> -->
           <div class="options">
             <a href="#" id="PI" onclick="personalInfo()">Personal Information</a>
             <a href="#" id="MO" onclick="myOrders()">My Orders</a>
             <a href="#" id="CP" onclick="changePass()">Change Password</a>
-            <a href="/logout"  id="LO" onclick="return logOut(this)">Log out</a>
+            <a href="/logout" id="LO" onclick="return logOut(this)">Log out</a>
           </div>
-          
+
         </div>
         <div class="info">
           <h1>Personal Information</h1>
-          <form action="/profile/update" method="post" >
+
+          <form action="/profile/update" method="post">
             <div class="info-item">
-              <input type="text"  name="userId"  hidden="true" value="<%=currentUser.userId%>">
+              <input type="text" name="userId" hidden="true" value="<%=currentUser.userId%>">
               <label for="name">Name:</label>
-              <label   disabled="true"><%= currentUser.username %></label>
+              <label disabled="true">
+                <%= currentUser.username %>
+              </label>
             </div>
             <div class="info-item">
               <label for="email">Email:</label>
-              <label  disabled="true"><%= currentUser.email %> </label>
+              <label disabled="true">
+                <%= currentUser.email %>
+              </label>
             </div>
             <div class="info-item">
               <label for="address">Address:</label>
-              <input type="text" class="ii" name="address" value="<%= currentUser.address %>" disabled="true">
+              <input type="text" class="ii" name="address" id="adress" value="<%= currentUser.address %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="phone">Phone:</label>
-              <input type="tel" class="ii" name="phoneNumber" value="<%= currentUser.phoneNumber %>" disabled="true">
+              <input type="tel" class="ii" name="phoneNumber" id="phone" value="<%= currentUser.phoneNumber %>" disabled="true">
             </div>
 
-            <input class="change-btn" type="button" value="Update" onclick="changeInfo()" >
-            <input class="change-btn confirm" type="submit" value="Confirm" >
-          
+            <input class="change-btn" type="button" value="Update" onclick="changeInfo()">
+            <input class="change-btn confirm" type="submit" value="Confirm">
+
           </form>
         </div>
         <div class="orders">
-            <h1>My Orders</h1>
+          <h1>My Orders</h1>
           <table class="table">
             <thead>
               <tr>
@@ -62,21 +67,27 @@
                 <td>2023-04-20</td>
                 <td>Blue T-shirt, Black Jeans</td>
                 <td>$50</td>
-                <td><p class="status d">Delivered</p></td>
+                <td>
+                  <p class="status d">Delivered</p>
+                </td>
               </tr>
               <tr>
                 <td>002</td>
                 <td>2023-04-18</td>
                 <td>Red Dress, White Shoes</td>
                 <td>$80</td>
-                <td><p class="status s">Shipped</p></td>
+                <td>
+                  <p class="status s">Shipped</p>
+                </td>
               </tr>
               <tr>
                 <td>003</td>
                 <td>2023-04-26</td>
                 <td>Blue Crop top and Shorts</td>
                 <td>$29.99</td>
-                <td><p class="status o">Ordered</p></td>
+                <td>
+                  <p class="status o">Ordered</p>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -85,7 +96,7 @@
         <div class="changepass">
           <h1>Change Password</h1>
           <form>
-            <input type="text"  name="userId" id="userId" hidden="true" value="<%=currentUser.userId%>">
+            <input type="text" name="userId" id="userId" hidden="true" value="<%=currentUser.userId%>">
             <div class="changer-input">
               <label for="password">New password:</label>
               <input type="password" id="password" name="password" required>
@@ -94,17 +105,18 @@
               <label for="password">Confirm password:</label>
               <input type="password" id="confirmPassword" required>
             </div>
-            <input class="change-btn pass-btn" type="submit" value="Confirm" >
+            <input class="change-btn pass-btn" type="submit" value="Confirm">
           </form>
         </div>
-      
-        
+
+
 
       </main>
-    
+
       <%- include('./partials/footer.ejs') %>
 
-    <script src="js/profile.js"></script>
-    <script src="js/menu.js"></script>
+        <script src="js/profile.js"></script>
+        <script src="js/menu.js"></script>
   </body>
+
 </html>

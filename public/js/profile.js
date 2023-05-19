@@ -87,6 +87,56 @@ function logOut(){
 
 
 
+
+var updateInfoForm = document.querySelectorAll("form")[1];
+
+updateInfoForm.onsubmit = function doChangePassword(event) {
+
+  event.preventDefault();
+
+  var userIdValue =  document.getElementById("userId").value;
+  var adressValue = document.getElementById("adress").value;
+  var phoneValue = document.getElementById("phone").value;
+
+  var endpoint = "/profile/update";
+
+    fetch(endpoint, {
+      method: "post",
+      body: JSON.stringify({
+        userId: userIdValue,
+        address: adressValue,
+        phoneNumber : phoneValue
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message) {
+          alert(data.message);
+        } 
+        return data
+      }).then((data)=>{
+        if (data.redirect) {
+          window.location.href = data.redirect; // Redirect to the specified URL
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        // Handle any errors
+      });
+  
+ return false ; 
+};
+
+
+
 var updatePasswordForm = document.querySelectorAll("form")[2];
 
 updatePasswordForm.onsubmit = function doChangePassword(event) {
