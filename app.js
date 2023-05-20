@@ -317,6 +317,7 @@ app.get("/cart", (req, res) => {
 //  ------------------/logout------------------
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
+    res.clearCookie('userId')
     res.redirect("/");
   });
 });
