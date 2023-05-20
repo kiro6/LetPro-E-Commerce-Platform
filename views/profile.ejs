@@ -23,16 +23,12 @@
 
           <form action="/profile/update" method="post">
             <div class="info-item">
-              <label for="name">Name:</label>
-              <label disabled="true">
-                <%= currentUser.username %>
-              </label>
+              <label for="username">Username:</label>
+              <input type="text" class="ii" name="username" id="username" value="<%= currentUser.username %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="email">Email:</label>
-              <label disabled="true">
-                <%= currentUser.email %>
-              </label>
+              <input type="text" class="ii" name="email" id="email" value="<%= currentUser.email %>" disabled="true">
             </div>
             <div class="info-item">
               <label for="address">Address:</label>
@@ -48,7 +44,9 @@
 
           </form>
         </div>
+        
         <div class="orders">
+          <% if(currentUser.orderedProducts[0]!=null){ %>
           <h1>My Orders</h1>
           <table class="table">
             <thead>
@@ -61,35 +59,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>001</td>
-                <td>2023-04-20</td>
-                <td>Blue T-shirt, Black Jeans</td>
-                <td>$50</td>
+              <% currentUser.orderedProducts.forEach(product=>{%>
+                <td><%= product._id %></td>
+                <td><%= product.createAt %></td>
+                <td><%= product.color %> <% product.name %></td>
+                <td><%= product.price %></td>
                 <td>
-                  <p class="status d">Delivered</p>
+                  <p class="status <%= product.status %>">
+                    <%if(product.status=='d'){%>
+                      Delivered
+                    <%}else if(product.status=='s'){ %>
+                      Shipped
+                    <%}else{%>
+                      Ordered
+                    <% } %>
+                  </p>
                 </td>
-              </tr>
-              <tr>
-                <td>002</td>
-                <td>2023-04-18</td>
-                <td>Red Dress, White Shoes</td>
-                <td>$80</td>
-                <td>
-                  <p class="status s">Shipped</p>
-                </td>
-              </tr>
-              <tr>
-                <td>003</td>
-                <td>2023-04-26</td>
-                <td>Blue Crop top and Shorts</td>
-                <td>$29.99</td>
-                <td>
-                  <p class="status o">Ordered</p>
-                </td>
-              </tr>
+
+              <%}) %>
             </tbody>
           </table>
+          <% } else{%>
+                  <h1 style="font-size: 40px; position: absolute; width: 450px;">No Orders Yet</h1>
+            <% } %>
+
         </div>
 
         <div class="changepass">

@@ -11,7 +11,7 @@ function changeInfo(){
   setTimeout(function(){
       const inputs = document.querySelectorAll('.ii')
 
-        for (var i = 0; i < inputs.length; i++) {
+        for (var i = 2; i < inputs.length; i++) {
           inputs[i].style.background = 'white';
           inputs[i].style.outline = 'black';
           inputs[i].style.border = '1px solid black';
