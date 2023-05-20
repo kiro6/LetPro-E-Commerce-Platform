@@ -12,16 +12,16 @@
         <p id="P">Price: $<span></span></p>
         <p id="Q">Quantity: <span></span></p>
         <p id="T">Total: $<span></span></p>
-    <button class="button" type="button" ><a href="/cart">view cart</a></button>
+    <button class="button" id="cartBtn" type="button" ><a href="/cart">view cart</a></button>
     <button class="button" type="button" onclick="continueShopping()">Continue shopping</button>
 </div>
     </div>
     <main>
         <div class="container">
             <div class="product-image">
-                <div class="nav">
+                <!-- <div class="nav">
                     <a href="">Men</a> <i class="bx bx-chevrons-right"></i> <a href="">Tops</a> <i class="bx bx-chevrons-right"></i> <a href="">T-shirts</a>
-                </div>
+                </div> -->
                 
                 <img src="/images/<%= product.name %>1.jpg" alt="Product-image">
             </div>
@@ -42,7 +42,7 @@
                         <% if(index==0){ %> 
                             checked
                         <% } %> id="<%= element.size %>" name="size" data-value="<%= index+1 %>" >
-                        <label id="label <%= element.size %>"  for="<%= element.size %>"> <%= element.quantityLeft %></label>
+                        <label id="label <%= element.size %>"  for="<%= element.size %>"> <%= element.size %></label>
          
                     <% }) %>
                           
@@ -72,10 +72,21 @@
                     <hr>
                     <button class="add-btn" onclick="addtocart( <%=  JSON.stringify(product) %>  )">Add to Cart</button>
 
-                     <!-- Check the quantity if < 4 put 
-                        <h5 class="notice">Only quantity left in stock</h5>
-                    -->
-                    
+                    <% if(size){ %>
+                        <% if(colors[0].sizes[0].quantityLeft==0){ %>
+                            <h5 class="notice">Out of stock</h5>
+                        <% }else if(colors[0].sizes[0].quantityLeft<6){ %>
+                            <h5 class="notice">Only <%= colors[0].sizes[0].quantityLeft %>  left in stock</h5>
+                    <% }}
+                    else{ %>
+                        <% if(colors[0].quantityLeft==0){ %>
+                            <h5 class="notice">Out of stock</h5>
+                        <% }else if(colors[0].quantityLeft<6){ %>
+                            <h5 class="notice">Only <%= colors[0].quantityLeft %>  left in stock</h5>
+                        <% }else %>
+                            <h5 class="notice"></h5>
+                    <% } %>
+
                 </div>
                 <div class="product-info">
                     <h4>Product Description</h4>
@@ -101,14 +112,9 @@
       
         var theProduct = <%- JSON.stringify(product) %>;
         var colorsArr = <%- JSON.stringify(colors) %>;
-
-    
-        changeColor(theProduct , colorsArr) ;
-
-   
-
-     
-
+        var hasSize = <%= size %>
+        changeColor(theProduct , colorsArr ,hasSize) ;
+        changeSize(theProduct,colorsArr);
 
     </script>
     

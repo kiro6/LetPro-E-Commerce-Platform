@@ -4,6 +4,7 @@ const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
 const quantitySpan = document.querySelector('.quantity span');
 const image = document.querySelector('.product-image img');
+const notice = document.querySelector('.notice');
 let src = image.getAttribute('src');
 
 const cartcount = document.querySelector('.cart h4');
@@ -14,7 +15,7 @@ let count = 1;
 
 
 // eslint-disable-next-line no-unused-vars
-function changeColor(theProduct ,colorsArr) {
+function changeColor(theProduct ,colorsArr ,hasSize) {
     let index ; 
     colorBtns.forEach((color) => {
         color.addEventListener('click', (event)=>{
@@ -23,14 +24,56 @@ function changeColor(theProduct ,colorsArr) {
         image.setAttribute('src',src);
         var selected = colorsArr[index-1].color;
         document.querySelector('.color h3 span').innerHTML = selected;
-        for (let i = 0; i < 5; i++) {
-            var label =document.getElementById('label '+colorsArr[index - 1].sizes[i].size ) ;
-            label.innerText =  colorsArr[index -1].sizes[i].quantityLeft ; 
-            
+        if(!hasSize){
+          if(colorsArr[index-1].quantityLeft==0){
+            notice.innerText= 'Out of stock';
+          }
+          else if(colorsArr[index-1].quantityLeft<6){
+            notice.innerText = 'Only '+colorsArr[index-1].quantityLeft+' left in stock';
+          }
+          else{
+            notice.innerText = '';
+          }
         }
+        if(hasSize){
+          sizeIndex = selectedSize()-1;
+
+          if(colorsArr[index-1].sizes[sizeIndex].quantityLeft==0){
+            notice.innerText= 'Out of stock';
+          }
+          else if(colorsArr[index-1].sizes[sizeIndex].quantityLeft<6){
+            notice.innerText = 'Only '+colorsArr[index-1].sizes[sizeIndex].quantityLeft+' left in stock';
+          }
+          else{
+            notice.innerText = '';
+          }
+
+        }
+        
         });
     });
 
+}
+
+function changeSize(theProduct ,colorsArr){
+  let index ; 
+    sizeBtns.forEach((size) => {
+        size.addEventListener('click', (event)=>{
+          index = event.target.dataset.value -1;            
+          colorIndex= selectedColor()-1;
+
+          if(colorsArr[colorIndex].sizes[index].quantityLeft==0){
+            notice.innerText= 'Out of stock';
+          }
+          else if(colorsArr[colorIndex].sizes[index].quantityLeft<6){
+            notice.innerText = 'Only '+colorsArr[colorIndex].sizes[index].quantityLeft+' left in stock';
+          }
+          else{
+            notice.innerText = '';
+          }
+        
+        });
+    });
 }
 
 
@@ -152,6 +195,9 @@ function openPopup(messageValue , quantity , done){
          document.querySelector('#T').setAttribute('hidden' , true);
         document.querySelector('.popup img').setAttribute('hidden' , true);
         firstH2.setAttribute('hidden' , true) ; 
+        // document.querySelector('#cartBtn').innerText = <a href="/login">login</a>;
+        document.querySelector('#cartBtn a').href = '/login';
+        document.querySelector('#cartBtn a').innerText = 'login';
 
         message.innerText = messageValue ; 
     }
