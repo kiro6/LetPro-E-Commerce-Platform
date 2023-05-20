@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 function openMenu(){
     document.getElementById("menu").style.width = "250px";
 }

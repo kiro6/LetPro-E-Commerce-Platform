@@ -29,39 +29,30 @@
                 <div class="product-options">
                     <p>$<span><%= product.price  %></span></p>
 
+
                     <% if(size){%>
                         <div class="size">
                             <h3>Size:</h3>
-                            <input type="radio" <% if(product.variants[0].sizes[0].quantityLeft== 0) {%>
-                                class = "sizeBtn sb-1 unavailable"
-                                disabled = "true"
-                            <% }else{ %>
-                                class="sizeBtn sb-1"
-                                <% console.log('available') %>
-                                checked="checked"
-                            <% } %> id="s" name="size" data-size="1">
-                            <label for="s">S</label>
-                            <input type="radio" class="sizeBtn sb-2" id="m" name="size" data-size="2">
-                            <label for="m">M</label>
-                            <input type="radio" class="sizeBtn sb-3" id="l" name="size" data-size="3">
-                            <label for="l">L</label>
-                            <input type="radio" class="sizeBtn sb-4" id="xl" name="size" data-size="4">
-                            <label for="xl">XL</label>
-                            <input type="radio" class="sizeBtn sb-5" id="xxl" name="size" data-size="5">
-                            <label for="xxl">XXL</label>
+
+                    <% colors[0].sizes.forEach((element, index) => { %>
+                     
+                         
+                        <input type="radio" class="sizeBtn sb-1" checked="checked" id="<%= element.size %>" name="size" data-size="<%= index+1 %>">
+                        <label id="label <%= element.size %>"  for="<%= element.size %>"> <%= element.quantityLeft %></label>
+         
+                    <% }) %>
+                          
                         </div>
                         <hr>
                     <%} %>
                     
+
                     <div class="color">
                         <h3>Color: <span><%=colors[0].color  %></span></h3>
                         <% colors.forEach( (variant,index) => {%>
-                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color"
-                            <% if(index==0){ %> 
-                                checked="checked" 
-                            <% } %>
-                            data-value="<%= index+1%>">
+                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color" data-value="<%= index+1%>">
                             <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg"  alt="<%= product.name %>"></label>
+
                         <% }); %>
                     </div>
                     <hr>
@@ -102,8 +93,11 @@
 
       
         var theProduct = <%- JSON.stringify(product) %>;
+        var colorsArr = <%- JSON.stringify(colors) %>;
+
+        console.log(theProduct);
     
-        changeColor(theProduct) ;
+        changeColor(theProduct , colorsArr) ;
 
    
 

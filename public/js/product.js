@@ -1,5 +1,5 @@
-const colors = document.querySelectorAll(".colorBtn");
-const sizes = document.querySelectorAll(".sizeBtn");
+const colorBtns = document.querySelectorAll(".colorBtn");
+const sizeBtns = document.querySelectorAll(".sizeBtn");
 const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
 const quantity = document.querySelector('.quantity span');
@@ -14,13 +14,18 @@ let count = 1;
 
 
 // eslint-disable-next-line no-unused-vars
-function changeColor(theProduct) {
+function changeColor(theProduct ,colorsArr) {
     let index ; 
-    colors.forEach((color) => {
+    colorBtns.forEach((color) => {
         color.addEventListener('click', (event)=>{
-            index = event.target.dataset.value;            
+        index = event.target.dataset.value;            
         src = '/images/'+theProduct.name +index+'.jpg';
         image.setAttribute('src',src);
+        for (let i = 0; i < 5; i++) {
+            var label =document.getElementById('label '+colorsArr[index - 1].sizeBtns[i].size ) ;
+            label.innerText =  colorsArr[index -1].sizeBtns[i].quantityLeft ; 
+            
+        }
         });
     });
 
@@ -43,6 +48,7 @@ minus.addEventListener('click',()=>{
     }
 });
 
+// eslint-disable-next-line no-unused-vars
 function order(){
     const size = selectedSize();
     console.log(size);
@@ -65,16 +71,16 @@ function addtocart(){
 }
 
 function selectedSize(){
-    for(var i = 0 ; i < sizes.length ; i++){
-        if(sizes[i].checked){
-            return sizes[i].id;
+    for(var i = 0 ; i < sizeBtns.length ; i++){
+        if(sizeBtns[i].checked){
+            return sizeBtns[i].id;
         }
     }
 }
 function selectedColor(){
-    for(var i = 0 ; i < sizes.length ; i++){
-        if(colors[i].checked){
-            return colors[i].id;
+    for(var i = 0 ; i < sizeBtns.length ; i++){
+        if(colorBtns[i].checked){
+            return colorBtns[i].id;
         }
     }
 }
@@ -101,6 +107,7 @@ function openPopup(quantity){
     b.classList.add('blur');
     window.scrollTo(0,0);
 }
+// eslint-disable-next-line no-unused-vars
 function continueShopping(){
     popup.classList.remove("open-popup");
     b.classList.remove('blur');
