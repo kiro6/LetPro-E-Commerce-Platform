@@ -35,7 +35,7 @@ const userSchema = new Schema({
             ref: 'Product',
             required: true
           },
-          colorIdex: {
+          colorIndex: {
             type: Number,
             required: true
           },

@@ -290,6 +290,7 @@ app.post("/product/cartadd", (req, res) => {
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser && !requireLogin(req)) {
       currentUser.cart = req.body.cart;
+      console.log(req.body.cart) ; 
       const responseData = { message: "item added to cart successfully"  , done : true};
       res.json(responseData);
       
