@@ -242,7 +242,6 @@ function openPopup(messageValue, quantity, done) {
     document.querySelector("#T").setAttribute("hidden", true);
     document.querySelector(".popup img").setAttribute("hidden", true);
     firstH2.setAttribute("hidden", true);
-    // document.querySelector('#cartBtn').innerText = <a href="/login">login</a>;
     document.querySelector("#cartBtn a").href = "/login";
     document.querySelector("#cartBtn a").innerText = "login";
 
