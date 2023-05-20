@@ -23,7 +23,6 @@
 
           <form action="/profile/update" method="post">
             <div class="info-item">
-              <input type="text" name="userId" hidden="true" value="<%=currentUser.userId%>">
               <label for="name">Name:</label>
               <label disabled="true">
                 <%= currentUser.username %>
@@ -96,7 +95,6 @@
         <div class="changepass">
           <h1>Change Password</h1>
           <form>
-            <input type="text" name="userId" id="userId" hidden="true" value="<%=currentUser.userId%>">
             <div class="changer-input">
               <label for="password">New password:</label>
               <input type="password" id="password" name="password" required>

@@ -86,6 +86,26 @@ function logOut(){
 
 
 
+function getCookie(cookieName) {
+  const name = cookieName + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(";");
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i];
+    while (cookie.charAt(0) === " ") {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+
+  return null; 
+}
+
+
+
 
 
 var updateInfoForm = document.querySelectorAll("form")[1];
@@ -94,7 +114,7 @@ updateInfoForm.onsubmit = function doChangePassword(event) {
 
   event.preventDefault();
 
-  var userIdValue =  document.getElementById("userId").value;
+  var userIdValue =  getCookie('userId')
   var adressValue = document.getElementById("adress").value;
   var phoneValue = document.getElementById("phone").value;
 
@@ -142,7 +162,7 @@ updatePasswordForm.onsubmit = function doChangePassword(event) {
 
   event.preventDefault();
 
-  var userIdValue =  document.getElementById("userId").value;
+  var userIdValue = getCookie('userId') ; 
   var passwordValue = document.getElementById("password").value;
   var confirmPasswordValue = document.getElementById("confirmPassword").value;
 

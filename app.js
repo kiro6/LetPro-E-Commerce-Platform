@@ -163,7 +163,7 @@ app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
   }
-
+  res.setHeader('Set-Cookie', 'userId='+currentUser.userId+'; Path=/;');
   res.render("profile", { title: "Profile", currentUser });
 });
 
@@ -262,7 +262,6 @@ app.get("/product", (req, res) => {
           colors = productFound.colors;
         }
 
-      console.log(Trending);
       res.render("product", { title: "Product", product:productFound , size ,colors});
     })
     .catch(err => {
@@ -270,6 +269,16 @@ app.get("/product", (req, res) => {
       res.status(500).send("An error occurred");
     });
 });
+
+//  ------------------/product/cartadd------------------
+app.post("/product/cartadd", (req, res) => {
+
+
+
+
+});
+
+
 
 //  ------------------/cart------------------
 app.get("/cart", (req, res) => {

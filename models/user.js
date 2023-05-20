@@ -28,14 +28,6 @@ const userSchema = new Schema({
         type:String,
         required:false
     },
-    // cart:{
-    //     type:String,
-    //     required:false
-    // },
-    // orders:{
-    //     type:Object,
-    //     required:false
-    // },
     cart: [
         {
           product: {
