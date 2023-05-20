@@ -13,6 +13,21 @@ let count = 1;
 
 
 
+// eslint-disable-next-line no-unused-vars
+function changeColor(theProduct) {
+    let index ; 
+    colors.forEach((color) => {
+        color.addEventListener('click', (event)=>{
+            index = event.target.dataset.value;            
+        src = '/images/'+theProduct.name +index+'.jpg';
+        image.setAttribute('src',src);
+        });
+    });
+
+}
+
+
+
 
 plus.addEventListener('click',()=>{
     count +=1;

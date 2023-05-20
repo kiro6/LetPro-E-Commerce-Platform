@@ -102,35 +102,14 @@
 
       
         var theProduct = <%- JSON.stringify(product) %>;
-        // theProduct = JSON.parse(theProduct);
-        console.log(theProduct);
+    
+        changeColor(theProduct) ;
+
+   
+
+     
 
 
-        var c = document.querySelectorAll(".colorBtn");
-        var p = document.querySelector('#product').dataset.variable;
-        let sizeIndex = 1;
-        let colorIndex = 1;
-
-        c.forEach((color) => {
-            color.addEventListener('click', colorSelected);
-        });
-
-
-        function colorSelected(){
-            index = this.dataset.value;
-            console.log(index);
-            
-            console.log(p);
-            src = '/images/'+theProduct.name +index+'.jpg';
-            image.setAttribute('src',src);
-        }
-
-        function chosenColor(){
-            return colorIndex - 1;
-        }
-        function chosenSize(){
-            return sizeIndex - 1;
-        }   
     </script>
     
     
