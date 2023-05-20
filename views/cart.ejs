@@ -9,27 +9,45 @@
     <main>
         <h1>Your Cart</h1>
         <div class="cart-items">
-            <hr>
-            <%=  currentUser.username %>
+            <hr style="width: 20%;">
 
-            <div class="item">
+            <% currentUser.cart.forEach((element,index) => { %>
+                <div class="item item-<%= index+1 %>">
                 <div class="item-image">
-                    <img src="/images/<%= currentUser.cart[0].product.name%><%= (currentUser.cart[0].colorIndex + 1) %>.jpg" alt="product image">
+                    <img src="/images/<%= element.product.name%><%= (element.colorIndex + 1) %>.jpg" alt="product image" width="100px" height="100px">
                 </div>
                 <div class="item-info">
-                    <h3><%= currentUser.cart[0].product.name%></h3>
-                    <p><%= currentUser.cart[0].product.price%></p>
+                    <h3><%= element.product.name%></h3>
+                    <p><%= element.product.price%></p>
                     <div class="quantity">
-                        <span><%= currentUser.cart[0].quantity%></span>
+                        <span><%= element.quantity%></span>
                     </div>
                 </div>
-                
+                <div class="delete">
+                    <button data-value="<%= index+1 %>">&times;</button>
+                </div>
             </div>
             <hr>
+             
+            <% }) %>
+        </div>
+            <div class="pay">
+                <h2>Summary</h2>
+                <p>Total: <span><%= currentUser.cartTotalPrice %></span></p>
+    
+                <form action="">
+                    <input type="submit" value="Check Out">
+                    <!-- <div class="bc"> -->
+                        <button type="submit"><img src="images/paypal.jpg" alt=""></button>
+                    <!-- </div> -->
+                </form>
+            </div>
+        
     </main>
 
     <%- include('./partials/footer.ejs') %>
     <script src="js/menu.js"></script>
+    <script src="js/cart.js"></script>
     
 </body>
 </html>

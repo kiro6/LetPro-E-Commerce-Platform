@@ -28,8 +28,10 @@ main h1{
     grid-column: 1;
 }
 .item{
+    position: relative;
     display: flex;
     margin: 15px 0;
+    transition: .5s;
 }
 .item-image img{
     width: 100px;
@@ -63,6 +65,8 @@ main h1{
     background-color: rgb(233, 232, 232);
     border-radius: 8px;
     padding: 10px 15px;
+    min-height: 300px;
+    max-height: 300px;
 }
 
 .pay h2{
@@ -144,6 +148,18 @@ main h1{
 .pay button:hover::before{
     background-color: rgba(86, 86, 87, 0.5);
 }
-.pay button img:hover{
-    
+.delete {
+    position: absolute;
+    right: 5px;
+    top: -10px;
+    font-size: 20px;
+}
+.delete button{
+    font-size: 30px;
+    border-radius: 50%;
+    width: 35px;
+    font-weight: 550;
+    outline: none;
+    border: 2px black solid;
+    cursor: pointer;
 }
