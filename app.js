@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 
 const Users = require("./models/user.js");
 const Products = require("./models/products.js");
+const { log } = require("console");
 
 //express app
 const app = express();
@@ -34,6 +35,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
 
 // security
 
@@ -122,7 +124,9 @@ app.post("/login", (req, res) => {
     .then((user) => {
       if (user) {
         req.session.user = user;
+        console.log(user);
         res.json({ redirect: "/profile", userId: user.userId });
+
       } else {
         const responseData = { message: "User Name or Password is Wrong" };
         res.json(responseData);
@@ -130,8 +134,11 @@ app.post("/login", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      const responseData = { message: "An error occurred" };
+      res.json(responseData);
     });
 });
+
 
 //  ------------------register------------------
 app.post("/register", (req, res) => {
@@ -170,6 +177,7 @@ app.get("/profile", (req, res) => {
     res.redirect("/login");
   } else {
     const userId = req.cookies.userId;
+    console.log(req.cookies) ; 
 
     Users.findOne({ userId }).then((currentUser) => {
       if (currentUser) {

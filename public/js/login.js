@@ -86,6 +86,7 @@ LoginForm.onsubmit = function doLogin(event) {
       return response.json();
     })
     .then((data) => {
+      setSessionCookie("userId", data.userId); 
       if (data.redirect) {
         window.location.href = data.redirect; // Redirect to the specified URL
       }else{
@@ -138,7 +139,6 @@ registerForm.onsubmit = function doRegister(event) {
       })
       .then((data) => {
        alert(data.message) ; 
-       setSessionCookie("userId", data.userId); 
       })
       .catch((error) => {
         console.log(error);
