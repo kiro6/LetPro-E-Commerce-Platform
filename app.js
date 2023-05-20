@@ -327,7 +327,7 @@ app.get("/cart", (req, res) => {
 
     Users.findOne({ userId }).then((currentUser) => {
       if (currentUser) {
-        res.render("cart", { currentUser });
+        res.render("cart", { title : "cart" , currentUser });
       } else {
         res.redirect("login");
       }
