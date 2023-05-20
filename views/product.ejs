@@ -38,7 +38,10 @@
                     <% colors[0].sizes.forEach((element, index) => { %>
                      
                          
-                        <input type="radio" class="sizeBtn sb-1" checked id="<%= element.size %>" name="size" data-value="<%= index+1 %>" >
+                        <input type="radio" class="sizeBtn sb-1" 
+                        <% if(index==0){ %> 
+                            checked
+                        <% } %> id="<%= element.size %>" name="size" data-value="<%= index+1 %>" >
                         <label id="label <%= element.size %>"  for="<%= element.size %>"> <%= element.quantityLeft %></label>
          
                     <% }) %>
@@ -51,7 +54,10 @@
                     <div class="color">
                         <h3>Color: <span><%=colors[0].color  %></span></h3>
                         <% colors.forEach( (variant,index) => {%>
-                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color" data-value="<%= index+1%>"  checked >
+                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color" data-value="<%= index+1%>" 
+                            <% if(index==0){ %> 
+                                checked
+                            <% } %> >
                             <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg"  alt="<%= product.name %>"></label>
 
                         <% }); %>

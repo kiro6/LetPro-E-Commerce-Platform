@@ -21,6 +21,8 @@ function changeColor(theProduct ,colorsArr) {
         index = event.target.dataset.value;            
         src = '/images/'+theProduct.name +index+'.jpg';
         image.setAttribute('src',src);
+        var selected = colorsArr[index-1].color;
+        document.querySelector('.color h3 span').innerHTML = selected;
         for (let i = 0; i < 5; i++) {
             var label =document.getElementById('label '+colorsArr[index - 1].sizes[i].size ) ;
             label.innerText =  colorsArr[index -1].sizes[i].quantityLeft ; 
