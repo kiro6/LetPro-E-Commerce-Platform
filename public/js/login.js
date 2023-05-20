@@ -116,7 +116,8 @@ registerForm.onsubmit = function doRegister(event) {
 
   var endpoint = "/register";
 
-  if (passwordValue === confirmPasswordValue) {
+
+ if (passwordValue === confirmPasswordValue) {
     fetch(endpoint, {
       method: "post",
       body: JSON.stringify({

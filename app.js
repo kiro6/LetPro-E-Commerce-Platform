@@ -124,7 +124,6 @@ app.post("/login", (req, res) => {
     .then((user) => {
       if (user) {
         req.session.user = user;
-        console.log(user);
         res.json({ redirect: "/profile", userId: user.userId });
 
       } else {
@@ -177,7 +176,6 @@ app.get("/profile", (req, res) => {
     res.redirect("/login");
   } else {
     const userId = req.cookies.userId;
-    console.log(req.cookies) ; 
 
     Users.findOne({ userId }).then((currentUser) => {
       if (currentUser) {

@@ -61,36 +61,42 @@
                 </div>
 
                 <div class="actual-form">
-                  <input type="text" class="ii" name="userId" id="ruserId" hidden="true" value="" required>
+                  <input type="text" class="ii" name="userId" id="ruserId" hidden="true" value="" required
+                  >
                   <div class="input-wrap">
-                    <input name="username" type="text" minlength="4" class="input-field" autocomplete="off" required
-                      id="rusername">
+                    <input name="username" type="text" class="input-field" autocomplete="off" required id="rusername" title="only alphabetical chars and numbers  allowed , minimum length of 4 characters and a maximum length of 10 characters"
+                    pattern="^[a-zA-Z0-9]{4,10}$"
+                    oninvalid="this.setCustomValidity('only alphabetical chars and numbers  allowed , minimum length of 4 characters and a maximum length of 10 characters')"   oninput="this.setCustomValidity('')"
+                    >
                     <label>Username</label>
                   </div>
 
                   <div class="input-wrap">
-                    <input name="email" type="email" class="input-field" autocomplete="off" required id="remail">
+                    <input name="email" type="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" class="input-field" autocomplete="off" required id="remail"  title="set a valid email"
+                    oninvalid="this.setCustomValidity('set a valid email')"   oninput="this.setCustomValidity('')"
+                    >
                     <label>Email</label>
                   </div>
 
                   <div class="input-wrap">
-                    <input name="address" type="text" class="input-field" autocomplete="off" required id="raddress">
+                    <input name="address" type="text"  minlength="10"  class="input-field" autocomplete="off" required id="raddress" title="explain your address in at least  10 chars ">
                     <label>address</label>
                   </div>
 
                   <div class="input-wrap">
-                    <input name="phoneNumber" type="text" class="input-field" autocomplete="off" required id="rphone">
+                    <input name="phoneNumber" type="text" class="input-field" autocomplete="off" required id="rphone" pattern="^01\d{9}$"  title="'set a valid phone number 11 digit and start with 01"
+                     oninvalid="this.setCustomValidity('set a valid phone number 11 digit and start with 01')"   oninput="this.setCustomValidity('')">
                     <label>phone</label>
                   </div>
 
                   <div class="input-wrap">
-                    <input name="password" type="password" minlength="4" class="input-field" autocomplete="off" required
-                      id="rpassword">
+                    <input name="password" type="password"  class="input-field" autocomplete="off" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$" id="rpassword"  title="Minimum eight and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+                    oninvalid="this.setCustomValidity('Minimum eight and maximum 15 characters, at least one uppercase letter, one lowercase letter, one number and one special character')"   oninput="this.setCustomValidity('')">
                     <label>Password</label>
                   </div>
 
                   <div class="input-wrap">
-                    <input type="password" minlength="4" class="input-field" autocomplete="off" required
+                    <input type="password"  class="input-field" autocomplete="off" required
                       id="confirmPassword">
                     <label>Confirm password</label>
                   </div>
