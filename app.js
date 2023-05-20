@@ -323,7 +323,30 @@ app.post("/product/cartadd", (req, res) => {
 
 //  ------------------/cart------------------
 app.get("/cart", (req, res) => {
-  res.render("cart", { title: "Cart" });
+
+  if (requireLogin(req)) {
+    res.redirect('login') ; 
+  } else {
+    
+
+    const userId  =  req.cookies.userId
+    
+    Users.findOne({userId}).then((currentUser)=>{
+      if (currentUser) {
+        res.render('cart' , {currentUser}) ;
+      }else{
+        res.redirect('login') ; 
+      }
+
+   
+
+    })
+
+
+
+  }
+
+
 });
 
 //  ------------------/logout------------------

@@ -8,6 +8,7 @@
 
     <main>
         <h1>Your Cart</h1>
+        <%=  currentUser.username %>
         <div class="cart-items">
             <hr>
             <div class="item">
@@ -26,50 +27,6 @@
                 
             </div>
             <hr>
-            <div class="item">
-                <div class="item-image">
-                    <img src="images/f1.jpg" alt="product image">
-                </div>
-                <div class="item-info">
-                    <h3>Men's Flowers T-shirt</h3>
-                    <p>$29.99</p>
-                    <div class="quantity">
-                        <button disabled="true" id="minus"><i class="bx bx-minus"></i></button>
-                        <span>1</span>
-                        <button id="plus"><i class="bx bx-plus"></i></button>
-                    </div>
-                </div>
-                
-            </div>
-            <hr>
-            <div class="item">
-                <div class="item-image">
-                    <img src="images/f1.jpg" alt="product image">
-                </div>
-                <div class="item-info">
-                    <h3>Men's Flowers T-shirt</h3>
-                    <p>$29.99</p>
-                    <div class="quantity">
-                        <button disabled="true" id="minus"><i class="bx bx-minus"></i></button>
-                        <span>1</span>
-                        <button id="plus"><i class="bx bx-plus"></i></button>
-                    </div>
-                </div>
-                
-            </div>
-            <hr>
-        </div>
-        <div class="pay">
-            <h2>Summary</h2>
-            <p>Total: <span>$451.99</span></p>
-
-            <form action="">
-                <input type="submit" value="Check Out">
-                <!-- <div class="bc"> -->
-                    <button type="submit"><img src="images/paypal.jpg" alt=""></button>
-                <!-- </div> -->
-            </form>
-        </div>
     </main>
 
     <%- include('./partials/footer.ejs') %>
