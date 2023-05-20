@@ -3,9 +3,9 @@ const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
-const crypto = require('crypto');
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 
 const Users = require("./models/user.js");
@@ -35,12 +35,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// security 
+// security
 
 function hashString(inputString) {
-  const hash = crypto.createHash('sha256');
+  const hash = crypto.createHash("sha256");
   hash.update(inputString);
-  const hashedString = hash.digest('hex');
+  const hashedString = hash.digest("hex");
   return hashedString;
 }
 
@@ -69,40 +69,36 @@ app.use(
 //logs
 app.use(morgan("dev"));
 
-
-
 //  ------------------/index------------------
 app.get("/", (req, res) => {
   let Trending = [];
 
-
   let Queries = [
     Products.Tshirt.find({ trending: true }),
     Products.Bag.find({ trending: true }),
-    Products.Watch.find({ trending: true })
+    Products.Watch.find({ trending: true }),
   ];
 
-
   Promise.all(Queries)
-    .then(results => {
-      results.forEach(products => {
-        products.forEach(product => {
+    .then((results) => {
+      results.forEach((products) => {
+        products.forEach((product) => {
           Trending.push(product);
         });
       });
 
       res.render("index", { title: "Home", Trending });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).send("An error occurred");
     });
 });
 
 //------------------/index------------------
-app.get('/index' , (req , res) => {
-res.redirect('/') ; 
-})
+app.get("/index", (req, res) => {
+  res.redirect("/");
+});
 
 // -------------------shop------------------
 app.get("/shop", (req, res) => {
@@ -113,7 +109,7 @@ app.get("/shop", (req, res) => {
 
 app.get("/login", (req, res) => {
   res.render("login", {
-    title: "Login"
+    title: "Login",
   });
 });
 
@@ -125,10 +121,8 @@ app.post("/login", (req, res) => {
   Users.findOne({ username: username, password: password })
     .then((user) => {
       if (user) {
-        
-
         req.session.user = user;
-        res.json({ redirect: "/profile"  , userId : user.userId  });
+        res.json({ redirect: "/profile", userId: user.userId });
       } else {
         const responseData = { message: "User Name or Password is Wrong" };
         res.json(responseData);
@@ -174,18 +168,15 @@ app.post("/register", (req, res) => {
 app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
-  }else{
+  } else {
     const userId = req.cookies.userId;
 
-    Users.findOne({userId}).then((currentUser)=>{
+    Users.findOne({ userId }).then((currentUser) => {
       if (currentUser) {
         res.render("profile", { title: "Profile", currentUser });
       }
-    })
+    });
   }
-
-
-  
 });
 
 //  ------------------/profile/update------------------
@@ -205,15 +196,18 @@ app.post("/profile/update", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-
-      const responseData = { message: "data updated successfully" ,  redirect: "/profile"  };
+      const responseData = {
+        message: "data updated successfully",
+        redirect: "/profile",
+      };
       res.json(responseData);
     } else {
       req.session.destroy(() => {
-
-        const responseData = { message: "an error happened while updating your data" , redirect: "/index" };
+        const responseData = {
+          message: "an error happened while updating your data",
+          redirect: "/index",
+        };
         res.json(responseData);
-
       });
     }
   });
@@ -221,7 +215,6 @@ app.post("/profile/update", (req, res) => {
 
 //  ------------------/profile/changepass------------------
 app.post("/profile/changepass", (req, res) => {
- 
   var conditions = {
     userId: req.body.userId,
   };
@@ -232,60 +225,61 @@ app.post("/profile/changepass", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      const responseData = { message: "password updated successfully" , redirect: "/profile" };
+      const responseData = {
+        message: "password updated successfully",
+        redirect: "/profile",
+      };
       res.json(responseData);
-      
     } else {
       req.session.destroy(() => {
-
-        const responseData = { message: "an error happened while updating your password" , redirect: "/index" };
+        const responseData = {
+          message: "an error happened while updating your password",
+          redirect: "/index",
+        };
         res.json(responseData);
-
       });
     }
   });
-
 });
-
-
 
 //  ------------------/product------------------
 app.get("/product", (req, res) => {
   const { product } = req.query;
-  let Trending=[];
+  let Trending = [];
 
   let Queries = [
     Products.Tshirt.findOne({ name: product }),
-    Products.Bag.findOne({ name: product}),
-    Products.Watch.findOne({ name: product})
+    Products.Bag.findOne({ name: product }),
+    Products.Watch.findOne({ name: product }),
   ];
 
   Promise.all(Queries)
-    .then(results => {
-
+    .then((results) => {
       Trending = Trending.concat(results);
       let productFound;
 
-      Trending.forEach(item=>{
-        if(item!=null)
-          productFound=item;
+      Trending.forEach((item) => {
+        if (item != null) productFound = item;
       });
-
 
       let colors;
       let size = false;
 
-        if(productFound.schema.path('variants')){
-          size = true;
-          colors = productFound.variants;
-        }
-        else{
-          colors = productFound.colors;
-        }
+      if (productFound.schema.path("variants")) {
+        size = true;
+        colors = productFound.variants;
+      } else {
+        colors = productFound.colors;
+      }
 
-      res.render("product", { title: "Product", product:productFound , size ,colors});
+      res.render("product", {
+        title: "Product",
+        product: productFound,
+        size,
+        colors,
+      });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).send("An error occurred");
     });
@@ -293,66 +287,58 @@ app.get("/product", (req, res) => {
 
 //  ------------------/product/cartadd------------------
 app.post("/product/cartadd", (req, res) => {
-
   var conditions = {
     userId: req.body.userId,
   };
 
   var update = {
     $push: {
-      cart: req.body.cart
-    }
+      cart: req.body.cart,
+    },
   };
 
-  Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
-    if (updatedUser && !requireLogin(req)) {
-      const responseData = { message: "item added to cart successfully"  , done : true};
-      res.json(responseData);
-      
-    } else {
-      const responseData = { message: "plz login to add items to cart" , done : false  };
-      res.json(responseData);
-    }
-  }).catch((err)=>{
-    console.log(err) ; 
-  }) ; 
-  
+  Users.findOneAndUpdate(conditions, update)
+    .then((updatedUser) => {
+      if (updatedUser && !requireLogin(req)) {
+        const responseData = {
+          message: "item added to cart successfully",
+          done: true,
+        };
+        res.json(responseData);
+      } else {
+        const responseData = {
+          message: "plz login to add items to cart",
+          done: false,
+        };
+        res.json(responseData);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
-
-
 
 //  ------------------/cart------------------
 app.get("/cart", (req, res) => {
-
   if (requireLogin(req)) {
-    res.redirect('login') ; 
+    res.redirect("login");
   } else {
-    
+    const userId = req.cookies.userId;
 
-    const userId  =  req.cookies.userId
-    
-    Users.findOne({userId}).then((currentUser)=>{
+    Users.findOne({ userId }).then((currentUser) => {
       if (currentUser) {
-        res.render('cart' , {currentUser}) ;
-      }else{
-        res.redirect('login') ; 
+        res.render("cart", { currentUser });
+      } else {
+        res.redirect("login");
       }
-
-   
-
-    })
-
-
-
+    });
   }
-
-
 });
 
 //  ------------------/logout------------------
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.clearCookie('userId')
+    res.clearCookie("userId");
     res.redirect("/");
   });
 });
