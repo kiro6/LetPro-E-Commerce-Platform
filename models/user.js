@@ -31,7 +31,7 @@ const userSchema = new Schema({
     cart: [
         {
           product: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Object,
             ref: 'Product',
             required: true
           },
@@ -86,6 +86,10 @@ const userSchema = new Schema({
             required: true
           },
           createAt: {
+            type: String,
+            required: true
+          },
+          status:{
             type: String,
             required: true
           }

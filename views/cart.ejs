@@ -8,20 +8,19 @@
 
     <main>
         <h1>Your Cart</h1>
-        <%=  currentUser.username %>
         <div class="cart-items">
             <hr>
+            <%=  currentUser.username %>
+
             <div class="item">
                 <div class="item-image">
-                    <img src="images/f1.jpg" alt="product image">
+                    <img src="/images/<%= currentUser.cart[0].product.name%><%= (currentUser.cart[0].colorIndex + 1) %>.jpg" alt="product image">
                 </div>
                 <div class="item-info">
-                    <h3>Men's Flowers T-shirt</h3>
-                    <p>$29.99</p>
+                    <h3><%= currentUser.cart[0].product.name%></h3>
+                    <p><%= currentUser.cart[0].product.price%></p>
                     <div class="quantity">
-                        <button disabled="true" id="minus"><i class="bx bx-minus"></i></button>
-                        <span>1</span>
-                        <button id="plus"><i class="bx bx-plus"></i></button>
+                        <span><%= currentUser.cart[0].quantity%></span>
                     </div>
                 </div>
                 
