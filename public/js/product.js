@@ -2,7 +2,7 @@ const colorBtns = document.querySelectorAll(".colorBtn");
 const sizeBtns = document.querySelectorAll(".sizeBtn");
 const plus = document.querySelector('#plus');
 const minus = document.querySelector('#minus');
-const quantity = document.querySelector('.quantity span');
+const quantitySpan = document.querySelector('.quantity span');
 const image = document.querySelector('.product-image img');
 let src = image.getAttribute('src');
 
@@ -32,76 +32,129 @@ function changeColor(theProduct ,colorsArr) {
 }
 
 
+function getCookie(cookieName) {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(";");
+  
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === " ") {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
+    }
+  
+    return null; 
+  }
+  
+
 
 
 plus.addEventListener('click',()=>{
     count +=1;
-    quantity.innerHTML = count;
+    quantitySpan.innerText = count;
     minus.disabled = false;
 });
 
 minus.addEventListener('click',()=>{
     count-=1;
-    quantity.innerHTML = count;
+    quantitySpan.innerText = count;
     if(count===1){
         minus.disabled = true;
     }
 });
 
 // eslint-disable-next-line no-unused-vars
-function order(){
-    const size = selectedSize();
-    console.log(size);
-    const color = selectedColor();
-    console.log(color);
-    const Quantity = quantity.innerHTML;
-    console.log(Quantity);
-    
+function addtocart(TheProduct){
+    const userIdValue  = getCookie('userId') ; 
+    const sizeIndexValue = selectedSize() - 1  ;
+    const colorIndexValue  = selectedColor() - 1;
+    const quantityValue = Number(quantitySpan.innerText);
 
-    //Create post request
-
-    addtocart();
-    openPopup(Quantity);
-}  
-
-function addtocart(){
     let count = cartcount.innerHTML;
     count++;
     cartcount.innerHTML = count;
-}
+    let endpoint = '/product/cartadd' ;
+
+     fetch(endpoint, {
+        method: "post",
+        body: JSON.stringify({
+         userId : userIdValue ,    
+         cart : {product : TheProduct , colorIndex :  colorIndexValue , sizeIndex : sizeIndexValue , quantity  : quantityValue  }
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }) .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.status);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        openPopup(data.message , quantityValue , data.done)
+    })
+      .catch((error) => {
+        console.log(error);
+      });
+ 
+}  
+
+
 
 function selectedSize(){
     for(var i = 0 ; i < sizeBtns.length ; i++){
         if(sizeBtns[i].checked){
-            return sizeBtns[i].id;
+            return Number(sizeBtns[i].dataset.value);
         }
     }
 }
 function selectedColor(){
-    for(var i = 0 ; i < sizeBtns.length ; i++){
+    for(var i = 0 ; i < colorBtns.length ; i++){
         if(colorBtns[i].checked){
-            return colorBtns[i].id;
+            return Number(colorBtns[i].dataset.value);
         }
     }
 }
 
 
+
 let popup=document.getElementById("popup");
 let b =document.querySelector('.popup-container');
+let message = document.getElementById('message') ; 
+const firstH2 = document.querySelector('.popup-container h2');
 
-const P = document.querySelector('#P span');
-const Q = document.querySelector('#Q span');
-const T = document.querySelector('#T span');
-const popupImage = document.querySelector('.popup img');
 
-function openPopup(quantity){
-    let price = document.querySelector('.product-options p span').innerHTML;
-    let total = quantity * price;
+function openPopup(messageValue , quantity , done){
 
-    P.innerHTML = price;
-    Q.innerHTML = quantity;
-    T.innerHTML = total;
-    popupImage.setAttribute('src',src);
+    if (done) {
+        const P = document.querySelector('#P span');
+        const Q = document.querySelector('#Q span');
+        const T = document.querySelector('#T span');
+        const popupImage = document.querySelector('.popup img');
+    
+        let price = document.querySelector('.product-options p span').innerHTML;
+        let total = quantity * price;
+    
+        P.innerText = price;
+        Q.innerText = quantity;
+        T.innerText = total;
+        message.innerText = messageValue ; 
+        popupImage.setAttribute('src',src);
+    } else {
+         document.querySelector('#P').setAttribute('hidden' , true);
+         document.querySelector('#Q').setAttribute('hidden' , true);
+         document.querySelector('#T').setAttribute('hidden' , true);
+        document.querySelector('.popup img').setAttribute('hidden' , true);
+        firstH2.setAttribute('hidden' , true) ; 
+
+        message.innerText = messageValue ; 
+    }
+    
+   
 
     popup.classList.add("open-popup");
     b.classList.add('blur');
@@ -109,6 +162,9 @@ function openPopup(quantity){
 }
 // eslint-disable-next-line no-unused-vars
 function continueShopping(){
+
+
+
     popup.classList.remove("open-popup");
     b.classList.remove('blur');
 }

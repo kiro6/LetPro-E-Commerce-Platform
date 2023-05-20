@@ -35,12 +35,12 @@ const userSchema = new Schema({
             ref: 'Product',
             required: true
           },
-          color: {
-            type: String,
+          colorIdex: {
+            type: Number,
             required: true
           },
-          size: {
-            type: String,
+          sizeIndex: {
+            type: Number,
             required: false
           },
           quantity: {

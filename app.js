@@ -49,8 +49,10 @@ const currentUser = {
   email: "",
   phoneNumber: "",
   address: "",
-  cart: "",
-  orders: "",
+  cart: [],
+  wishlist: [],
+orderedProducts: [],
+  cartTotalPrice: 0
 };
 
 //  ------------------/index------------------
@@ -201,6 +203,7 @@ app.post("/profile/update", (req, res) => {
 
 //  ------------------/profile/changepass------------------
 app.post("/profile/changepass", (req, res) => {
+ 
   var conditions = {
     userId: req.body.userId,
   };
@@ -224,6 +227,7 @@ app.post("/profile/changepass", (req, res) => {
       });
     }
   });
+
 });
 
 
@@ -273,9 +277,30 @@ app.get("/product", (req, res) => {
 //  ------------------/product/cartadd------------------
 app.post("/product/cartadd", (req, res) => {
 
+  var conditions = {
+    userId: req.body.userId,
+  };
 
+  var update = {
+    $push: {
+      cart: req.body.cart
+    }
+  };
 
-
+  Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
+    if (updatedUser && !requireLogin(req)) {
+      currentUser.cart = req.body.cart;
+      const responseData = { message: "item added to cart successfully"  , done : true};
+      res.json(responseData);
+      
+    } else {
+      const responseData = { message: "plz login to add items to cart" , done : false  };
+      res.json(responseData);
+    }
+  }).catch((err)=>{
+    console.log(err) ; 
+  }) ; 
+  
 });
 
 

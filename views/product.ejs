@@ -8,6 +8,7 @@
         <div class="popup" id="popup">
         <img src="">
         <h2> <%= product.name %></h2>
+        <h2 id="message"></h2>
         <p id="P">Price: $<span></span></p>
         <p id="Q">Quantity: <span></span></p>
         <p id="T">Total: $<span></span></p>
@@ -37,7 +38,7 @@
                     <% colors[0].sizes.forEach((element, index) => { %>
                      
                          
-                        <input type="radio" class="sizeBtn sb-1" checked="checked" id="<%= element.size %>" name="size" data-size="<%= index+1 %>">
+                        <input type="radio" class="sizeBtn sb-1" checked id="<%= element.size %>" name="size" data-value="<%= index+1 %>" >
                         <label id="label <%= element.size %>"  for="<%= element.size %>"> <%= element.quantityLeft %></label>
          
                     <% }) %>
@@ -50,7 +51,7 @@
                     <div class="color">
                         <h3>Color: <span><%=colors[0].color  %></span></h3>
                         <% colors.forEach( (variant,index) => {%>
-                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color" data-value="<%= index+1%>">
+                            <input type="radio" class="colorBtn cb-<%= index+1  %>" id="<%= variant.color %>" name="color" data-value="<%= index+1%>"  checked >
                             <label for="<%= variant.color%>"><img src="images/<%= product.name %><%= index+1 %>.jpg"  alt="<%= product.name %>"></label>
 
                         <% }); %>
@@ -63,7 +64,7 @@
                         <button id="plus"><i class="bx bx-plus"></i></button>
                     </div>
                     <hr>
-                    <button class="add-btn" onclick="order()">Add to Cart</button>
+                    <button class="add-btn" onclick="addtocart( <%=  JSON.stringify(product) %>  )">Add to Cart</button>
 
                      <!-- Check the quantity if < 4 put 
                         <h5 class="notice">Only quantity left in stock</h5>
@@ -95,7 +96,6 @@
         var theProduct = <%- JSON.stringify(product) %>;
         var colorsArr = <%- JSON.stringify(colors) %>;
 
-        console.log(theProduct);
     
         changeColor(theProduct , colorsArr) ;
 
