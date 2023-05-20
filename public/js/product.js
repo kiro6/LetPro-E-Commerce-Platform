@@ -22,8 +22,8 @@ function changeColor(theProduct ,colorsArr) {
         src = '/images/'+theProduct.name +index+'.jpg';
         image.setAttribute('src',src);
         for (let i = 0; i < 5; i++) {
-            var label =document.getElementById('label '+colorsArr[index - 1].sizeBtns[i].size ) ;
-            label.innerText =  colorsArr[index -1].sizeBtns[i].quantityLeft ; 
+            var label =document.getElementById('label '+colorsArr[index - 1].sizes[i].size ) ;
+            label.innerText =  colorsArr[index -1].sizes[i].quantityLeft ; 
             
         }
         });
