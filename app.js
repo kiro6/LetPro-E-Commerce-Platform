@@ -5,6 +5,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 
+const crypto = require('crypto');
 const mongoose = require("mongoose");
 
 const Users = require("./models/user.js");
@@ -33,6 +34,15 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+// security 
+
+function hashString(inputString) {
+  const hash = crypto.createHash('sha256');
+  hash.update(inputString);
+  const hashedString = hash.digest('hex');
+  return hashedString;
+}
 
 function generateId() {
   const characters =
@@ -115,6 +125,8 @@ app.post("/login", (req, res) => {
   Users.findOne({ username: username, password: password })
     .then((user) => {
       if (user) {
+        
+
         req.session.user = user;
         res.json({ redirect: "/profile"  , userId : user.userId  });
       } else {
