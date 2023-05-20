@@ -3,6 +3,8 @@ const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
+
 const mongoose = require("mongoose");
 
 const Users = require("./models/user.js");
@@ -27,9 +29,10 @@ app.set("view engine", "ejs");
 //static files
 app.use(express.static("public"));
 
-//req body
+// middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 //sessions
 app.use(
@@ -43,17 +46,7 @@ app.use(
 //logs
 app.use(morgan("dev"));
 
-const currentUser = {
-  userId: "",
-  username: "",
-  email: "",
-  phoneNumber: "",
-  address: "",
-  cart: [],
-  wishlist: [],
-orderedProducts: [],
-  cartTotalPrice: 0
-};
+
 
 //  ------------------/index------------------
 app.get("/", (req, res) => {
@@ -109,16 +102,8 @@ app.post("/login", (req, res) => {
   Users.findOne({ username: username, password: password })
     .then((user) => {
       if (user) {
-        currentUser.userId = user.userId;
-        currentUser.username = username;
-        currentUser.email = user.email;
-        currentUser.address = user.address;
-        currentUser.phoneNumber = user.phoneNumber;
-        currentUser.cart = user.cart;
-        currentUser.orders = user.orders;
-
         req.session.user = user;
-        res.json({ redirect: "/profile" });
+        res.json({ redirect: "/profile"  , userId : user.userId  });
       } else {
         const responseData = { message: "User Name or Password is Wrong" };
         res.json(responseData);
@@ -164,9 +149,18 @@ app.post("/register", (req, res) => {
 app.get("/profile", (req, res) => {
   if (requireLogin(req)) {
     res.redirect("/login");
+  }else{
+    const userId = req.cookies.userId;
+
+    Users.findOne({userId}).then((currentUser)=>{
+      if (currentUser) {
+        res.render("profile", { title: "Profile", currentUser });
+      }
+    })
   }
-  res.setHeader('Set-Cookie', 'userId='+currentUser.userId+'; Path=/;');
-  res.render("profile", { title: "Profile", currentUser });
+
+
+  
 });
 
 //  ------------------/profile/update------------------
@@ -186,8 +180,7 @@ app.post("/profile/update", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      currentUser.address = req.body.address;
-      currentUser.phoneNumber = req.body.phoneNumber;
+
       const responseData = { message: "data updated successfully" ,  redirect: "/profile"  };
       res.json(responseData);
     } else {
@@ -214,7 +207,6 @@ app.post("/profile/changepass", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser) {
-      currentUser.password = req.body.password;
       const responseData = { message: "password updated successfully" , redirect: "/profile" };
       res.json(responseData);
       
@@ -289,8 +281,6 @@ app.post("/product/cartadd", (req, res) => {
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
     if (updatedUser && !requireLogin(req)) {
-      currentUser.cart = req.body.cart;
-      console.log(req.body.cart) ; 
       const responseData = { message: "item added to cart successfully"  , done : true};
       res.json(responseData);
       

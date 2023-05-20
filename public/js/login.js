@@ -138,6 +138,7 @@ registerForm.onsubmit = function doRegister(event) {
       })
       .then((data) => {
        alert(data.message) ; 
+       setSessionCookie("userId", data.userId); 
       })
       .catch((error) => {
         console.log(error);
@@ -147,4 +148,11 @@ registerForm.onsubmit = function doRegister(event) {
   }
   return false;
 };
+
+
+function setSessionCookie(name, value) {
+  document.cookie = name + "=" + (value || "") + "; path=/";
+}
+
+
 
