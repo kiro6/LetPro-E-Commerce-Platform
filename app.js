@@ -34,10 +34,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+function generateId() {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let id = "";
+
+  for (let i = 0; i < 24; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    id += characters.charAt(randomIndex);
+  }
+
+  return id;
+}
+
 //sessions
 app.use(
   session({
-    secret: "Secret-Key",
+    secret: generateId(),
     resave: false,
     saveUninitialized: false,
   })
