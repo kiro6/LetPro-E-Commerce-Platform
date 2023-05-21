@@ -374,12 +374,9 @@ app.get("/cart", (req, res) => {
 app.post('/cart/checkout', (req, res) => {
   Users.findOne({ _id: req.body.user }).then((userFound) => {
     if (userFound.userBalance >= userFound.cartTotalPrice) {
-      // Sufficient balance to checkout
-      
-      // Calculate updated balance
+ 
       const updatedBalance = userFound.userBalance - userFound.cartTotalPrice;
       
-      // Move cart items to orderedProducts
       const orderedProducts = userFound.cart.map((cartItem) => ({
         product: cartItem.product,
         colorIndex: cartItem.colorIndex,
@@ -390,7 +387,6 @@ app.post('/cart/checkout', (req, res) => {
         status: 'Pending',
       }));
       
-      // Reset cart and update balance
       Users.findOneAndUpdate(
         { _id: req.body.user },
         {
@@ -400,7 +396,6 @@ app.post('/cart/checkout', (req, res) => {
         { new: true }
       )
         .then((updatedUser) => {
-          console.log('Cart items moved to orderedProducts successfully');
           const responseData = {
             message: 'Checkout successful',
             done: true,
@@ -413,7 +408,6 @@ app.post('/cart/checkout', (req, res) => {
           res.status(500).json({ message: 'Internal server error' });
         });
     } else {
-      // Insufficient balance to checkout
       const responseData = {
         message: 'Insufficient balance to checkout',
         done: false,
@@ -427,6 +421,55 @@ app.post('/cart/checkout', (req, res) => {
 });
 
 
+//----------------/cart/delete--------------
+app.post('/cart/delete', (req, res) => {
+  const { user, index, price } = req.body;
+
+  Users.findOne(user)
+    .then((userFound) => {
+      if (userFound) {
+        // Check if the index is valid
+        if (index >= 0 && index < userFound.cart.length) {
+          // Remove the item at the specified index from the cart array
+          userFound.cart.splice(index, 1);
+
+          // Calculate the updated cartTotalPrice
+          let updatedTotalPrice = 0;
+          for (const cartItem of userFound.cart) {
+            updatedTotalPrice += cartItem.product.price;
+          }
+          
+          // Update the cartTotalPrice
+          userFound.cartTotalPrice = updatedTotalPrice;
+
+          console.log(userFound.cartTotalPrice);
+
+          // Save the updated user document
+          userFound
+            .save()
+            .then(() => {
+              const responseData = {
+                message: 'Item removed from cart successfully',
+                done: true,
+              };
+              res.json(responseData);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).json({ message: 'Internal server error' });
+            });
+        } else {
+          res.status(400).json({ message: 'Invalid index provided' });
+        }
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ message: 'Internal server error' });
+    });
+});
 
 
 //  ------------------/logout------------------

@@ -1,56 +1,76 @@
-const deleteBtns = document.querySelectorAll('.delete button');
+const deleteBtns = document.querySelectorAll(".delete button");
 
 removeItem();
 
-function removeItem(){
-    deleteBtns.forEach(button =>{  
+function removeItem() {
+  deleteBtns.forEach((button) => {
     let index;
-    button.addEventListener('click', (event)=>{
-        index = event.target.dataset.value; 
-        div = document.querySelector(('.item-'+index));
+    button.addEventListener("click", (event) => {
+    index = Number(event.target.dataset.value) ;  
+    let priceValue =  Number(currentUser.cart[index-1].price)  
 
-        var nextElement = div.nextElementSibling;
-        nextElement.parentNode.removeChild(nextElement);
+      let endpoint = "/cart/delete";
 
-        div.parentNode.removeChild(div);
-        console.log(div);
-    })
-});
+      fetch(endpoint, {
+        method: "post",
+        body: JSON.stringify({
+          user: currentUser,
+          index: index-1,
+          price : priceValue , 
+
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.done) {
+            alert(data.message);
+            div = document.querySelector(".item-" + index);
+
+            var nextElement = div.nextElementSibling;
+            nextElement.parentNode.removeChild(nextElement);
+
+            div.parentNode.removeChild(div);
+          } else {
+            alert(data.message);
+          }
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    });
+  });
 }
 
-
-// const checkForm = document.getElementById("checkForm") ; 
+// const checkForm = document.getElementById("checkForm") ;
 // checkForm.onsubmit =
 
 function checkOut() {
-    let endpoint = "/cart/checkout";
-  
-    fetch(endpoint, {
-      method: "post",
-      body: JSON.stringify({
-        user: currentUser,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+  let endpoint = "/cart/checkout";
+
+  fetch(endpoint, {
+    method: "post",
+    body: JSON.stringify({
+      user: currentUser,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.done) {
+        alert(data.message);
+      } else {
+        alert(data.message);
+      }
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.done) {
-          // Checkout successful
-          alert("Checkout successful: " + data.message);
-          // Do something else if needed
-        } else {
-          // Insufficient balance to checkout
-          alert("Insufficient balance to checkout: " + data.message);
-          // Do something else if needed
-        }
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-        // Handle error scenario
-      });
-  
-    return false;
-  }
-  
+    .catch((error) => {
+      console.log("Error:", error);
+      // Handle error scenario
+    });
+
+  return false;
+}

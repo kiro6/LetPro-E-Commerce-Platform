@@ -51,10 +51,6 @@ const userSchema = new Schema({
           quantity: {
             type: Number,
             required: true
-          },
-          price: {
-            type: Number,
-            required: true
           }
         }
       ],
@@ -74,10 +70,6 @@ const userSchema = new Schema({
             required: false
           },
           quantity: {
-            type: Number,
-            required: true
-          },
-          price: {
             type: Number,
             required: true
           },
