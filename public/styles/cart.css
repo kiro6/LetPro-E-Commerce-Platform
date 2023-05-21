@@ -164,3 +164,17 @@ main h1{
     border: 2px black solid;
     cursor: pointer;
 }
+
+.darkmode{
+    background-color: #333333;
+}
+
+.darkmode main{
+    background-color: #333333;
+}
+.darkmode h1, .darkmode h3{
+    color: #fbf2f2;
+}
+.darkmode .item p, .darkmode .item span{
+    color: #fbf2f2;
+}
