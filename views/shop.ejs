@@ -20,307 +20,34 @@
 
     <main>
         <div class="products">
-            <div class="row">
-                <a href="product.html"><img src="images/1.jpg" alt=""></a>
-                    <div class="product-text">
-                        <h5>New</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                    </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Crop top and shorts</h4>
-                        <p>$29.99</p>
-                    </div>
-            </div>
-            <div class="row">
-                <a href="10.html"><img src="images/10.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
+            <% shopItems.forEach(product => {%>
+                        
+                <div class="row">
+                    <a href="/product?product=<%= product.name %>"><img src="images/<%= product.name %>1.jpg" alt=""></a>
+                        <div class="product-text">
+                            <h5>Hot</h5>
                         </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$29.99</p>
-                    </div>
-            </div>
-            <div class="row">
-                <a href="2.html"><img src="images/2.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
+                        <!-- <div class="heart-icon">
+                            <i class='bx bx-heart'></i>
+                        </div> -->
+                        <div class="cart-icon">
+                        <a href="/product?product=<%= product.name %>"><i class='bx bx-cart'></i></a>
                         </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>
-            <div class="row">
-                <a href="9.html"><img src="images/9.jpg" alt=""></a>
-                    <div class="product-text">
-                        <h5>Sale</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
+                        <div class="ratting">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star-half"></i>
                         </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$37.99 <del>$59.99</del></p>
-                    </div>
-            </div>
-            <div class="row">
-                <a href="4.html"><img src="images/4.jpg" alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
+                        <div class="price">
+                            <h4><%=product.name%></h4>
+                            <p>$<%=product.price%></p>
                         </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>
-            <div class="row">
-                <a href="5.html"><img src="images/5.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="6.html"><img src="images/6.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="7.html"><img src="images/7.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Build-and-Deploy-Ecommerce-Website-main/Build-and-Deploy-Ecommerce-Website-main/img/products/f1.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Build-and-Deploy-Ecommerce-Website-main/Build-and-Deploy-Ecommerce-Website-main/img/products/f2.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Build-and-Deploy-Ecommerce-Website-main/Build-and-Deploy-Ecommerce-Website-main/img/products/f3.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Build-and-Deploy-Ecommerce-Website-main/Build-and-Deploy-Ecommerce-Website-main/img/products/f4.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Build-and-Deploy-Ecommerce-Website-main/Build-and-Deploy-Ecommerce-Website-main/img/products/f5.jpg"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>Product</h4>
-                        <p>$99.99</p>
-                    </div>
-            </div>    
-            <div class="row">
-                <a href="product.html"><img src="C:/Users/mshmo/OneDrive/Desktop/Untitled Export/whole watch.JPG"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>AP Stainless Steel Watch</h4>
-                        <p>$20,000</p>
-                    </div>
-            </div>
+                </div>
 
-            <div class="row">
-                <a href="bags.html"><img src="images/first-bag1.webp"  alt=""></a>
-                    <div class="product-text">
-                        <h5>hot</h5>
-                    </div>
-                    <div class="cart-icon">
-                        <i class='bx bx-cart'></i>
-                        </div>
-                    <div class="ratting">
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star"></i>
-                        <i class="bx bxs-star-half"></i>
-                    </div>
-                    <div class="price">
-                        <h4>AP Stainless Steel Watch</h4>
-                        <p>$20,000</p>
-                    </div>
-            </div>    
+
+            <% });%>   
         </div>
     </main>
 

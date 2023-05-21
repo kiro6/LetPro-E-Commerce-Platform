@@ -104,7 +104,29 @@ app.get("/index", (req, res) => {
 
 // -------------------shop------------------
 app.get("/shop", (req, res) => {
-  res.render("shop", { title: "Shop" });
+  let shopItems = [];
+
+  let Queries = [
+    Products.Tshirt.find(),
+    Products.Bag.find(),
+    Products.Watch.find(),
+  ];
+
+  Promise.all(Queries)
+    .then((results) => {
+      results.forEach((products) => {
+        products.forEach((product) => {
+          shopItems.push(product);
+        });
+      });
+
+      shopItems = shuffleItems(shopItems);
+      res.render("shop", { title: "Shop", shopItems });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("An error occurred");
+    });
 });
 
 //  ------------------login------------------
@@ -434,4 +456,11 @@ function requireLogin(req) {
   } else {
     return false;
   }
+}
+function shuffleItems(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
