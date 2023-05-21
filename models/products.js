@@ -26,7 +26,7 @@ const tshirtSchema = new Schema({
     type: Number,
     required: true
   },
-  gender:{
+  Category:{
     type: String,
     required: true
   },
@@ -65,7 +65,7 @@ const bagSchema = new Schema({
     type: Boolean,
     required: true
   },
-  gender: {
+  Category: {
     type:String,
     required:true
   },
@@ -100,7 +100,7 @@ const watchSchema = new Schema({
     type: Boolean,
     required: true
   },
-  gender:{
+  Category:{
     type: String,
     required: true
   },
@@ -112,4 +112,39 @@ const watchSchema = new Schema({
 
 const Watch = mongoose.model('Watches', watchSchema);
 
-module.exports = {Tshirt , Bag , Watch};
+const shoeSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  colors: [{
+      color: {
+        type: String,
+        required: true
+      },
+      quantityLeft: {
+        type: Number,
+        required: true
+      }
+    }],
+  price:{
+    type: Number,
+    required: true
+  },
+  trending:{
+    type: Boolean,
+    required: true
+  },
+  Category:{
+    type: String,
+    required: true
+  },
+  productDescription:{
+    type: String,
+    required: true
+  }
+});
+
+const Shoe = mongoose.model('Shoes', shoeSchema);
+
+module.exports = {Tshirt , Bag , Watch , Shoe};

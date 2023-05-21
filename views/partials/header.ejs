@@ -15,10 +15,10 @@
             <% if(title == 'Shop') {%>
             <nav class="shop-nav">
                 <ul>
-                    <li>T-shirts</li>
-                    <li>Bags</li>
-                    <li>Watches</li>
-                    <li>Shoes</li>
+                    <li onclick="filterItems('T-shirts')">T-shirts</li>
+                    <li onclick="filterItems('Bags')">Bags</li>
+                    <li onclick="filterItems('Watches')">Watches</li>
+                    <li onclick="filterItems('Shoes')">Shoes</li>
                 </ul>
             </nav>
             <% } %>
@@ -33,10 +33,10 @@
         <% if(!(title == 'Login')){%>
             <a href="/index"><i class="bx bx-home"></i></a>
             <a href="/profile"><i class="bx bx-user"></i></a>
-            <div class="cart">
-                <h4>0</h4>
+            <!-- <div class="cart">
+                <h4></h4> -->
                 <a href="/cart"><i class="bx bx-cart"></i></a>
-            </div>
+            <!-- </div> -->
         <%}%>
         
 

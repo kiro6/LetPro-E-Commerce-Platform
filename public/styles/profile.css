@@ -100,7 +100,8 @@ main {
 
 .orders{
     position: absolute;
-    left: 380px;
+    margin-top: 80px;
+    left: 280px;
     visibility: hidden;
 }
 .orders h1{

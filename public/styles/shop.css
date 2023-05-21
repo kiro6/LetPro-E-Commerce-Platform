@@ -62,9 +62,19 @@ header{
     font-weight: 700;
 }
 
+.sorting{
+    font-size: 25px;
+    padding-top: 2%;
+    padding-left: 7.5%;
+    background-color: #fbf2f2;
+}
+.sorting select{
+    font-size: 18px;
+}
+
 
 main{
-    padding-top: 85px;
+    padding-top: 75px;
     padding-bottom: 200px;
     background-color: #fbf2f2;
 }
@@ -93,4 +103,10 @@ main{
 }
 .darkmode .shop-nav ul li:hover{
     color:#151515
+}
+.darkmode .sorting{
+    background-color: #333333;
+}
+.darkmode .sorting label{
+    color: #fbf2f2;
 }
