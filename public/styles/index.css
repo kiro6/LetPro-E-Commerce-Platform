@@ -259,17 +259,17 @@ section{
     right: 0;
     font-size: 20px;
 }
-.heart-icon:hover{
-    color: rgb(246, 13, 36);
-    cursor: pointer;
-}
 .cart-icon{
     position: absolute;
     right: 0;
     font-size: 20px;
-    bottom: 12px;
+    bottom: 35px;
 }
-.cart-icon:hover{
+.cart-icon a{
+    text-decoration: none;
+    color: #000;
+}
+.cart-icon a:hover{
     color: var(--Primary);
     cursor: pointer;
 }
@@ -527,6 +527,10 @@ footer ul{
 
 .darkmode .contact-info h4{
     color: #f1e5e5;
+}
+.darkmode .cart-icon a{
+    text-decoration: none;
+    color: #fff;
 }
 
 .darkmode .contact p{

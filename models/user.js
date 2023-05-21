@@ -53,15 +53,6 @@ const userSchema = new Schema({
           }
         }
       ],
-      wishlist: [
-        {
-          product: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Product',
-            required: true
-          }
-        }
-      ],
     orderedProducts: [
         {
           product: {
