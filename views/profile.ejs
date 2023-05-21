@@ -64,22 +64,25 @@
             </thead>
             <tbody>
               <% currentUser.orderedProducts.forEach(product=>{%>
-                <td><%= product._id %></td>
-                <td><%= product.createAt %></td>
-                <td><%= product.color %> <% product.name %></td>
-                <td><%= product.price %></td>
-                <td>
-                  <p class="status <%= product.status %>">
-                    <%if(product.status=='d'){%>
-                      Delivered
-                    <%}else if(product.status=='s'){ %>
-                      Shipped
-                    <%}else{%>
-                      Ordered
-                    <% } %>
-                  </p>
-                </td>
-
+                <tr>
+                  <td><%= product._id %></td>
+                  <td><%= product.createAt %></td>
+                  <td>
+                   <%= product.quantity %>, <%= product.product.name %>
+                  </td>
+                  <td><%= product.product.price * product.quantity %></td>
+                  <td>
+                    <p class="status <%= product.status %>">
+                      <%if(product.status=='d'){%>
+                        Delivered
+                      <%}else if(product.status=='s'){ %>
+                        Shipped
+                      <%}else{%>
+                        Ordered
+                      <% } %>
+                    </p>
+                  </td>
+                </tr>
               <%}) %>
             </tbody>
           </table>
