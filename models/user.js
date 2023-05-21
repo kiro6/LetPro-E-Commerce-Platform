@@ -27,7 +27,12 @@ const userSchema = new Schema({
     phoneNumber:{
         type:String,
         required:false
-    },
+    }, 
+    userBalance : {
+      type : Number , 
+      required: false
+    }
+    ,
     cart: [
         {
           product: {
@@ -56,17 +61,17 @@ const userSchema = new Schema({
     orderedProducts: [
         {
           product: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: Object,
             ref: 'Product',
             required: true
           },
-          color: {
-            type: String,
+          colorIndex: {
+            type: Number,
             required: true
           },
-          size: {
-            type: String,
-            required: true
+          sizeIndex: {
+            type: Number,
+            required: false
           },
           quantity: {
             type: Number,
@@ -78,11 +83,11 @@ const userSchema = new Schema({
           },
           createAt: {
             type: String,
-            required: true
+            required: false
           },
           status:{
             type: String,
-            required: true
+            required: false
           }
         }
       ],

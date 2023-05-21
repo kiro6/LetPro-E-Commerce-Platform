@@ -198,6 +198,7 @@ app.post("/profile/update", (req, res) => {
   var update = {
     phoneNumber: req.body.phoneNumber,
     address: req.body.address,
+    userBalance : req.body.userBalance 
   };
 
   Users.findOneAndUpdate(conditions, update).then((updatedUser) => {
@@ -300,7 +301,11 @@ app.post("/product/cartadd", (req, res) => {
   var update = {
     $push: {
       cart: req.body.cart,
-    },
+     
+    } , 
+    $inc: {
+      cartTotalPrice:  Number(req.body.cartTotalPrice)
+    }
   };
 
   Users.findOneAndUpdate(conditions, update)
@@ -340,6 +345,67 @@ app.get("/cart", (req, res) => {
     });
   }
 });
+
+
+//----------------/cart/checkout--------------
+
+app.post('/cart/checkout', (req, res) => {
+  Users.findOne({ _id: req.body.user }).then((userFound) => {
+    if (userFound.userBalance >= userFound.cartTotalPrice) {
+      // Sufficient balance to checkout
+      
+      // Calculate updated balance
+      const updatedBalance = userFound.userBalance - userFound.cartTotalPrice;
+      
+      // Move cart items to orderedProducts
+      const orderedProducts = userFound.cart.map((cartItem) => ({
+        product: cartItem.product,
+        colorIndex: cartItem.colorIndex,
+        sizeIndex: cartItem.sizeIndex,
+        quantity: cartItem.quantity,
+        price: cartItem.price,
+        createAt: new Date().toISOString(),
+        status: 'Pending',
+      }));
+      
+      // Reset cart and update balance
+      Users.findOneAndUpdate(
+        { _id: req.body.user },
+        {
+          $push: { orderedProducts: { $each: orderedProducts } },
+          $set: { cart: [], userBalance: updatedBalance, cartTotalPrice: 0 },
+        },
+        { new: true }
+      )
+        .then((updatedUser) => {
+          console.log('Cart items moved to orderedProducts successfully');
+          const responseData = {
+            message: 'Checkout successful',
+            done: true,
+            user: updatedUser,
+          };
+          res.json(responseData);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({ message: 'Internal server error' });
+        });
+    } else {
+      // Insufficient balance to checkout
+      const responseData = {
+        message: 'Insufficient balance to checkout',
+        done: false,
+      };
+      res.json(responseData);
+    }
+  }).catch((err) => {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  });
+});
+
+
+
 
 //  ------------------/logout------------------
 app.get("/logout", (req, res) => {

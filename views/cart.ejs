@@ -35,11 +35,10 @@
                 <h2>Summary</h2>
                 <p>Total: <span><%= currentUser.cartTotalPrice %></span></p>
     
-                <form action="">
+                <form onsubmit="return checkOut()">
                     <input type="submit" value="Check Out">
-                    <!-- <div class="bc"> -->
                         <button type="submit"><img src="images/paypal.jpg" alt=""></button>
-                    <!-- </div> -->
+                 
                 </form>
             </div>
         
@@ -48,6 +47,10 @@
     <%- include('./partials/footer.ejs') %>
     <script src="js/menu.js"></script>
     <script src="js/cart.js"></script>
+    <script>
+
+    currentUser =  <%- JSON.stringify(currentUser) %>;
+    </script>
     
 </body>
 </html>

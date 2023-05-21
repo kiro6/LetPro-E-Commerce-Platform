@@ -117,6 +117,8 @@ updateInfoForm.onsubmit = function doChangePassword(event) {
   var userIdValue =  getCookie('userId')
   var adressValue = document.getElementById("adress").value;
   var phoneValue = document.getElementById("phone").value;
+  var balanceValue = Number(document.getElementById("balance").value);
+
 
   var endpoint = "/profile/update";
 
@@ -125,7 +127,8 @@ updateInfoForm.onsubmit = function doChangePassword(event) {
       body: JSON.stringify({
         userId: userIdValue,
         address: adressValue,
-        phoneNumber : phoneValue
+        phoneNumber : phoneValue , 
+        userBalance : balanceValue 
       }),
       headers: {
         "Content-Type": "application/json",

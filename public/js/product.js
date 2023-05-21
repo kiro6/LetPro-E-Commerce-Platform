@@ -168,7 +168,9 @@ function addtocart(TheProduct) {
   const userIdValue = getCookie("userId");
   const sizeIndexValue = selectedSize() - 1;
   const colorIndexValue = selectedColor() - 1;
+  const price = document.querySelector(".product-options p span").innerHTML;
   const quantityValue = Number(quantitySpan.innerText);
+  let total = quantityValue * price;
 
   let count = cartcount.innerHTML;
   count++;
@@ -185,6 +187,7 @@ function addtocart(TheProduct) {
         sizeIndex: sizeIndexValue,
         quantity: quantityValue,
       },
+      cartTotalPrice : total 
     }),
     headers: {
       "Content-Type": "application/json",
@@ -202,6 +205,7 @@ function addtocart(TheProduct) {
     .catch((error) => {
       console.log(error);
     });
+    
 }
 
 function selectedSize() {
