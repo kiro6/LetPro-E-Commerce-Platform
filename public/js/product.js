@@ -23,7 +23,7 @@ function changeColor(theProduct, colorsArr, hasSize) {
       count = 1 ; 
       quantitySpan.innerText = count  ;
       plus.disabled = false ; 
-      minus.disabled = false ; 
+      minus.disabled = true ; 
 
       
       indexColor = event.target.dataset.value - 1;
@@ -67,7 +67,7 @@ function changeSize(colorsArr) {
       count = 1 ; 
       quantitySpan.innerText = count  ;
       plus.disabled = false ; 
-      minus.disabled = false ; 
+      minus.disabled = true ; 
 
       indexSize = event.target.dataset.value - 1;
       let colorIndex = selectedColor() - 1;
@@ -121,10 +121,13 @@ plus.addEventListener("click", () => {
       return;
     }
   } else {
-    if (colorsArr[colorIndex].quantityLeft >= count) {
+    if (colorsArr[colorIndex].quantityLeft > count) {
       count += 1;
       quantitySpan.innerText = count;
       minus.disabled = false;
+      if (count === colorsArr[colorIndex].quantityLeft) {
+        plus.disabled = true;
+      }
     } else {
       return;
     }
