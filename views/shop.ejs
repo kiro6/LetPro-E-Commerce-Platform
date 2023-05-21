@@ -8,15 +8,13 @@
     <section class="banner">
         <h1>Featured Items</h1>
     </section>
-
-    <!-- <div class="shop-filter">
-        <h3>Filter by:</h3>
-        <div class="filters">
-            
-        </div>
-        
-
-    </div> -->
+<div class="sorting">
+    <label for="sort-option">Sort By:</label>
+    <select id="sort-option" class="dropdown">
+      <option value="priceLowToHigh">Price: Low to High</option>
+      <option value="priceHighToLow">Price: High to Low</option>
+    </select>
+</div>
 
     <main>
         <div class="products">
@@ -26,6 +24,7 @@
                     <a href="/product?product=<%= product.name %>"><img src="images/<%= product.name %>1.jpg" alt=""></a>
                         <div class="product-text">
                             <h5>Hot</h5>
+                            <h6 style="visibility: hidden;"><%= product.Category %></h6>
                         </div>
                         <!-- <div class="heart-icon">
                             <i class='bx bx-heart'></i>
@@ -54,6 +53,7 @@
     <%- include('./partials/footer.ejs') %>
     
     <script src="js/menu.js"></script>
+    <script src="js/shop.js"></script>
 
 </body>
 </html>
