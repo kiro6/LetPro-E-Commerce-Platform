@@ -384,7 +384,7 @@ app.post('/cart/checkout', (req, res) => {
         quantity: cartItem.quantity,
         price: cartItem.price,
         createAt: new Date().toISOString(),
-        status: 'Pending',
+        status: 'ordered',
       }));
       
       Users.findOneAndUpdate(
