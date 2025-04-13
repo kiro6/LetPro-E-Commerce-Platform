@@ -16,7 +16,7 @@ const { log } = require("console");
 const app = express();
 
 //connect to DB
-const DBUSR = "mongodb+srv://CEO:admin12345@mood.kkmmia4.mongodb.net/MOOD";
+const DBUSR = "mongodb+srv://";
 mongoose
   .connect(DBUSR, { useNewURLParser: true, useUnifiedTopology: true })
   .then((result) => {
